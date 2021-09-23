@@ -1,12 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import UserNavbar from "../components/UserNavbar"
-import { Link, Route, Switch, useRouteMatch } from "react-router-dom"
-import { 
-    Container,
-    Row,
-    Col,
-    Nav
- } from 'react-bootstrap'
+import { Link, Route, Switch, useRouteMatch, useLocation } from "react-router-dom"
+import { Nav } from 'react-bootstrap'
+import HRHome from "./HRHome"
+import HRCourses from './HRCourses'
 
 // This is the homepage for HR.
 // For any subsequent pages you are creating, create them in pages folder (e.g. HRCourses.js, HRPendingEnrolment.js)
@@ -16,8 +13,9 @@ import {
 // For import routes, make sure to state your current folder i.e. "./xxx/xxx" instead of "/xxx/xxx".
 
 
-function HRHome() {
+function HRRouting() {
     const { url, path } = useRouteMatch()
+    const location = useLocation()
 
     const NavbarOptions = (
         <Nav className="me-auto">
@@ -30,34 +28,21 @@ function HRHome() {
             </Nav.Link>
         </Nav>
     )
-        
-    
 
     return (
         <div>
-            <Container>
-                <Row>
-                    <Col bg="dark">
-                        <div style={{backgroundColor: "red"}}>
-                            <h1>Pending Enrolment</h1>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <div style={{backgroundColor: "blue"}}>
-                            <h1>Engineers</h1>
-                        </div>
-                    </Col>
-                    <Col>
-                        <div style={{backgroundColor: "green"}}>
-                            <h1>Courses</h1>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+            <UserNavbar options={NavbarOptions}/>
+
+            <Switch>
+                <Route path={`${path}/courses`} component={HRCourses} />
+                <Route path={`${path}/engineers`}>
+                    <h1>Engineers page</h1>
+                </Route>
+            </Switch>
+
+            {location.pathname === "/hr" ? <HRHome /> : null }
         </div>
     )
 }
 
-export default HRHome
+export default HRRouting
