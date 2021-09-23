@@ -1,20 +1,48 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
+import React from "react"
+import {
+	BrowserRouter as Router,
+	Switch, 
+	Route,
+	Link
+} from "react-router-dom"
+import HRHome from "./pages/HRHome"
+import EngineerHome from "./pages/EngineerHome"
+import TrainerHome from "./pages/TrainerHome"
 
 function App() {
-	const [backendInfo, setBackendInfo] = useState("")
-
-	useEffect(() => {
-		axios.get("http://localhost:5000")
-		.then((res) => { setBackendInfo(res.data) })
-	}, "")
-
 	return (
-		<div>
-			<h1>bye bitches</h1>
-			<p>{backendInfo}</p>
-		</div>
-	);
+		
+		<Router>
+			<div>
+				<h1>Welcome to Login. Choose your role.</h1>
+
+				<nav>
+					<ul>
+					<li>
+						<Link to="/hr">HR</Link>
+					</li>
+					<li>
+						<Link to="/engineer">Engineer</Link>
+					</li>
+					<li>
+						<Link to="/trainer">Trainer</Link>
+					</li>
+					</ul>
+				</nav>
+				<Switch>
+					<Route path="/engineer">
+						<EngineerHome />
+					</Route>
+					<Route path="/trainer">
+						<TrainerHome />
+					</Route>
+					<Route path="/hr">
+						<HRHome />
+					</Route>
+				</Switch>
+			</div>
+		</Router>
+	)
 }
 
 export default App;
