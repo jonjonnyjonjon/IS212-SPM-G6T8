@@ -5,13 +5,23 @@ import {
     Table
  } from 'react-bootstrap'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const HRCourses = () => {
     const [courseFilter, setCourseFilter] = useState("")
+    const [courses, setCourses] = useState([])
 
-    return(
+    useEffect(() => {
+        axios.get("http://127.0.0.1:5000/courses")
+            .then(res => {
+                setCourses(res.data)
+            })
+    }, [])
+
+    return( 
         <Container className="mt-5">
+            {console.log(courses)}
             <h1>Courses</h1>
             <div>
                 <Button variant="info">Ready</Button>{' '}
@@ -19,30 +29,23 @@ const HRCourses = () => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
+                            <th>Course name</th>
+                            <th>Class</th>
+                            <th>Class size</th>
+                            <th>Start date</th>
+                            <th>End date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <td>3</td>
-                        <td colSpan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                        </tr>
+                        {courses.map(course =>
+                            <tr>
+                                <td>{course.courseName}</td>
+                                <td>{course.class}</td>
+                                <td>{course.size}</td>
+                                <td>{course.startDate}</td>
+                                <td>{course.endDate}</td>
+                            </tr>    
+                        )}
                     </tbody>
                 </Table>
             </div>
