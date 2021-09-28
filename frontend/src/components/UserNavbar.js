@@ -1,7 +1,6 @@
 import { 
     Navbar,
-    Container,
-    Nav
+    Container
 } from "react-bootstrap"
 
 import { FaHome } from "react-icons/fa"

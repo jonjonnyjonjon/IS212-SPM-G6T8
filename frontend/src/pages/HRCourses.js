@@ -7,9 +7,12 @@ import {
 
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { Link, useRouteMatch } from 'react-router-dom'
 
 const HRCourses = () => {
-    const [courseFilter, setCourseFilter] = useState("")
+    const { url } = useRouteMatch()
+
+    // const [courseFilter, setCourseFilter] = useState("")
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -21,11 +24,15 @@ const HRCourses = () => {
 
     return( 
         <Container className="mt-5">
-            {console.log(courses)}
             <h1>Courses</h1>
             <div>
                 <Button variant="info">Ready</Button>{' '}
                 <Button variant="info">Not ready</Button>{' '}
+
+                <Button variant="info">
+                    <Link to={`${url}/createCourse`}>Create course</Link>
+                </Button>{' '}
+
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -38,7 +45,7 @@ const HRCourses = () => {
                     </thead>
                     <tbody>
                         {courses.map(course =>
-                            <tr>
+                            <tr key={course.courseName + course.class}>
                                 <td>{course.courseName}</td>
                                 <td>{course.class}</td>
                                 <td>{course.size}</td>

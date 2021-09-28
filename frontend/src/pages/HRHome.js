@@ -1,11 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserNavbar from "../components/UserNavbar"
-import { Link, Route, Switch, useRouteMatch } from "react-router-dom"
+
 import { 
     Container,
     Row,
-    Col,
-    Nav
+    Col
  } from 'react-bootstrap'
 
 // This is the homepage for HR.
@@ -17,22 +15,6 @@ import {
 
 
 function HRHome() {
-    const { url, path } = useRouteMatch()
-
-    const NavbarOptions = (
-        <Nav className="me-auto">
-            <Nav.Link>
-                <Link to={`${url}/courses`}>Courses</Link>
-            </Nav.Link>
-
-            <Nav.Link>
-                <Link to={`${url}/engineers`}>Engineers</Link>
-            </Nav.Link>
-        </Nav>
-    )
-        
-    
-
     return (
         <div>
             <Container>

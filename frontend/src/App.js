@@ -1,15 +1,11 @@
 import React from "react"
 import {
-	BrowserRouter as Router,
 	Switch, 
 	Route,
 	Link,
 	useLocation
 } from "react-router-dom"
 
-import HRHome from "./pages/HRHome"
-import EngineerHome from "./pages/EngineerHome"
-import TrainerHome from "./pages/TrainerHome"
 import HRRouting from "./pages/HRRouting"
 
 function App() {
@@ -36,13 +32,10 @@ function App() {
 			: null }
 			
 			<Switch>
-				<Route path="/engineer" component={EngineerHome} />
-				<Route path="/trainer">
-					<TrainerHome />
-				</Route>
-				<Route path="/hr">
-					<HRRouting />
-				</Route>
+				<Route path="/engineer" />
+				<Route path="/trainer" />
+				<Route path="/hr" component={HRRouting} />
+
 			</Switch>
 		</div>
 	)	
