@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 
 import HRRouting from "./pages/HRRouting"
+import TrainerRouting from "./pages/TrainerRouting"
 
 function App() {
 	const location = useLocation();
@@ -33,7 +34,7 @@ function App() {
 			
 			<Switch>
 				<Route path="/engineer" />
-				<Route path="/trainer" />
+				<Route path="/trainer" component={TrainerRouting}/>
 				<Route path="/hr" component={HRRouting} />
 
 			</Switch>

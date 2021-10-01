@@ -1,6 +1,9 @@
 function TrainerHome() {
     return (
-        <h1>trainerHome</h1>
+        <div>
+            <h1>Welcome to trainer's homepage!</h1>
+            <h2>Course Manager</h2> 
+        </div>
     )
 }
 
