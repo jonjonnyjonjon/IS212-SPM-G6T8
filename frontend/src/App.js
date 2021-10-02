@@ -8,6 +8,9 @@ import {
 import HRHome from "./pages/HRHome"
 import EngineerHome from "./pages/EngineerHome"
 import TrainerHome from "./pages/TrainerHome"
+import TrainerCreateQuizType from "./pages/TrainerCreateQuizType"
+import TrainerViewResult from "./pages/TrainerViewResult"
+import TrainerCreateQuestion from "./pages/TrainerCreateQuestion"
 
 function App() {
 	return (
@@ -35,6 +38,9 @@ function App() {
 					</Route>
 					<Route path="/trainer">
 						<TrainerHome />
+						{/* <TrainerCreateQuizType /> */}
+						<TrainerCreateQuestion />
+						<TrainerViewResult />
 					</Route>
 					<Route path="/hr">
 						<HRHome />
