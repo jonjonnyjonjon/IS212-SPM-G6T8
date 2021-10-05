@@ -6,13 +6,11 @@ import {
  } from 'react-bootstrap'
 
 import { useEffect, useState } from "react"
-import axios from "axios"
 import { Link, useRouteMatch } from 'react-router-dom'
+import axios from "axios"
 
 const HRCourses = () => {
     const { url } = useRouteMatch()
-
-    // const [courseFilter, setCourseFilter] = useState("")
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -36,27 +34,36 @@ const HRCourses = () => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
+                            <th>Course ID</th>
                             <th>Course name</th>
                             <th>Class</th>
-                            <th>Class size</th>
+                            <th>Size</th>
+                            <th>Trainer</th>
                             <th>Start date</th>
                             <th>End date</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
                         {courses.map(course =>
                             <tr key={course.courseName + course.class}>
+                                <td>{course.courseID}</td>
                                 <td>{course.courseName}</td>
                                 <td>{course.class}</td>
                                 <td>{course.size}</td>
+                                <td>{course.trainer}</td>
                                 <td>{course.startDate}</td>
                                 <td>{course.endDate}</td>
+                                <td>
+                                    <Button variant="warning">
+                                        <Link to={`${url}/editCourse/${course.courseID}`}>Edit</Link>
+                                    </Button>{' '}
+                                </td>
                             </tr>    
                         )}
                     </tbody>
                 </Table>
             </div>
-            
         </Container>
     )
 }

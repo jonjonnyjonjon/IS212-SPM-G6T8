@@ -6,7 +6,7 @@ import {
 	useLocation
 } from "react-router-dom"
 
-import HRRouting from "./pages/HRRouting"
+import HRRouting from "./pages/HR/HRRouting"
 
 function App() {
 	const location = useLocation();
