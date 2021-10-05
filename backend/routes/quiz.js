@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require("../db")
 
 router.get("/", (req, res) => {
-	let sql = "SELECT * from questions"
+	let sql = "SELECT * from quiz"
 
 	db.query(sql, (err, rows) => {
 		if (err) {
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 })
 
 router.post('/quiz', (req, res) => {
-	let sql = `INSERT INTO questions VALUES ("${req.body.quizType}", "${req.body.time}", "${req.body.question}", ${req.body.answer}, "${req.body.option}"`
+	let sql = `INSERT INTO quiz VALUES ("${req.body.quizType}", "${req.body.time}", "${req.body.question}", ${req.body.answer}, "${req.body.options}"`
 
 	db.query(sql, (err, result) => {
 		if (err) {
@@ -27,7 +27,7 @@ router.post('/quiz', (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record inserted to courses table")
+			console.log("1 record inserted to quiz table")
 		}
 	})
 })

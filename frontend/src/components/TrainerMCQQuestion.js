@@ -43,14 +43,14 @@ function TrainerMCQQuestion() {
                     id="option3"
                     value="3"
                     onChange={e => setField("answer", e.target.value)} 
-                    /> <Form.Control type="text" placeholder="Option 3" onChange={e => setField("option", e.target.value)} />
+                    /> <Form.Control type="text" placeholder="Option 3" onChange={e => setField("options", e.target.value)} />
                     <Form.Check
                     type="radio"
                     name="option4"
                     id="option4"
                     value="4"
                     onChange={e => setField("answer", e.target.value)} 
-                    /> <Form.Control type="text" placeholder="Option 4" onChange={e => setField("option", e.target.value)} />
+                    /> <Form.Control type="text" placeholder="Option 4" onChange={e => setField("options", e.target.value)} />
                 </Form.Group>
 
         </Container>

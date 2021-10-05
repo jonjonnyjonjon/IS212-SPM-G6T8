@@ -11,7 +11,7 @@ import { useState } from 'react'
 import axios from "axios"
 
 
-const TrainerCreateQuestion = () => {
+const TrainerCreateQuiz = () => {
 
     const [form, setForm] = useState({})
     
@@ -86,4 +86,4 @@ const TrainerCreateQuestion = () => {
 }
 
 
-export default TrainerCreateQuestion
+export default TrainerCreateQuiz

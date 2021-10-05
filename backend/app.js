@@ -6,10 +6,10 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 
-app.get('/', function (req, res) {
-  res.json(["Hello World!"]);
-});
+const trainerRoute = require('./routes/quiz')
 
-app.listen(5000, function () {
+app.use('/quiz', trainerRoute)
+
+app.listen(5000, () => {
   console.log('Example app listening on port 5000!');
 });

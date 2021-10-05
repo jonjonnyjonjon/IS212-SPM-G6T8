@@ -1,54 +1,44 @@
 import React from "react"
 import {
-	BrowserRouter as Router,
 	Switch, 
 	Route,
-	Link
+	Link,
+	useLocation
 } from "react-router-dom"
-import HRHome from "./pages/HRHome"
-import EngineerHome from "./pages/EngineerHome"
-import TrainerHome from "./pages/TrainerHome"
-import TrainerCreateQuizType from "./pages/TrainerCreateQuizType"
-import TrainerViewResult from "./pages/TrainerViewResult"
-import TrainerCreateQuestion from "./pages/TrainerCreateQuestion"
+
+import TrainerRouting from "./pages/TrainerRouting"
 
 function App() {
+	const location = useLocation();
 	return (
-		
-		<Router>
+		<div className="App">
+			{location.pathname === "/" ?
 			<div>
-				<h1>Welcome to Login. Choose your role.</h1>
+				<h1>Welcome to Login. Choose your role.</h1> 
+					<nav>
+						<ul>
+						<li>
+							<Link to="/hr">HR</Link>
+						</li>
+						<li>
+							<Link to="/engineer">Engineer</Link>
+						</li>
+						<li>
+							<Link to="/trainer">Trainer</Link>
+						</li>
+						</ul>
+					</nav>
+			</div> 
+			: null }
+			
+			<Switch>
+				<Route path="/engineer" />
+				<Route path="/trainer" component={TrainerRouting} />
+				<Route path="/hr" />
 
-				<nav>
-					<ul>
-					<li>
-						<Link to="/hr">HR</Link>
-					</li>
-					<li>
-						<Link to="/engineer">Engineer</Link>
-					</li>
-					<li>
-						<Link to="/trainer">Trainer</Link>
-					</li>
-					</ul>
-				</nav>
-				<Switch>
-					<Route path="/engineer">
-						<EngineerHome />
-					</Route>
-					<Route path="/trainer">
-						<TrainerHome />
-						{/* <TrainerCreateQuizType /> */}
-						<TrainerCreateQuestion />
-						<TrainerViewResult />
-					</Route>
-					<Route path="/hr">
-						<HRHome />
-					</Route>
-				</Switch>
-			</div>
-		</Router>
-	)
+			</Switch>
+		</div>
+	)	
 }
 
 export default App;

@@ -14,7 +14,7 @@ import { useState } from 'react'
 
 function TrainerViewResult() {
 
-    const [key, setKey] = useState('all');
+    const [key, setKey] = useState({});
 
     return (
         <div>

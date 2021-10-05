@@ -1,11 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import UserNavbar from "../components/UserNavbar"
-import { Link, Route, Switch, useRouteMatch, useLocation } from "react-router-dom"
+import { Link, Route, Switch, useRouteMatch, useLocation} from "react-router-dom"
 import { Nav } from 'react-bootstrap'
 import TrainerViewResult from './TrainerViewResult'
 import TrainerHome from './TrainerHome'
-import TrainerCreateQuestion from './TrainerCreateQuestion'
-import TrainerCreateQuizType from './TrainerCreateQuizType'
+import TrainerCreateQuiz from './TrainerCreateQuiz'
 
 // This is the homepage for HR.
 // For any subsequent pages you are creating, create them in pages folder (e.g. HRCourses.js, HRPendingEnrolment.js)
@@ -21,12 +20,12 @@ const TrainerRouting = () => {
 
     const NavbarOptions = (
         <Nav className="me-auto">
-            <Nav.Link as={Link} to={`${url}/courses`}>
-                Courses
+            <Nav.Link as={Link} to={`${url}/quiz`}>
+                Create Quiz
             </Nav.Link>
 
-            <Nav.Link as={Link} to={`${url}/engineers`}>
-                Engineers
+            <Nav.Link as={Link} to={`${url}/results`}>
+                Results
             </Nav.Link>
         </Nav>
     )
@@ -36,10 +35,9 @@ const TrainerRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
-                {/* <Route exact path={`${path}/quiz`} component={TrainerCreateQuizType} /> */}
-                <Route path={`${path}/quiz`} component={TrainerCreateQuestion} />
+                <Route path={`${path}/quiz`} component={TrainerCreateQuiz} />
 
-                <Route path={`${path}/results`}>
+                <Route path={`${path}/results`} component={TrainerViewResult}>
                     <h1>Results page</h1>
                 </Route>
             </Switch>
