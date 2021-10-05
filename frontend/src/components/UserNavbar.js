@@ -5,8 +5,6 @@ import {
 
 import { FaHome } from "react-icons/fa"
 
-
-
 function UserNavbar(props) {
     return (
         <Navbar bg="light" expand="lg">
