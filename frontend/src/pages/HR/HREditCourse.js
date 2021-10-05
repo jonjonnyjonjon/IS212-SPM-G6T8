@@ -17,13 +17,15 @@ const HREditCourse = () => {
     const [courseClass, setCourseClass] = useState("")
     const [chosenTrainer, setChosenTrainer] = useState("")
     const [size, setSize] = useState(0)
+    const [enrolmentStart, setEnrolmentStart] = useState("")
+    const [enrolmentEnd, setEnrolmentEnd] = useState("")
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
 
     let history = useHistory()
     const [trainers, setTrainers] = useState([])
 
-    // 
+    // Get course information from courseID passed in URL param
     useEffect(()=> {
         axios.post("http://127.0.0.1:5000/courses/courseID", {
             "courseID": courseID
@@ -34,6 +36,8 @@ const HREditCourse = () => {
                 setCourseClass(courseInfo.class)
                 setSize(courseInfo.size)
                 setChosenTrainer(courseInfo.trainer)
+                setEnrolmentStart(courseInfo.enrolmentStart)
+                setEnrolmentEnd(courseInfo.enrolmentEnd)
                 setStartDate(courseInfo.startDate)
                 setEndDate(courseInfo.endDate)
             })
@@ -59,6 +63,8 @@ const HREditCourse = () => {
             "class": courseClass,
             "size": size,
             "trainer": chosenTrainer,
+            "enrolmentStart": enrolmentStart,
+            "enrolmentEnd": enrolmentEnd,
             "startDate": startDate,
             "endDate": endDate
         })
@@ -102,6 +108,16 @@ const HREditCourse = () => {
                 <Form.Group className="mb-3">
                     <Form.Label>Class size</Form.Label>
                     <Form.Control value={size} onChange={e => setSize(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Enrolment start</Form.Label>
+                    <Form.Control value={enrolmentStart} onChange={e => setEnrolmentStart(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Enrolment end</Form.Label>
+                    <Form.Control value={enrolmentEnd} onChange={e => setEnrolmentEnd(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">

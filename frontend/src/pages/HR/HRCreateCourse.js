@@ -15,8 +15,10 @@ const HRCreateCourse = () => {
     const [courseID, setCourseID] = useState("")
     const [courseName, setCourseName] = useState("")
     const [courseClass, setCourseClass] = useState("")
-    const [chosenTrainer, setChosenTrainer] = useState("")
+    const [chosenTrainer, setChosenTrainer] = useState("Please type in the course ID first")
     const [size, setSize] = useState(0)
+    const [enrolmentStart, setEnrolmentStart] = useState("")
+    const [enrolmentEnd, setEnrolmentEnd] = useState("")
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
 
@@ -29,6 +31,7 @@ const HRCreateCourse = () => {
         })
             .then(res => {
                 setTrainers(res.data)
+                setChosenTrainer(res.data[0].name)
             })
             .catch(err => console.log(err))
     }, [courseID])
@@ -41,6 +44,8 @@ const HRCreateCourse = () => {
             "class": courseClass,
             "size": size,
             "trainer": chosenTrainer,
+            "enrolmentStart": enrolmentStart,
+            "enrolmentEnd": enrolmentEnd,
             "startDate": startDate,
             "endDate": endDate
         })
@@ -83,6 +88,21 @@ const HRCreateCourse = () => {
                 <Form.Group className="mb-3">
                     <Form.Label>Class size</Form.Label>
                     <Form.Control placeholder="Enter class size" onChange={e => setSize(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Start date</Form.Label>
+                    <Form.Control placeholder="Enter enrolment start date" onChange={e => setEnrolmentStart(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Start date</Form.Label>
+                    <Form.Control placeholder="Enter enrolment end date" onChange={e => setEnrolmentEnd(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Start date</Form.Label>
+                    <Form.Control placeholder="Enter start date" onChange={e => setStartDate(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">

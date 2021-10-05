@@ -32,7 +32,17 @@ router.post("/courseID", (req, res) => {
 })
 
 router.post("/createCourse", (req, res) => {
-	let sql = `INSERT INTO courses VALUES ("${req.body.courseID}", "${req.body.courseName}", "${req.body.class}", ${req.body.size}, "${req.body.trainer}","${req.body.startDate}", "${req.body.endDate}")`
+	let sql = `INSERT INTO courses VALUES ( \
+		"${req.body.courseID}", \
+		"${req.body.courseName}", \
+		"${req.body.class}", \
+		${req.body.size}, \
+		"${req.body.trainer}", \
+		"${req.body.enrolmentStart}", \
+		"${req.body.enrolmentEnd}", \
+		"${req.body.startDate}", \
+		"${req.body.endDate}", \
+		DEFAULT, DEFAULT)`
 
 	db.query(sql, (err, result) => {
 		if (err) {
@@ -52,6 +62,8 @@ router.post("/editCourse", (req, res) => {
 		class = "${req.body.class}", \
 		size = ${req.body.size}, \
 		trainer = "${req.body.trainer}", \
+		enrolmentStart = "${req.body.enrolmentStart}", \
+		enrolmentEnd = "${req.body.enrolmentEnd}", \
 		startDate = "${req.body.startDate}", \
 		endDate = "${req.body.endDate}"
 		WHERE courseID = "${req.body.courseID}"`
@@ -63,7 +75,23 @@ router.post("/editCourse", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record inserted to courses table")
+			console.log("1 record edited and saved into table")
+		}
+	})
+})
+
+router.post("/publishCourse", (req, res) => {
+	let sql = `UPDATE courses SET isPublished = True \
+		WHERE courseID = "${req.body.courseID}"`
+
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured.",
+				sql: sql
+			})
+		} else {
+			console.log(`Course ${req.body.courseID} is published.`)
 		}
 	})
 })
