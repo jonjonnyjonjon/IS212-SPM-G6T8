@@ -9,7 +9,7 @@ function UserNavbar(props) {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand><FaHome/> All-in-one </Navbar.Brand>
+                <Navbar.Brand href="/"><FaHome/> SPM G6T8 AIO LMS</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 {props.options}
