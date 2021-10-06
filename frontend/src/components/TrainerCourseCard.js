@@ -16,11 +16,14 @@ const CourseCard = styled(Card) `
 const Title = styled(Card.Title)`
     font-size: 20px;
     margin-bottom: 20px;
+    margin-left: 10px;
 `
 
 const Text = styled(Card.Text)`
     font-size: 15px;
     margin-bottom: 30px;
+    font-weight: 600;
+    margin-left: 10px;
 `
 const ButtonDiv = styled.div`
     font-size: 15px;
@@ -29,7 +32,7 @@ const ButtonDiv = styled.div`
 `
 
 const Btn = styled(Button)`
-    width: 60%;
+    width: 80%;
     background-color: #5D5FEF;
 `
 
@@ -39,7 +42,7 @@ function TrainerCourseCard(props) {
       <CardImg src={props.img}></CardImg>
       <Card.Body>
         <Title>{props.title}</Title>
-        <Text>{props.text}</Text>
+        <Text>Classes: {props.class}</Text>
         <ButtonDiv>
             <Btn>Manage</Btn>
         </ButtonDiv>
