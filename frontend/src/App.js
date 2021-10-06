@@ -5,8 +5,9 @@ import {
 	Route,
 	Link
 } from "react-router-dom"
+
 import HRHome from "./pages/HRHome"
-import EngineerHome from "./pages/EngineerHome"
+import EngineerCourses from "./pages/Engineer/EngineerCourses"
 import TrainerHome from "./pages/TrainerHome"
 
 function App() {
@@ -29,9 +30,10 @@ function App() {
 					</li>
 					</ul>
 				</nav>
+
 				<Switch>
 					<Route path="/engineer">
-						<EngineerHome />
+						<EngineerCourses />
 					</Route>
 					<Route path="/trainer">
 						<TrainerHome />
