@@ -6,7 +6,7 @@ import TrainerViewResult from './TrainerViewResult'
 import TrainerHome from './TrainerHome'
 import TrainerCreateQuiz from './TrainerCreateQuiz'
 
-// This is the homepage for HR.
+// This is the homepage for Trainer.
 // For any subsequent pages you are creating, create them in pages folder (e.g. HRCourses.js, HRPendingEnrolment.js)
 // Take note of naming convention, it is camel case, but the first word's first letter is also capitalized, i.e. MyName, not myName
 
