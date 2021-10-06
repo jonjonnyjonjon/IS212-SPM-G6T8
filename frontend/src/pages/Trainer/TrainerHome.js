@@ -35,14 +35,17 @@ function TrainerHome() {
     const CourseMap = new Map();
     for (let i = 0; i < courses.length; i++) {
       if (!CourseMap.has(courses[i]["courseName"])) {
-        CourseMap.set(courses[i]["courseName"], [courses[i]["class"]]);
+        CourseMap.set(courses[i]["courseName"], [courses[i]['courseID']] );
       } else {
-        CourseMap.get(courses[i]["courseName"]).push(courses[i]["class"]);
+        CourseMap.get(courses[i]["courseName"]).push(courses[i]['courseID']);
       }
     }
     return CourseMap;
   }
   const CourseMap = getCourseMap();
+
+  console.log(CourseMap)
+  // console.log(courses[0]['class'], courses[0]['courseID'])
 
   return (
     <div>
@@ -55,12 +58,14 @@ function TrainerHome() {
       >
         <Tab eventKey="ongoing" title="Ongoing">
         {/* will need to filter & display ongoing courses accordingly */}
-          <CourseContainer>
+        <CourseContainer>
             {Array.from(CourseMap.keys()).map((key) => (
               <TrainerCourseCard
+                // course id will be the last 5 ch of course name (can rename to course code if conflict w/ id)
+                id={key.slice(-5)}
                 img={printer}
                 title={key}
-                class={CourseMap.get(key).join(", ")}
+                class={(CourseMap.get(key)).map((course) => course.slice(-2) ).join(", ")}
               ></TrainerCourseCard>
             ))}
           </CourseContainer>
@@ -68,12 +73,14 @@ function TrainerHome() {
 
         <Tab eventKey="incomplete" title="Incomplete"> 
         {/* will need to filter & display incomplete courses accordingly */}
-          <CourseContainer>
+        <CourseContainer>
             {Array.from(CourseMap.keys()).map((key) => (
               <TrainerCourseCard
+                // course id will be the last 5 ch of course name (can rename to course code if conflict w/ id)
+                id={key.slice(-5)}
                 img={printer}
                 title={key}
-                class={CourseMap.get(key).join(", ")}
+                class={(CourseMap.get(key)).map((course) => course.slice(-2) ).join(", ")}
               ></TrainerCourseCard>
             ))}
           </CourseContainer>
