@@ -8,27 +8,36 @@ import {
 
 import HRRouting from "./pages/HRRouting"
 import TrainerRouting from "./pages/TrainerRouting"
+import styled from "styled-components";
+import {Button} from "react-bootstrap"
 
+const Header = styled.h2 `
+	margin: 50px 20px;
+	font-weight: 800;
+	text-align: center;	
+`
+
+const NavButton = styled(Button) `
+	width: 200px;
+	height: 40px;
+	background-color: #5D5FEF;
+`
+const Nav = styled.nav `
+	display: flex;
+	justify-content: space-evenly;
+`
 function App() {
 	const location = useLocation();
 	return (
 		<div className="App">
 			{location.pathname === "/" ?
 			<div>
-				<h1>Welcome to Login. Choose your role.</h1> 
-					<nav>
-						<ul>
-						<li>
-							<Link to="/hr">HR</Link>
-						</li>
-						<li>
-							<Link to="/engineer">Engineer</Link>
-						</li>
-						<li>
-							<Link to="/trainer">Trainer</Link>
-						</li>
-						</ul>
-					</nav>
+				<Header>Welcome to Login. Choose your role.</Header> 
+					<Nav>
+						<NavButton href="/hr">HR</NavButton>
+						<NavButton href="/engineer">Engineer</NavButton>
+						<NavButton href="/trainer">Trainer</NavButton>
+					</Nav>
 			</div> 
 			: null }
 			
@@ -36,7 +45,6 @@ function App() {
 				<Route path="/engineer" />
 				<Route path="/trainer" component={TrainerRouting}/>
 				<Route path="/hr" component={HRRouting} />
-
 			</Switch>
 		</div>
 	)	
