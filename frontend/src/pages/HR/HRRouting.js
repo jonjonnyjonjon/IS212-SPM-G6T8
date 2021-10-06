@@ -1,10 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserNavbar from "../components/UserNavbar"
-import { Link, Route, Switch, useRouteMatch, useLocation } from "react-router-dom"
 import { Nav } from 'react-bootstrap'
+
+import { Link, Route, Switch, useRouteMatch, useLocation } from "react-router-dom"
+import UserNavbar from "../../components/UserNavbar"
 import HRHome from "./HRHome"
-import HRCourses from './HRCourses'
-import HRCreateCourse from './HRCreateCourse'
+import HRCourses from "./HRCourses"
+import HRCreateCourse from "./HRCreateCourse"
+import HREditCourse from "./HREditCourse"
+
 
 // This is the homepage for HR.
 // For any subsequent pages you are creating, create them in pages folder (e.g. HRCourses.js, HRPendingEnrolment.js)
@@ -37,6 +40,7 @@ const HRRouting = () => {
             <Switch>
                 <Route exact path={`${path}/courses`} component={HRCourses} />
                 <Route path={`${path}/courses/createCourse`} component={HRCreateCourse} />
+                <Route path={`${path}/courses/editCourse/:courseID`} component={HREditCourse} />
 
                 <Route path={`${path}/engineers`}>
                     <h1>Engineers page</h1>
