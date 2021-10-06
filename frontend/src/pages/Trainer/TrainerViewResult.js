@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserNavbar from "../components/UserNavbar"
+import UserNavbar from "../../components/UserNavbar"
 import {
     Container,
     Table,

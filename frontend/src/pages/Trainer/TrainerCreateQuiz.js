@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserNavbar from "../components/UserNavbar"
-import TrainerMCQQuestion from '../components/TrainerMCQQuestion'
-import TrainerTFQuestion from '../components/TrainerTFQuestion'
+import UserNavbar from "../../components/UserNavbar"
+import TrainerMCQQuestion from '../../components/TrainerMCQQuestion'
+import TrainerTFQuestion from '../../components/TrainerTFQuestion'
 import {
     Form,
     Container,

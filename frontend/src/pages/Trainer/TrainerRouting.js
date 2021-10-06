@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserNavbar from "../components/UserNavbar"
+import UserNavbar from "../../components/UserNavbar"
 import { Link, Route, Switch, useRouteMatch, useLocation} from "react-router-dom"
 import { Nav } from 'react-bootstrap'
 import TrainerViewResult from './TrainerViewResult'

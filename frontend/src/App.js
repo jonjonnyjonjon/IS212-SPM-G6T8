@@ -6,8 +6,8 @@ import {
 	useLocation
 } from "react-router-dom"
 
-import HRRouting from "./pages/HRRouting"
-import TrainerRouting from "./pages/TrainerRouting"
+import HRRouting from "./pages/HR/HRRouting"
+import TrainerRouting from "./pages/Trainer/TrainerRouting"
 import styled from "styled-components";
 import {Button} from "react-bootstrap"
 

@@ -1,5 +1,5 @@
-import TrainerCourseCard from "../components/TrainerCourseCard";
-import printer from "../img/printer.png";
+import TrainerCourseCard from "../../components/TrainerCourseCard";
+import printer from "../../img/printer.png";
 import { Container, Tabs, Tab } from "react-bootstrap";
 import { useState } from "react";
 import styled from "styled-components";
