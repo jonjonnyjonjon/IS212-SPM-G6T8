@@ -6,6 +6,10 @@ import {
 	useLocation
 } from "react-router-dom"
 
+import HRHome from "./pages/HRHome"
+import EngineerCourses from "./pages/Engineer/EngineerCourses"
+import TrainerHome from "./pages/TrainerHome"
+
 import HRRouting from "./pages/HR/HRRouting"
 import TrainerRouting from "./pages/Trainer/TrainerRouting"
 import styled from "styled-components";
