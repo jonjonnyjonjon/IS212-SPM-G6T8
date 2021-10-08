@@ -84,7 +84,7 @@ function EngineerCourses() {
                                 <Card.Body>
                                     <Card.Title> {course.courseName} </Card.Title>
                                     <Card.Subtitle> {course.courseID} </Card.Subtitle>
-                                    <Card.Text> {course.completed_date} </Card.Text><br/>
+                                    <Card.Text> {course.completedDate} </Card.Text><br/>
                                     <Card.Subtitle>Course Trainer: {course.trainer} </Card.Subtitle>
                                 </Card.Body>
                             </Col>

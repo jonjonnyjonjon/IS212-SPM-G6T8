@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS completed_courses;
 CREATE TABLE completed_courses (
     email varchar(255),
     courseID VARCHAR(255),
-    completed_date VARCHAR(255),
+    completedDate VARCHAR(255),
     
     CONSTRAINT completed_pk PRIMARY KEY (email, courseID),
     CONSTRAINT completed_fk1 FOREIGN KEY (email) REFERENCES engineers(email),
@@ -72,11 +72,11 @@ INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "CG1000C1", "08
 DROP TABLE IF EXISTS course_prereq;
 CREATE TABLE course_prereq (
     courseID VARCHAR(255),
-    prereq_courseID VARCHAR(255),
+    prereqCourseID VARCHAR(255),
 
-    CONSTRAINT prereq_pk PRIMARY KEY (courseID, prereq_courseID),
+    CONSTRAINT prereq_pk PRIMARY KEY (courseID, prereqCourseID),
     CONSTRAINT prereq_pk1 FOREIGN KEY (courseID) REFERENCES courses(courseID),
-    CONSTRAINT prereq_pk2 FOREIGN KEY (prereq_courseID) REFERENCES courses(courseID)
+    CONSTRAINT prereq_pk2 FOREIGN KEY (prereqCourseID) REFERENCES courses(courseID)
 );
 
 INSERT INTO course_prereq VALUES("CG1000C2", "CG1000C1");

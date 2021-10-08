@@ -12,7 +12,7 @@ router.get("/retrieveEligible", (req, res) => {
                 WHERE courseID not in (SELECT courseID FROM completed_courses WHERE email ='keithchiang.2019@aio.com') 
                 AND hasPrereq = False
                 OR (courseID in (SELECT courseID FROM course_prereq
-                                WHERE prereq_courseID in (SELECT courseID FROM completed_courses WHERE email='keithchiang.2019@aio.com')
+                                WHERE prereqCourseID in (SELECT courseID FROM completed_courses WHERE email='keithchiang.2019@aio.com')
                                 AND courseID not in (SELECT courseID FROM completed_courses WHERE email='keithchiang.2019@aio.com'))
                     ); `;
 
@@ -30,7 +30,7 @@ router.get("/retrieveEligible", (req, res) => {
 
 // Retrieve completed courses
 router.get("/retrieveCompleted", (req, res) => {
-	let sql = `SELECT c.courseID, c.courseName, c.trainer, cc.completed_date
+	let sql = `SELECT c.courseID, c.courseName, c.trainer, cc.completedDate
                 FROM courses c, completed_courses cc
                 WHERE c.courseID = cc.courseID
                 AND email = 'keithchiang.2019@aio.com'
@@ -54,12 +54,12 @@ router.get("/retrieveCompleted", (req, res) => {
     2. courses that I have not met the prerequisites for AND have not completed
 */
 router.get("/retrieveIneligible", (req, res) => {
-	let sql = ` SELECT  c.courseID, c.courseName, c.class, c.size, c.trainer, c.startDate, c.endDate, p.prereq_courseID
+	let sql = ` SELECT  c.courseID, c.courseName, c.class, c.size, c.trainer, c.startDate, c.endDate, p.prereqCourseID
                 FROM courses c, course_prereq p
                 WHERE c.courseID = p.courseID
                 AND c.hasPrereq = True
                 AND c.courseID in (SELECT courseID FROM course_prereq
-                WHERE prereq_courseID not in (SELECT courseID FROM completed_courses WHERE email='keithchiang.2019@aio.com'));
+                WHERE prereqCourseID not in (SELECT courseID FROM completed_courses WHERE email='keithchiang.2019@aio.com'));
                 
                 `;
 
