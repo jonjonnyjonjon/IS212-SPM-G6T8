@@ -15,4 +15,10 @@ app.use("/courses", coursesRoute)
 app.use("/trainers", trainersRoute)
 app.use("/engineers", engineersRoute)
 
-app.listen(5000, () => console.log('Example app listening on port 5000!'))
+const trainerRoute = require('./routes/quiz')
+
+app.use('/quiz', trainerRoute)
+
+app.listen(5000, () => {
+  console.log('Example app listening on port 5000!');
+});

@@ -1,50 +1,57 @@
 import React from "react"
 import {
-	BrowserRouter as Router,
 	Switch, 
 	Route,
-	Link
+	Link,
+	useLocation
 } from "react-router-dom"
 
 import HRHome from "./pages/HRHome"
 import EngineerCourses from "./pages/Engineer/EngineerCourses"
 import TrainerHome from "./pages/TrainerHome"
 
+import HRRouting from "./pages/HR/HRRouting"
+import TrainerRouting from "./pages/Trainer/TrainerRouting"
+import styled from "styled-components";
+import {Button} from "react-bootstrap"
+
+const Header = styled.h2 `
+	margin: 50px 20px;
+	font-weight: 800;
+	text-align: center;	
+`
+
+const NavButton = styled(Button) `
+	width: 200px;
+	height: 40px;
+	background-color: #5D5FEF;
+`
+const Nav = styled.nav `
+	display: flex;
+	justify-content: space-evenly;
+`
 function App() {
+	const location = useLocation();
 	return (
-		
-		<Router>
+		<div className="App">
+			{location.pathname === "/" ?
 			<div>
-				<h1>Welcome to Login. Choose your role.</h1>
-
-				<nav>
-					<ul>
-					<li>
-						<Link to="/hr">HR</Link>
-					</li>
-					<li>
-						<Link to="/engineer">Engineer</Link>
-					</li>
-					<li>
-						<Link to="/trainer">Trainer</Link>
-					</li>
-					</ul>
-				</nav>
-
-				<Switch>
-					<Route path="/engineer">
-						<EngineerCourses />
-					</Route>
-					<Route path="/trainer">
-						<TrainerHome />
-					</Route>
-					<Route path="/hr">
-						<HRHome />
-					</Route>
-				</Switch>
-			</div>
-		</Router>
-	)
+				<Header>Welcome to Login. Choose your role.</Header> 
+					<Nav>
+						<NavButton href="/hr">HR</NavButton>
+						<NavButton href="/engineer">Engineer</NavButton>
+						<NavButton href="/trainer">Trainer</NavButton>
+					</Nav>
+			</div> 
+			: null }
+			
+			<Switch>
+				<Route path="/engineer" />
+				<Route path="/trainer" component={TrainerRouting}/>
+				<Route path="/hr" component={HRRouting} />
+			</Switch>
+		</div>
+	)	
 }
 
 export default App;
