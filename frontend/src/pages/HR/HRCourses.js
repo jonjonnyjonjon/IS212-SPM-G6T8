@@ -6,13 +6,12 @@ import {
  } from 'react-bootstrap'
 
 import { useEffect, useState } from "react"
-import { Link, useRouteMatch, useHistory } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
 
 const HRCourses = () => {
     const { url } = useRouteMatch()
     const [courses, setCourses] = useState([])
-    let history = useHistory()
 
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/courses")

@@ -42,7 +42,7 @@ const HREditCourse = () => {
                 setEndDate(courseInfo.endDate)
             })
             .catch(err => console.log(err))
-    }, [])
+    })
 
     // Get all qualified trainers to teach this course
     useEffect(()=> {

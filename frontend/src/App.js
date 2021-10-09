@@ -2,13 +2,8 @@ import React from "react"
 import {
 	Switch, 
 	Route,
-	Link,
 	useLocation
 } from "react-router-dom"
-
-import HRHome from "./pages/HRHome"
-import EngineerCourses from "./pages/Engineer/EngineerCourses"
-import TrainerHome from "./pages/TrainerHome"
 
 import HRRouting from "./pages/HR/HRRouting"
 import TrainerRouting from "./pages/Trainer/TrainerRouting"
