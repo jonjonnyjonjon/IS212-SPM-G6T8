@@ -3,34 +3,6 @@ CREATE DATABASE spmg6t8;
 USE spmg6t8;
 
 
-DROP TABLE IF EXISTS courses;
-CREATE TABLE courses (
-    courseID VARCHAR(255),
-    courseName VARCHAR(255),
-    class VARCHAR(255),
-    courseSummary VARCHAR(1000),
-    size INT,
-    trainer VARCHAR(255),
-    enrolmentStart VARCHAR(255),
-    enrolmentEnd VARCHAR(255),
-    startDate VARCHAR(255),
-    endDate VARCHAR(255),
-    materialStatus BOOLEAN DEFAULT False,
-    isPublished BOOLEAN DEFAULT False,
-    hasPrereq BOOLEAN DEFAULT False,
-    
-    PRIMARY KEY (courseID)
-);
-
--- update: populating John Appleseed's courses for demo
-INSERT INTO courses VALUES("CG1000C1", "Intro to Canon G1000", "C1", "Course Summary Here", 24, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, False);
-INSERT INTO courses VALUES("CG1000C2", "Intro to Canon G1000", "C2", "Course Summary Here", 20, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
-INSERT INTO courses VALUES("CG3000C1", "Intro to Canon G3000", "C1", "Course Summary Here", 25, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
-INSERT INTO courses VALUES("CG3000C2", "Intro to Canon G3000", "C2", "Course Summary Here", 28, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
-
-INSERT INTO courses VALUES("CG2000C1", "Intro to Canon G2000", "C1", "Course Summary Here", 30, "Jane Doe", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", False, False, False);
-INSERT INTO courses VALUES ("CG2000C2", "Intro to Canon G2000", "C2", "Course Summary Here", 30, "Jack Sparrow", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", DEFAULT, DEFAULT, True);
-
 DROP TABLE IF EXISTS trainers;
 CREATE TABLE trainers (
 	name varchar(255),
@@ -45,6 +17,35 @@ CREATE TABLE trainers (
 INSERT INTO trainers VALUES("John Appleseed", "johnappleseed.2021@aio.com", "password123", "CG1000");
 INSERT INTO trainers VALUES("Jack Sparrow", "jacksparrow.2021@aio.com", "password456", "CG2000");
 INSERT INTO trainers VALUES("Jane Doe", "janedoe.2021@aio.com", "password789", "CG2000");
+
+DROP TABLE IF EXISTS courses;
+CREATE TABLE courses (
+    courseID VARCHAR(255),
+    courseName VARCHAR(255),
+    class VARCHAR(255),
+    courseSummary VARCHAR(1000),
+    size INT,
+    trainerEmail VARCHAR(255),
+    enrolmentStart VARCHAR(255),
+    enrolmentEnd VARCHAR(255),
+    startDate VARCHAR(255),
+    endDate VARCHAR(255),
+    materialStatus BOOLEAN DEFAULT False,
+    isPublished BOOLEAN DEFAULT False,
+    hasPrereq BOOLEAN DEFAULT False,
+    
+    PRIMARY KEY (courseID),
+	CONSTRAINT trainer_fk FOREIGN KEY (trainerEmail) REFERENCES trainers(email)
+);
+
+-- update: populating John Appleseed's courses for demo
+INSERT INTO courses VALUES("CG1000C1", "Intro to Canon G1000", "C1", "Course Summary Here", 24, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, False);
+INSERT INTO courses VALUES("CG1000C2", "Intro to Canon G1000", "C2", "Course Summary Here", 20, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+INSERT INTO courses VALUES("CG3000C1", "Intro to Canon G3000", "C1", "Course Summary Here", 25, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+INSERT INTO courses VALUES("CG3000C2", "Intro to Canon G3000", "C2", "Course Summary Here", 28, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+
+INSERT INTO courses VALUES("CG2000C1", "Intro to Canon G2000", "C1", "Course Summary Here", 30, "janedoe.2021@aio.com", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", False, False, False);
+INSERT INTO courses VALUES ("CG2000C2", "Intro to Canon G2000", "C2", "Course Summary Here", 30, "jacksparrow.2021@aio.com", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", DEFAULT, DEFAULT, True);
 
 DROP TABLE IF EXISTS engineers;
 CREATE TABLE engineers
