@@ -1,96 +1,55 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useEffect } from 'react'
 import { 
-    Button,
     Container,
-    Table
+    Button,
+    Tabs,
+    Tab,
+    Row,
+    Col
  } from 'react-bootstrap'
-
-import { useEffect, useState } from "react"
 import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
+import { useState } from "react"
+
+import CoursesContainer from "../../components/coursesContainer"
 
 const HRCourses = () => {
     const { url } = useRouteMatch()
     const [courses, setCourses] = useState([])
+    const [key, setKey] = useState("Published")
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/courses")
+        axios.post("http://127.0.0.1:5000/courses/filter", {
+            "filter": key
+        })
             .then(res => {
                 setCourses(res.data)
             })
-    }, [])
+    }, [key])
 
-    const publishCourse = (id) => {
-        axios.post("http://127.0.0.1:5000/courses/publishCourse", {
-            "courseID": id
-        })
+    return(
+        <Container>
+            <Row>
+                <Col><h1>Courses</h1></Col>
+                <Col>
+                    <Link to={`${url}/createCourse`}>
+                        <Button variant="info">Create course</Button>
+                    </Link>
+                </Col>
+            </Row>
 
-        alert("Course has been published!")
-        window.location.reload()
-    }
-
-    return( 
-        <Container className="mt-5">
-            <h1>Courses</h1>
-            <div>
-                <Button variant="info">Ready</Button>{' '}
-                <Button variant="info">Not ready</Button>{' '}
-
-                <Button variant="info">
-                    <Link to={`${url}/createCourse`}>Create course</Link>
-                </Button>{' '}
-
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Class</th>
-                            <th>Size</th>
-                            <th>Trainer</th>
-                            <th>Enrolment Start</th>
-                            <th>Enrolment End</th>
-                            <th>Start date</th>
-                            <th>End date</th>
-                            <th>Materials Uploaded?</th>
-                            <th>Edit</th>
-                            <th>Publish Course</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {courses.map(course =>
-                            <tr key={course.courseName + course.class}>
-                                <td>{course.courseID}</td>
-                                <td>{course.courseName}</td>
-                                <td>{course.class}</td>
-                                <td>{course.size}</td>
-                                <td>{course.trainer}</td>
-                                <td>{course.enrolmentStart}</td>
-                                <td>{course.enrolmentEnd}</td>
-                                <td>{course.startDate}</td>
-                                <td>{course.endDate}</td>
-                                <td>{course.materialStatus === 0 ? "No" : "Yes"}</td>
-
-                                <td>
-                                    <Button variant="warning">
-                                        <Link to={`${url}/editCourse/${course.courseID}`}>Edit</Link>
-                                    </Button>{' '}
-                                </td>
-
-                                <td>
-                                    {course.isPublished === 0 ?
-                                        <Button 
-                                            variant="warning" 
-                                            onClick={() => publishCourse(course.courseID)} 
-                                            disabled={course.materialStatus === 0 ? "disabled" : null}>
-                                            Publish course
-                                        </Button> : "Course is published!"}
-                                </td>
-                            </tr>    
-                        )}
-                    </tbody>
-                </Table>
-            </div>
+            <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
+                <Tab eventKey="Published" title="Published">
+                    <CoursesContainer filter="published" courses={courses}/>
+                </Tab>
+                <Tab eventKey="Ready" title="Ready">
+                    <CoursesContainer filter="ready" courses={courses}/>
+                </Tab>
+                <Tab eventKey="Pending" title="Pending">
+                    <CoursesContainer filter="pending" courses={courses}/>
+                </Tab>
+            </Tabs>
         </Container>
     )
 }

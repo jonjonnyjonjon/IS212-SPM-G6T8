@@ -2,8 +2,33 @@ const express = require("express")
 const router = express.Router()
 const db = require("../db")
 
-router.get("/", (req, res) => {
+// gets all courses
+router.post("/", (req, res) => {
 	let sql = "SELECT * from courses"
+
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			// array of rows are already in the format of "data": []
+			res.json(rows) 
+		}
+	})
+})
+
+// gets courses based on filter
+router.post("/filter", (req, res) => {
+	let filter = req.body.filter
+	let sql;
+	if (filter === "Published") {
+		sql = "SELECT * from courses WHERE isPublished = True"
+	} else if (filter === "Ready") {
+		sql = "SELECT * from courses WHERE materialStatus = True AND isPublished = False"
+	} else {
+		sql = "SELECT * from courses WHERE materialStatus = False"
+	}
 
 	db.query(sql, (err, rows) => {
 		if (err) {
@@ -42,7 +67,7 @@ router.post("/createCourse", (req, res) => {
 		"${req.body.enrolmentEnd}", \
 		"${req.body.startDate}", \
 		"${req.body.endDate}", \
-		DEFAULT, DEFAULT)`
+		)`
 
 	db.query(sql, (err, result) => {
 		if (err) {

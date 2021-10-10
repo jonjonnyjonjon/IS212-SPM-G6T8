@@ -9,7 +9,8 @@ Courses WHERE there are either:
 // ASSUMPTIONS NOW: All courses are available to be taught - not considering enrolment period yet
 router.get("/retrieveEligible", (req, res) => {
 	let sql = ` SELECT * FROM Courses
-                WHERE courseID not in (SELECT courseID FROM completed_courses WHERE email ='keithchiang.2019@aio.com') 
+                WHERE courseID not in (
+					SELECT courseID FROM completed_courses WHERE email ='keithchiang.2019@aio.com') 
                 AND hasPrereq = False
                 OR (courseID in (SELECT courseID FROM course_prereq
                                 WHERE prereqCourseID in (SELECT courseID FROM completed_courses WHERE email='keithchiang.2019@aio.com')

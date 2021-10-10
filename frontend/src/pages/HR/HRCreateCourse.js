@@ -91,18 +91,13 @@ const HRCreateCourse = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Start date</Form.Label>
+                    <Form.Label>Enrolment start</Form.Label>
                     <Form.Control placeholder="Enter enrolment start date" onChange={e => setEnrolmentStart(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Start date</Form.Label>
+                    <Form.Label>Enrolment end</Form.Label>
                     <Form.Control placeholder="Enter enrolment end date" onChange={e => setEnrolmentEnd(e.target.value)}/>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Start date</Form.Label>
-                    <Form.Control placeholder="Enter start date" onChange={e => setStartDate(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
