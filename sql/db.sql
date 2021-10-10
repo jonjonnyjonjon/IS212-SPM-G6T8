@@ -39,10 +39,13 @@ CREATE TABLE courses (
 );
 
 -- update: populating John Appleseed's courses for demo
-INSERT INTO courses VALUES("CG1000C1", "Intro to Canon G1000", "C1", "Course Summary Here", 24, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, False);
-INSERT INTO courses VALUES("CG1000C2", "Intro to Canon G1000", "C2", "Course Summary Here", 20, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
-INSERT INTO courses VALUES("CG3000C1", "Intro to Canon G3000", "C1", "Course Summary Here", 25, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
-INSERT INTO courses VALUES("CG3000C2", "Intro to Canon G3000", "C2", "Course Summary Here", 28, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+INSERT INTO courses VALUES("CG1000C1", "Intro to Canon G1000", "C1", "Course Summary Here", 24, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "24/09/2021", "08/11/2021", False, False, False);
+INSERT INTO courses VALUES("CG1000C2", "Intro to Canon G1000", "C2", "Course Summary Here", 20, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "28/09/2021", "08/12/2021", False, False, True);
+INSERT INTO courses VALUES("CG3000C1", "Intro to Canon G3000", "C1", "Course Summary Here", 25, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "12/11/2021", "28/12/2021", False, False, True);
+INSERT INTO courses VALUES("CG3000C2", "Intro to Canon G3000", "C2", "Course Summary Here", 28, "johnappleseed.2021@aio.com", "10/09/2021", "20/09/2021", "23/07/2021", "10/11/2021", False, False, True);
+INSERT INTO courses VALUES('CG4000C1', 'Intro to Canon G4000', 'C1', 'Course Summary Here', '28', 'johnappleseed.2021@aio.com', '10/09/2021', '20/09/2021', '30/12/2021', '06/02/2022', False, False, True);
+INSERT INTO courses VALUES('CG4000C2', 'Intro to Canon G4000', 'C2', 'Course Summary Here', '28', 'johnappleseed.2021@aio.com', '10/09/2021', '20/09/2021', '28/09/2021', '15/12/2021', False, False, True);
+INSERT INTO courses VALUES('CG4000C3', 'Intro to Canon G4000', 'C3', 'Course Summary Here', '28', 'johnappleseed.2021@aio.com', '10/09/2021', '20/09/2021', '10/11/2021', '27/12/2021', False, False, True);
 
 INSERT INTO courses VALUES("CG2000C1", "Intro to Canon G2000", "C1", "Course Summary Here", 30, "janedoe.2021@aio.com", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", False, False, False);
 INSERT INTO courses VALUES ("CG2000C2", "Intro to Canon G2000", "C2", "Course Summary Here", 30, "jacksparrow.2021@aio.com", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", DEFAULT, DEFAULT, True);
