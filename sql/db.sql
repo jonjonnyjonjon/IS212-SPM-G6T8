@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
     courseID VARCHAR(255),
     courseName VARCHAR(255),
-    courseSummary VARCHAR(1000),
     class VARCHAR(255),
+    courseSummary VARCHAR(1000),
     size INT,
     trainer VARCHAR(255),
     enrolmentStart VARCHAR(255),
@@ -22,11 +22,14 @@ CREATE TABLE courses (
     PRIMARY KEY (courseID)
 );
 
+-- update: populating John Appleseed's courses for demo
 INSERT INTO courses VALUES("CG1000C1", "Intro to Canon G1000", "C1", "Course Summary Here", 24, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, False);
 INSERT INTO courses VALUES("CG1000C2", "Intro to Canon G1000", "C2", "Course Summary Here", 20, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+INSERT INTO courses VALUES("CG3000C1", "Intro to Canon G3000", "C1", "Course Summary Here", 25, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+INSERT INTO courses VALUES("CG3000C2", "Intro to Canon G3000", "C2", "Course Summary Here", 28, "John Appleseed", "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False, True);
+
 INSERT INTO courses VALUES("CG2000C1", "Intro to Canon G2000", "C1", "Course Summary Here", 30, "Jane Doe", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", False, False, False);
 INSERT INTO courses VALUES ("CG2000C2", "Intro to Canon G2000", "C2", "Course Summary Here", 30, "Jack Sparrow", "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", DEFAULT, DEFAULT, True);
-
 
 DROP TABLE IF EXISTS trainers;
 CREATE TABLE trainers (
@@ -81,3 +84,59 @@ CREATE TABLE course_prereq (
 
 INSERT INTO course_prereq VALUES("CG1000C2", "CG1000C1");
 INSERT INTO course_prereq VALUES("CG2000C2", "CG2000C1");
+
+
+# addition 10 oct: for quiz, course_materials and question tables. 
+
+
+DROP TABLE IF EXISTS quiz;
+CREATE TABLE quiz (
+	quizID INT,
+    courseID VARCHAR(255),
+    chapterID INT,
+    hasQuestions BOOLEAN DEFAULT False,
+    
+    CONSTRAINT quiz_pk PRIMARY KEY (QuizID, courseID, chapterID),
+	CONSTRAINT quiz_fk1 FOREIGN KEY (courseID) REFERENCES courses(courseID)
+);
+
+INSERT INTO quiz VALUES(1, "CG1000C1", 1, False );
+INSERT INTO quiz VALUES(2, "CG1000C1", 2, False );
+INSERT INTO quiz VALUES(3, "CG1000C1", 3, False );
+
+DROP TABLE IF EXISTS question;
+CREATE TABLE question (
+	quizID INT,
+	questionID INT,
+	question VARCHAR(1000),
+    type VARCHAR(3), 
+    duration INT, 
+    option1 VARCHAR(1000), 
+    option2 VARCHAR(1000), 
+    option3 VARCHAR(1000), 
+    option4 VARCHAR(1000), 
+    answer INT, 
+    hasQuestions BOOLEAN DEFAULT False,
+    
+    CONSTRAINT question_pk PRIMARY KEY (questionID, quizID),
+	CONSTRAINT question_fk1 FOREIGN KEY (quizID) REFERENCES quiz(quizID)
+);
+
+INSERT INTO question VALUES(1, 1, "What are the steps to operate a Canon printer?", "MCQ", 60, "On the printer", "Load paper in the printer", "Sleep", "Have a mental breakdown", 4, False );
+INSERT INTO question VALUES(1, 2, "Question 2", "MCQ", 60, "sleep", "sleep more", "cry", "Have a mental breakdown", 3, False );
+
+
+DROP TABLE IF EXISTS course_materials;
+CREATE TABLE course_materials (
+    courseID VARCHAR(1000),
+    chapterID INT,
+    content BLOB,
+    quizID INT,
+    
+    CONSTRAINT materials_pk PRIMARY KEY (courseID, chapterID),
+	CONSTRAINT materials_fk1 FOREIGN KEY (courseID) REFERENCES courses(courseID),
+    CONSTRAINT materials_fk2 FOREIGN KEY (quizID) REFERENCES quiz(quizID)
+);
+
+INSERT INTO course_materials VALUES("CG1000C1", 1,  "https://www.youtube.com/watch?v=x38SpWKT_Os&ab_channel=DIYwithAK", 1);
+INSERT INTO course_materials VALUES("CG1000C1", 2,  "https://www.youtube.com/watch?v=x38SpWKT_Os&ab_channel=DIYwithAK", 2);
