@@ -129,7 +129,7 @@ INSERT INTO question VALUES(1, 2, "Question 2", "MCQ", 60, "sleep", "sleep more"
 
 DROP TABLE IF EXISTS course_materials;
 CREATE TABLE course_materials (
-    courseID VARCHAR(1000),
+    courseID VARCHAR(255),
     chapterID INT,
     content BLOB,
     quizID INT,
