@@ -12,39 +12,68 @@ import { Link, useRouteMatch, useHistory } from 'react-router-dom'
 import axios from "axios"
 
 function EngineerBrowseCourse() {
-    const [courses, getCourses] = useState([]);
+    const [eligibleCourses, getEligibleCourses] = useState([]);
+    const [ineligibleCourses, getIneligibleCourses] = useState([]);
 
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/courses/retrieveEligible")
             .then(res => {
-                getCourses(res.data)
+                getEligibleCourses(res.data)
             })
+
+        axios.get("http://127.0.0.1:5000/courses/retrieveIneligible")
+        .then(res => {
+            getIneligibleCourses(res.data)
+        })
+
     }, [])
 
     return (
         <Container>
             <h1>Browse Courses</h1><br/>
 
-                    {courses.map(course =>
-                        <Card style={{ width: '60rem' }} className='mb-3'>
-                            <Row key={course.courseName + course.class}>
-                                <Col md={2}>
-                                    <Card.Img src="holder.js/100px180" />
-                                </Col>
-                                <Col md={8}>
-                                    <Card.Body>
-                                        <Card.Title> {course.courseName} </Card.Title>
-                                        <Card.Subtitle> {course.courseID} </Card.Subtitle>
-                                        <Card.Text> {course.courseSummary} </Card.Text><br/>
-                                        <Card.Subtitle>Sections available: G1, G2, G3</Card.Subtitle>
-                                    </Card.Body>
-                                </Col>
-                                <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                                    <Button className="stretched-link" variant="primary">Go somewhere</Button>
-                                </Col>
-                            </Row>
-                        </Card>
-                    )}
+            {eligibleCourses.map(course =>
+                <Card border='dark' style={{ width: '60rem' }} className='mb-3'>
+                    <Row key={course.courseName + course.class}>
+                        <Col md={2}>
+                            <Card.Img src="holder.js/100px180" />
+                        </Col>
+                        <Col md={8}>
+                            <Card.Body>
+                                <Card.Title> {course.courseName} </Card.Title>
+                                <Card.Subtitle> {course.courseID} </Card.Subtitle>
+                                <Card.Text> {course.courseSummary} </Card.Text><br/>
+                                <Card.Subtitle>Sections available: G1, G2, G3</Card.Subtitle>
+                            </Card.Body>
+                        </Col>
+                        <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                            <Button className="stretched-link me-2" variant="primary">Find out more</Button>
+                        </Col>
+                    </Row>
+                </Card>
+            )}
+
+            {ineligibleCourses.map(course =>
+                <Card border='danger' style={{ width: '60rem' }} className='text-muted mb-3'>
+                    <Row key={course.courseName + course.class}>
+                        <Col md={2}>
+                            <Card.Img src="holder.js/100px180" />
+                        </Col>
+                        <Col md={8}>
+                            <Card.Body>
+                                <Card.Title> {course.courseName} </Card.Title>
+                                <Card.Subtitle> {course.courseID} </Card.Subtitle>
+                                <Card.Text> {course.courseSummary} </Card.Text><br/>
+                                <Card.Subtitle> Pre-requisites not fulfilled: </Card.Subtitle>
+                                <Card.Text> {course.prereqCourseID} </Card.Text>
+                            </Card.Body>
+                        </Col>
+                        <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                            <Button className="stretched-link me-2" variant="danger" disabled>Find out more</Button>
+                        </Col>
+                    </Row>
+                </Card>
+            )}
 
         </Container>
     );

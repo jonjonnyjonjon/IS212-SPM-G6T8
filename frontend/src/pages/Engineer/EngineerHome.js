@@ -24,8 +24,9 @@ function EngineerHome() {
     const [key, setKey] = useState("ongoing");
 
 
+    // To change to retrieveOngoing once endpoint is completed
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/courses/retrieveEligible")
+        axios.get("http://127.0.0.1:5000/courses/retrieveCompleted")
             .then(res => {
                 getCourses(res.data)
             })
@@ -36,9 +37,7 @@ function EngineerHome() {
 
         let apiEndpoint = "http://127.0.0.1:5000/courses/retrieve";
 
-        if (k === "browse") {
-            apiEndpoint += "Eligible";
-        } else if (k === "completed" ) {
+        if (k === "completed" ) {
             apiEndpoint += "Completed";
         }
 
