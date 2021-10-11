@@ -6,12 +6,9 @@ import {
 	useLocation
 } from "react-router-dom"
 
-import HRHome from "./pages/HRHome"
-import EngineerCourses from "./pages/Engineer/EngineerCourses"
-import TrainerHome from "./pages/TrainerHome"
-
 import HRRouting from "./pages/HR/HRRouting"
 import TrainerRouting from "./pages/Trainer/TrainerRouting"
+import EngineerRouting from "./pages/Engineer/EngineerRouting"
 import styled from "styled-components";
 import {Button} from "react-bootstrap"
 
@@ -46,7 +43,7 @@ function App() {
 			: null }
 			
 			<Switch>
-				<Route path="/engineer" />
+				<Route path="/engineer" component={EngineerRouting} />
 				<Route path="/trainer" component={TrainerRouting}/>
 				<Route path="/hr" component={HRRouting} />
 			</Switch>
