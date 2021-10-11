@@ -74,7 +74,7 @@ function EngineerHome() {
                 title="Completed"
             >
                 {courses.map(course =>
-                    <Card style={{ width: '60rem' }}>
+                    <Card style={{ width: '60rem' }} className='mb-3'>
                         <Row key={course.courseName + course.courseID}>
                             <Col md={2}>
                                 <Card.Img src="holder.js/100px180" />
@@ -88,35 +88,12 @@ function EngineerHome() {
                                 </Card.Body>
                             </Col>
                             <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                                <Button variant="primary">Go somewhere</Button>
+                                <Button className="stretched-link" variant="primary">Go somewhere</Button>
                             </Col>
                         </Row>
                     </Card>
                 )}
             </Tab>
-
-            <Tab eventKey="browse" title="Browse Courses">
-                    {courses.map(course =>
-                        <Card style={{ width: '60rem' }}>
-                            <Row key={course.courseName + course.class}>
-                                <Col md={2}>
-                                    <Card.Img src="holder.js/100px180" />
-                                </Col>
-                                <Col md={8}>
-                                    <Card.Body>
-                                        <Card.Title> {course.courseName} </Card.Title>
-                                        <Card.Subtitle> {course.courseID} </Card.Subtitle>
-                                        <Card.Text> {course.courseSummary} </Card.Text><br/>
-                                        <Card.Subtitle>Sections available: G1, G2, G3</Card.Subtitle>
-                                    </Card.Body>
-                                </Col>
-                                <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                                    <Button variant="primary">Go somewhere</Button>
-                                </Col>
-                            </Row>
-                        </Card>
-                    )}
-                </Tab>
 
             </CourseTabs>
         </Container>

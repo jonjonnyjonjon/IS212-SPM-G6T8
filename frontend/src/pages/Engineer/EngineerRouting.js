@@ -5,6 +5,7 @@ import { Link, Route, Switch, useRouteMatch, useLocation } from "react-router-do
 import UserNavbar from "../../components/UserNavbar"
 
 import EngineerHome from './EngineerHome'
+import EngineerBrowseCourse from "./EngineerBrowseCourse"
 
 const EngineerRouting = () => {
     const { url, path } = useRouteMatch()
@@ -12,13 +13,13 @@ const EngineerRouting = () => {
 
     const NavbarOptions = (
         <Nav className="me-auto">
-            <Nav.Link as={Link} to={`${url}/courses`}>
-                Courses
+            <Nav.Link as={Link} to={`${url}/engineer/home`}>
+                My Courses
+            </Nav.Link>
+            <Nav.Link as={Link} to={`${url}/browseCourses`}>
+                Browse Courses
             </Nav.Link>
 
-            <Nav.Link as={Link} to={`${url}/engineers`}>
-                Engineers
-            </Nav.Link>
         </Nav>
     )
 
@@ -27,8 +28,11 @@ const EngineerRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
-                <Route path={`${path}/engineers`}>
-                    <h1>Engineers page</h1>
+                <Route path={`${path}/engineer/home`}>
+                    <EngineerHome />
+                </Route>
+                <Route path={`${path}/browseCourses`}>
+                    <EngineerBrowseCourse />
                 </Route>
             </Switch>
 
