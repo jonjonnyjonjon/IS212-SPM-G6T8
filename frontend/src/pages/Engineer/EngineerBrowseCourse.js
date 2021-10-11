@@ -7,11 +7,14 @@ import {
     Col,
  } from 'react-bootstrap'
 
-import { useEffect, useState } from "react"
-import { Link, useRouteMatch, useHistory } from 'react-router-dom'
-import axios from "axios"
+ import { useEffect, useState } from "react"
+ import { Link, useRouteMatch, useHistory } from 'react-router-dom'
+ import axios from "axios"
 
 function EngineerBrowseCourse() {
+    const { url } = useRouteMatch()
+    let history = useHistory()
+
     const [eligibleCourses, getEligibleCourses] = useState([]);
     const [ineligibleCourses, getIneligibleCourses] = useState([]);
 
@@ -28,34 +31,43 @@ function EngineerBrowseCourse() {
 
     }, [])
 
+    console.log(url);
+
     return (
         <Container>
             <h1>Browse Courses</h1><br/>
 
             {eligibleCourses.map(course =>
-                <Card border='dark' style={{ width: '60rem' }} className='mb-3'>
-                    <Row key={course.courseName + course.class}>
+                <Card border='dark' style={{ width: '60rem' }} className='mb-3' key={course.courseName + course.class}>
+                    <Row>
                         <Col md={2}>
                             <Card.Img src="holder.js/100px180" />
                         </Col>
+
                         <Col md={8}>
                             <Card.Body>
                                 <Card.Title> {course.courseName} </Card.Title>
                                 <Card.Subtitle> {course.courseID} </Card.Subtitle>
                                 <Card.Text> {course.courseSummary} </Card.Text><br/>
-                                <Card.Subtitle>Sections available: G1, G2, G3</Card.Subtitle>
+                                <Card.Subtitle>Classes available:</Card.Subtitle>
+                                <Card.Text>C1, C2</Card.Text>
                             </Card.Body>
                         </Col>
+                        
                         <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                            <Button className="stretched-link me-2" variant="primary">Find out more</Button>
+                            <Link to={`${url}/viewCourse/${course.courseID}`}> 
+                                <Button className="stretched-link me-2" variant="primary">
+                                            Find out more
+                                </Button>
+                            </Link>
                         </Col>
                     </Row>
                 </Card>
             )}
 
             {ineligibleCourses.map(course =>
-                <Card border='danger' style={{ width: '60rem' }} className='text-muted mb-3'>
-                    <Row key={course.courseName + course.class}>
+                <Card border='danger' style={{ width: '60rem' }} className='text-muted mb-3' key={course.courseName + course.class}>
+                    <Row>
                         <Col md={2}>
                             <Card.Img src="holder.js/100px180" />
                         </Col>
@@ -69,7 +81,10 @@ function EngineerBrowseCourse() {
                             </Card.Body>
                         </Col>
                         <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                            <Button className="stretched-link me-2" variant="danger" disabled>Find out more</Button>
+                            <Button className="stretched-link me-2" variant="danger" disabled>
+                                Find out more
+                            </Button>
+                            
                         </Col>
                     </Row>
                 </Card>

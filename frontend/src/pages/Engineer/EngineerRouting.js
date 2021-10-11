@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav } from 'react-bootstrap'
 
-import { Link, Route, Switch, useRouteMatch, useLocation } from "react-router-dom"
+import { Link, Route, Switch, useRouteMatch, useLocation, withRouter } from "react-router-dom"
 import UserNavbar from "../../components/UserNavbar"
 
 import EngineerHome from './EngineerHome'
 import EngineerBrowseCourse from "./EngineerBrowseCourse"
+import EngineerViewCourse from "./EngineerViewCourse"
+
 
 const EngineerRouting = () => {
     const { url, path } = useRouteMatch()
@@ -13,7 +15,7 @@ const EngineerRouting = () => {
 
     const NavbarOptions = (
         <Nav className="me-auto">
-            <Nav.Link as={Link} to={`${url}/engineer/home`}>
+            <Nav.Link as={Link} to={`${url}/home`}>
                 My Courses
             </Nav.Link>
             <Nav.Link as={Link} to={`${url}/browseCourses`}>
@@ -28,12 +30,9 @@ const EngineerRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
-                <Route path={`${path}/engineer/home`}>
-                    <EngineerHome />
-                </Route>
-                <Route path={`${path}/browseCourses`}>
-                    <EngineerBrowseCourse />
-                </Route>
+                <Route path={`${path}/home`} component={EngineerHome} />
+                <Route exact path={`${path}/browseCourses`} component={EngineerBrowseCourse} />
+                <Route exact path={`${path}/browseCourses/viewCourse/:courseID`} component={withRouter(EngineerViewCourse)} />
             </Switch>
 
             {location.pathname === "/engineer" ? <EngineerHome /> : null }

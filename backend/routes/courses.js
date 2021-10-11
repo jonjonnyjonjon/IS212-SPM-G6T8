@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 	db.query(sql, (err, rows) => {
 		if (err) {
 			res.status(500).send({
-				message: err.message || "An error has occured."
+				message: err.message || "An error has occurred."
 			})
 		} else {
 			// array of rows are already in the format of "data": []
@@ -17,18 +17,20 @@ router.get("/", (req, res) => {
 	})
 })
 
-router.post("/courseID", (req, res) => {
-	let sql = `SELECT * from courses WHERE courseID="${req.body.courseID}"`
+router.get("/getCourse", (req, res) => {
+	let sql = `SELECT * from courses WHERE courseID="${req.query.courseID}"`
 
-	db.query(sql, (err, rows) => {
+	db.query(sql, (err, result) => {
 		if (err) {
 			res.status(500).send({
-				message: err.message || "An error has occured."
+				message: err.message || "An error has occurred."
 			})
 		} else {
-			res.json(rows) 
+			// array of rows are already in the format of "data": []
+			res.json(result[0])
 		}
 	})
+    
 })
 
 router.post("/createCourse", (req, res) => {
@@ -47,7 +49,7 @@ router.post("/createCourse", (req, res) => {
 	db.query(sql, (err, result) => {
 		if (err) {
 			res.status(500).send({
-				message: err.message || "An error has occured.",
+				message: err.message || "An error has occurred.",
 				sql: sql
 			})
 		} else {
@@ -71,7 +73,7 @@ router.post("/editCourse", (req, res) => {
 	db.query(sql, (err, result) => {
 		if (err) {
 			res.status(500).send({
-				message: err.message || "An error has occured.",
+				message: err.message || "An error has occurred.",
 				sql: sql
 			})
 		} else {
@@ -87,7 +89,7 @@ router.post("/publishCourse", (req, res) => {
 	db.query(sql, (err, result) => {
 		if (err) {
 			res.status(500).send({
-				message: err.message || "An error has occured.",
+				message: err.message || "An error has occurred.",
 				sql: sql
 			})
 		} else {
