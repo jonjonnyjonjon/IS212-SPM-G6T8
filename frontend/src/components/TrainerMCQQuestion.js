@@ -18,12 +18,11 @@ function TrainerMCQQuestion(props) {
                 type="text" 
                 placeholder="Enter Question Here: Eg: What do you need to do before you turn on a printer?" 
             />
-
             <div className={`question` + props.qnNum + `Options`}>
                 
                 <InputGroup className="mb-2">
                     <InputGroup.Radio name={`question` + props.qnNum} id="option1"/>
-                    <FormControl />
+                    <FormControl/>
                 </InputGroup>
 
                 <InputGroup className="mb-2">

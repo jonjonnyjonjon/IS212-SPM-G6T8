@@ -10,15 +10,15 @@ app.use(cors())
 const coursesRoute = require("./routes/courses")
 const trainersRoute = require("./routes/trainers")
 const engineersRoute = require("./routes/engineers")
-const trainerRoute = require('./routes/quiz')
+const quizRoute = require('./routes/quiz')
 const classesRoute = require("./routes/classes")
 
 app.use("/courses", coursesRoute)
 app.use("/classes", classesRoute)
 app.use("/trainers", trainersRoute)
 app.use("/engineers", engineersRoute)
-app.use('/quiz', trainerRoute)
+app.use('/quiz', quizRoute)
 
-app.listen(5000, () => {
+app.listen(5000, "127.0.0.1", () => {
   console.log('Example app listening on port 5000!');
 });

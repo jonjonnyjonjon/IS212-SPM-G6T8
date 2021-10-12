@@ -6,12 +6,22 @@ import {
     Container,
     Button
 } from "react-bootstrap"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from "axios"
 
 
 const TrainerCreateQuiz = () => {
 
+    // const [courses, setCourses] = useState([]);
+
+    // useEffect(() => {
+    //     axios.get("http://127.0.0.1:5000/courses").then((res) => {
+    //     setCourses(res.data);
+    //     });
+    // }, []);
+
+    // console.log(courses[0].courseID)
+    
     const [quizType, setQuizType] = useState("")
     const [quizDuration, setQuizDuration] = useState(0)
     
@@ -57,10 +67,11 @@ const TrainerCreateQuiz = () => {
                         answer = optionValue
                     }
                 } else if (qnType === "tf") {
-                    optionValues = ["True", "False"]
-                    console.log(qnOptions[j].children[0].checked)
+                    optionValues = ["True", "False", "", ""]
+                    // console.log(qnOptions[j].children[0].checked)
                     answer = (qnOptions[j].children[0].checked) ? "True" : answer
                 }
+    
             }
 
             qnsInfo.push({
@@ -68,19 +79,57 @@ const TrainerCreateQuiz = () => {
                 "optionValues": optionValues,
                 "answer": answer 
             })
+
+
         }
 
         console.log(qnsInfo)
 
-        axios.post("http://127.0.0.1:5000/quiz", {
-            // to fill up
-            "quizType": quizType,
-            "quizDuration": quizDuration,
-            "quizInfo": qnsInfo
-        })
-            .then(console.log("sent to backend!"))
+        let title = ''
+        let options = []
+        let qnanswer = ''
+        let option1 = ''
+        let option2 = ''
+        let option3 = ''
+        let option4 = ''
+
+        for (let k = 0; k < qnsInfo.length; k++) {
+            let qnID = 1
+
+            title = qnsInfo[k].qnTitle
+            qnID += k
+            qnID = qnID.toString()
+            options = qnsInfo[k].optionValues
+            qnanswer = qnsInfo[k].answer
+
+
+            for (let l=0; l < options.length; l++) {
+                option1 = options[0]
+                option2 = options[1]
+                option3 = options[2]
+                option4 = options[3]
+            }
+
+            axios.post("http://127.0.0.1:5000/quiz/createQuestion", {
+                "quiz_id": '1',
+                "question_id": qnID,
+                "question": title,
+                "type": quizType,
+                "duration": parseInt(quizDuration),
+                "option1": option1,
+                "option2": option2,
+                "option3": option3,
+                "option4": option4,
+                "answer": qnanswer
+            })
+            
+        }
+        
+        console.log("sent to backend!")
+        
+        
+        //     .then(console.log("sent to backend!"))
         alert("quiz created! redirecting back to manage course")
-        //history.push it back to the 
     }
 
     return (
@@ -89,15 +138,15 @@ const TrainerCreateQuiz = () => {
             <Form>
                 <Form.Label>
                     Select your quiz type: <br />
-                    <select className="form-select">
-                        <option value="graded" onChange={e => setQuizType("quizType", e.target.value)}>Graded Quiz</option>
-                        <option value="ungraded" onChange={e => setQuizType("quizType", e.target.value)}>Ungraded Quiz</option>
+                    <select className="form-select" onClick={e => setQuizType(e.target.value)}>
+                        <option value="graded">Graded Quiz</option>
+                        <option value="ungraded" >Ungraded Quiz</option>
                     </select>
                 </Form.Label>
                 <br />
                 <Form.Label>
                     Duration of quiz (in minutes):
-                    <Form.Control type="number" placeholder="30" onChange={e => setQuizDuration("time", e.target.value)} />
+                    <Form.Control type="number" placeholder="30" onChange={e => setQuizDuration(e.target.value)} />
                 </Form.Label>
                 {/* <TrainerMCQQuestion /> */}
                 {/* <TrainerTFQuestion /> */}

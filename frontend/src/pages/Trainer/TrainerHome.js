@@ -31,37 +31,37 @@ function TrainerHome() {
     });
   }, []);
 
-  function sortCourses() {
-    const CourseMap = new Map();
-    CourseMap.set("ongoing", [])
-    CourseMap.set("incomplete", [])
-    var today = new Date()
-    for (let i = 0; i < courses.length; i++) {
-      let start = courses[i]["course_start"].split("/")
-      var startDate = new Date(start[2], start[1]-1, start[0])
-      let end = courses[i]["course_end"].split("/")
-      var endDate = new Date(end[2], end[1]-1, end[0])
-      // console.log(CourseMap.get("ongoing"))
+//   function sortCourses() {
+//     const CourseMap = new Map();
+//     CourseMap.set("ongoing", [])
+//     CourseMap.set("incomplete", [])
+//     var today = new Date()
+//     for (let i = 0; i < courses.length; i++) {
+//       let start = courses[i]["startDate"].split("/")
+//       var startDate = new Date(start[2], start[1]-1, start[0])
+//       let end = courses[i]["endDate"].split("/")
+//       var endDate = new Date(end[2], end[1]-1, end[0])
+//       // console.log(CourseMap.get("ongoing"))
 
-      if (today > startDate & today < endDate) {
-        CourseMap.get("ongoing").push(courses[i])
-      } 
-      if (today < startDate) {
-        CourseMap.get("incomplete").push(courses[i]);
-      }
-    }
-    return CourseMap;
-  }
+//       if (today > startDate & today < endDate) {
+//         CourseMap.get("ongoing").push(courses[i])
+//       } 
+//       if (today < startDate) {
+//         CourseMap.get("incomplete").push(courses[i]);
+//       }
+//     }
+//     return CourseMap;
+//   }
 
-  var ongoingCourses = Array.from(sortCourses())[0][1]
-  var incompleteCourses = Array.from(sortCourses())[1][1]
+//   var ongoingCourses = Array.from(sortCourses())[0][1]
+//   var incompleteCourses = Array.from(sortCourses())[1][1]
 
   console.log(courses)
 
   return (
     <Container>
       <Header>Course Manager</Header>
-      <CourseTabs
+      {/* <CourseTabs
         id="controlled-tab-example"
         activeKey={key}
         onSelect={(k) => setKey(k)}
@@ -96,7 +96,7 @@ function TrainerHome() {
             )}
           </CourseContainer>
         </Tab>
-      </CourseTabs>
+      </CourseTabs> */}
     </Container>
   );
 }
