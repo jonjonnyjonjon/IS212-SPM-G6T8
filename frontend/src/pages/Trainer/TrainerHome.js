@@ -37,9 +37,9 @@ function TrainerHome() {
     CourseMap.set("incomplete", [])
     var today = new Date()
     for (let i = 0; i < courses.length; i++) {
-      let start = courses[i]["startDate"].split("/")
+      let start = courses[i]["course_start"].split("/")
       var startDate = new Date(start[2], start[1]-1, start[0])
-      let end = courses[i]["endDate"].split("/")
+      let end = courses[i]["course_end"].split("/")
       var endDate = new Date(end[2], end[1]-1, end[0])
       // console.log(CourseMap.get("ongoing"))
 
@@ -56,6 +56,8 @@ function TrainerHome() {
   var ongoingCourses = Array.from(sortCourses())[0][1]
   var incompleteCourses = Array.from(sortCourses())[1][1]
 
+  console.log(courses)
+
   return (
     <Container>
       <Header>Course Manager</Header>
@@ -69,12 +71,12 @@ function TrainerHome() {
         <CourseContainer>
             {ongoingCourses.map(course => 
               <TrainerCourseCard
-                id={course.courseID}
+                id={course.course_id}
                 img={printer}
-                title={course.courseName}
-                class={course.class}
-                startDate={course.startDate}
-                endDate={course.endDate}
+                title={course.course_name}
+                class={course.class_id}
+                startDate={course.course_start}
+                endDate={course.course_end}
               ></TrainerCourseCard>
             )}
           </CourseContainer>
@@ -84,12 +86,12 @@ function TrainerHome() {
         <CourseContainer>
             {incompleteCourses.map(course => 
               <TrainerCourseCard
-                id={course.courseID}
+                id={course.course_id}
                 img={printer}
-                title={course.courseName}
-                class={course.class}
-                startDate={course.startDate}
-                endDate={course.endDate}
+                title={course.course_name}
+                class={course.class_id}
+                startDate={course.course_start}
+                endDate={course.course_end}
               ></TrainerCourseCard>
             )}
           </CourseContainer>

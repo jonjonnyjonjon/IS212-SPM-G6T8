@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require("../db")
 
 router.get("/", (req, res) => {
-	let sql = "SELECT * from courses WHERE trainerEmail = 'johnappleseed.2021@aio.com'"
+	let sql = "SELECT * from classes left join courses on classes.course_id = courses.course_id WHERE trainer_email = 'johnappleseed.2021@aio.com'"
 
 	db.query(sql, (err, rows) => {
 		if (err) {
