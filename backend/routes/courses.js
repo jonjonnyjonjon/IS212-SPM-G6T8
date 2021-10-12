@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require("../db")
 
 // gets all courses
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
 	let sql = "SELECT * from courses"
 
 	db.query(sql, (err, rows) => {
@@ -18,16 +18,13 @@ router.post("/", (req, res) => {
 	})
 })
 
-// gets courses based on filter
-router.post("/filter", (req, res) => {
-	let filter = req.body.filter
-	let sql;
-	if (filter === "Published") {
-		sql = "SELECT * from courses WHERE isPublished = True"
-	} else if (filter === "Ready") {
-		sql = "SELECT * from courses WHERE materialStatus = True AND isPublished = False"
+router.get("/courseName", (req, res) => {
+	let keyword = req.query.keyword
+	let sql
+	if (keyword) {
+		sql =  `SELECT * from courses WHERE course_name LIKE "%${keyword}%"`
 	} else {
-		sql = "SELECT * from courses WHERE materialStatus = False"
+		sql = "SELECT * from courses"
 	}
 
 	db.query(sql, (err, rows) => {
@@ -42,8 +39,8 @@ router.post("/filter", (req, res) => {
 	})
 })
 
-router.post("/courseID", (req, res) => {
-	let sql = `SELECT * from courses WHERE courseID="${req.body.courseID}"`
+router.get("/courseID", (req, res) => {
+	let sql = `SELECT * from courses WHERE course_id="${req.body.courseID}"`
 
 	db.query(sql, (err, rows) => {
 		if (err) {
@@ -60,14 +57,9 @@ router.post("/createCourse", (req, res) => {
 	let sql = `INSERT INTO courses VALUES ( \
 		"${req.body.courseID}", \
 		"${req.body.courseName}", \
-		"${req.body.class}", \
-		${req.body.size}, \
-		"${req.body.trainer}", \
-		"${req.body.enrolmentStart}", \
-		"${req.body.enrolmentEnd}", \
-		"${req.body.startDate}", \
-		"${req.body.endDate}", \
-		)`
+		"${req.body.courseSummary}", \
+		${req.body.hasPrereq}
+	)`
 
 	db.query(sql, (err, result) => {
 		if (err) {
@@ -101,22 +93,6 @@ router.post("/editCourse", (req, res) => {
 			})
 		} else {
 			console.log("1 record edited and saved into table")
-		}
-	})
-})
-
-router.post("/publishCourse", (req, res) => {
-	let sql = `UPDATE courses SET isPublished = True \
-		WHERE courseID = "${req.body.courseID}"`
-
-	db.query(sql, (err, result) => {
-		if (err) {
-			res.status(500).send({
-				message: err.message || "An error has occured.",
-				sql: sql
-			})
-		} else {
-			console.log(`Course ${req.body.courseID} is published.`)
 		}
 	})
 })

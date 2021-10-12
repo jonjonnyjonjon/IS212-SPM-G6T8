@@ -70,12 +70,23 @@ router.get("/retrieveIneligible", (req, res) => {
 				message: err.message || "An error has occurred."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
 })
 
+router.get("/eligibleEngineers", (req, res) => {
+	let sql = `SELECT * FROM engineers WHERE email NOT IN ( SELECT engineer_email FROM completed_courses WHERE course_id = "${req.query.courseID}");`
 
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+})
 
 module.exports = router

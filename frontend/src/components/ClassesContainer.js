@@ -1,21 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { 
     Button,
-    Container,
     Table
  } from 'react-bootstrap'
 
 import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
 
-const HRCourses = (props) => {
+const ClassesContainer = (props) => {
     const { url } = useRouteMatch()
-    const courses = props.courses
+    const classes = props.classes
     const filter = props.filter
-
-    const publishCourse = (id) => {
-        axios.post("http://127.0.0.1:5000/courses/publishCourse", {
-            "courseID": id
+    
+    const publishClass = (courseID, classID) => {
+        axios.post("http://127.0.0.1:5000/classes/publishClass", {
+            "courseID": courseID,
+            "classID": classID
         })
 
         alert("Course has been published!")
@@ -23,33 +23,34 @@ const HRCourses = (props) => {
     }
 
     return( 
-        <Container className="mt-5">
+        <div className="mt-3">
+            {classes.length === 0 ? <h1>No classes here.</h1> 
+            :
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Name</th>
                         <th>Class</th>
-                        <th>Size</th>
+                        <th>Capacity</th>
                         <th>Trainer</th>
                         <th>Enrolment Period</th>
                         <th>Course Duration</th>
-                        <th>Materials Uploaded?</th>
+                        
+                        {filter === "pending" ? <th>Materials Uploaded?</th> : null}
                         <th>Edit</th>
                         {filter === "ready" ? <th>Publish Course</th> : null}
                     </tr>
                 </thead>
                 <tbody>
-                    {courses.map(course =>
-                        <tr key={course.courseName + course.class}>
-                            <td>{course.courseName}</td>
-                            <td>{course.class}</td>
-                            <td>{course.size}</td>
-                            <td>{course.trainer}</td>
-                            <td>{course.enrolmentStart} - {course.enrolmentEnd}</td>
-                            <td>{course.startDate} - {course.endDate}</td>
-                            <td>{course.materialStatus === 0 ? "No" : "Yes"}</td>
+                    {classes.map(a_class =>
+                        <tr key={a_class.course_id + a_class.class_id}>
+                            <td>{a_class.class_id}</td>
+                            <td>{a_class.current_enrolled} / {a_class.size}</td>
+                            <td>{a_class.trainer_email}</td>
+                            <td>{a_class.enrolment_start} - {a_class.enrolment_end}</td>
+                            <td>{a_class.class_start} - {a_class.class_end}</td>
+                            {filter === "pending" ? <td>{a_class.material_status === 0 ? "No" : "Yes"}</td> : null}
                             <td>
-                                <Link to={`${url}/editCourse/${course.courseID}`}>
+                                <Link to={`${url}/edit/${a_class.class_id}`}>
                                     <Button variant="warning">Edit</Button>
                                 </Link>
                             </td>
@@ -57,8 +58,8 @@ const HRCourses = (props) => {
                                 <td>
                                     <Button 
                                         variant="warning" 
-                                        onClick={() => publishCourse(course.courseID)}>
-                                        Publish course
+                                        onClick={() => publishClass(a_class.course_id, a_class.class_id)}>
+                                        Publish class
                                     </Button> 
                                 </td>
                                 : null
@@ -67,8 +68,9 @@ const HRCourses = (props) => {
                     )}
                 </tbody>
             </Table>
-        </Container>
+            }
+        </div>
     )
 }
 
-export default HRCourses
+export default ClassesContainer
