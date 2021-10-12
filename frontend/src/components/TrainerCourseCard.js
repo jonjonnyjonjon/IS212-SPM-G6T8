@@ -1,5 +1,5 @@
 import { Card, Button } from "react-bootstrap";
-import { 	Link } from "react-router-dom";
+import { Link, useRouteMatch } from 'react-router-dom'
 import styled from "styled-components";
 
 const CardImg = styled(Card.Img)`
@@ -47,6 +47,7 @@ const Btn = styled(Button)`
 `;
 
 function TrainerCourseCard(props) {
+  const { url } = useRouteMatch()
   return (
     <CourseCard>
       <CardImg src={props.img}></CardImg>
@@ -56,17 +57,14 @@ function TrainerCourseCard(props) {
         <StartDate>Start Date: {props.startDate}</StartDate>
         <EndDate>End Date: {props.endDate}</EndDate>
         <ButtonDiv>
-          <Link
-            to={{
-              pathname: `/trainer/${props.id}`,
-              data: props.id,
-            }}
-          >
+          <Link to={`${url}/${props.id}`}>
             <Btn>Manage</Btn>
           </Link>
         </ButtonDiv>
         <ButtonDiv>
-          <Btn>Quiz Score</Btn>
+          <Link to={`${url}/${props.id}/results`}>
+            <Btn>Quiz Results</Btn>
+          </Link>
         </ButtonDiv>
       </Card.Body>
     </CourseCard>
