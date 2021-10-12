@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
 
 router.get("/getCourse", (req, res) => {
 	let sql = `SELECT * from courses WHERE courseID="${req.query.courseID}"`
-
 	db.query(sql, (err, result) => {
 		if (err) {
 			res.status(500).send({
@@ -28,6 +27,23 @@ router.get("/getCourse", (req, res) => {
 		} else {
 			// array of rows are already in the format of "data": []
 			res.json(result[0])
+		}
+	})
+    
+})
+
+router.get("/getPrerequisite", (req, res) => {
+	let sql = `SELECT prereqCourseID from course_prereq WHERE courseID="${req.query.courseID}"`
+    console.log(sql);
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			// array of rows are already in the format of "data": []
+            console.log(result);
+			res.json(result)
 		}
 	})
     

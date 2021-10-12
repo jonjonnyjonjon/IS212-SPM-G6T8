@@ -81,3 +81,4 @@ CREATE TABLE course_prereq (
 
 INSERT INTO course_prereq VALUES("CG1000C2", "CG1000C1");
 INSERT INTO course_prereq VALUES("CG2000C2", "CG2000C1");
+INSERT INTO course_prereq VALUES('CG2000C2', 'CG1000C2');
