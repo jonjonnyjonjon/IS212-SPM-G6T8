@@ -10,7 +10,7 @@ import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
 import { useState } from "react"
 
-const HRCourses = () => {
+const HREnrol = () => {
     const [courses, setCourses] = useState([])
     const [keyword, setKeyword] = useState("")
 
@@ -25,10 +25,8 @@ const HRCourses = () => {
 
     return(
         <Container>
-            <h1>All courses</h1>
-            <Link to={`${url}/create`}className="mt-3">
-                <Button variant="info">Create course</Button>
-            </Link>
+            <h1>Enrol engineers</h1>
+
             <Form.Control 
                 type="text" 
                 onChange={e => setKeyword(e.target.value)}
@@ -66,4 +64,37 @@ const HRCourses = () => {
     )
 }
 
-export default HRCourses
+export default HREnrol
+
+
+
+// <Modal show={show} onHide={handleClose}>
+//     <Modal.Header closeButton>
+//         <Modal.Title>Select engineers to enrol</Modal.Title>
+//     </Modal.Header>
+
+//     <Modal.Body>
+//         {selectedCourse}
+//         <div>
+//             {eligibleEngineers.map(engineer => 
+//                 <Form.Check 
+//                     type="checkbox"
+//                     key={engineer.email}
+//                     id={engineer.email}
+//                     label={engineer.name}
+//                     onClick={() => setSelectedEngineers(prev => [...prev, engineer.email])}
+//                 />
+//             )}
+//         </div>
+//     </Modal.Body>
+
+//     <Modal.Footer>
+//         <Button variant="secondary" onClick={handleClose}>
+//             Close
+//         </Button>
+//         <Button variant="primary" onClick={handleSaveChanges}>
+//             Save Changes
+//         </Button>
+//     </Modal.Footer>
+// </Modal>
+    
