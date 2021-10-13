@@ -52,7 +52,7 @@ const HREnrol = () => {
                             <td>{course.course_summary}</td>
                             <td>{course.has_prereq ? "Yes" : "No"}</td>
                             <td>
-                                <Link to={`${url}/${course.course_id}/${course.course_name}`}>
+                                <Link to={`${url}/${course.course_id}/${course.course_name}/${course.has_prereq}`}>
                                     <Button variant="warning">View</Button>
                                 </Link>
                             </td>

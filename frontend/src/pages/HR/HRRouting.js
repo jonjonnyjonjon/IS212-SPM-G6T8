@@ -47,7 +47,7 @@ const HRRouting = () => {
 
                 <Route path={`${path}/courses/editCourse/:courseID`} component={HREditCourse} />
 
-                <Route path={`${path}/enrolment/:courseID/:courseName`} component={HREnrolClasses}/>
+                <Route path={`${path}/enrolment/:courseID/:courseName/:hasPrereq`} component={HREnrolClasses}/>
                 <Route path={`${path}/enrolment`} component={HREnrol}/>
 
             </Switch>

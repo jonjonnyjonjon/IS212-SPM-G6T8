@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 			})
 		} else {
 			// array of rows are already in the format of "data": []
-			res.json(rows) 
+			res.status(200).json(rows) 
 		}
 	})
 })
