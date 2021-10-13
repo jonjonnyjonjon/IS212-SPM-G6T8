@@ -5,6 +5,7 @@ import { Nav } from 'react-bootstrap'
 import TrainerViewResult from './TrainerViewResult'
 import TrainerHome from './TrainerHome'
 import TrainerCreateQuiz from './TrainerCreateQuiz'
+import TrainerManageCourse from './TrainerManageCourse'
 
 // This is the homepage for Trainer.
 // For any subsequent pages you are creating, create them in pages folder (e.g. HRCourses.js, HRPendingEnrolment.js)
@@ -35,6 +36,7 @@ const TrainerRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
+                <Route path={`${path}/:courseID`} component={TrainerManageCourse} />
                 <Route path={`${path}/quiz`} component={TrainerCreateQuiz} />
 
                 <Route path={`${path}/results`} component={TrainerViewResult}>
