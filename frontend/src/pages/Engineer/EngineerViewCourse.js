@@ -11,12 +11,12 @@ const EngineerViewCourse = () => {
     const [coursePrereq, getPrereq] = useState( [] )
 
     useEffect(()=> {
-        axios.get(`http://127.0.0.1:5000/courses/getCourse/?courseID=${courseID}`, )
+        axios.get(`http://127.0.0.1:5000/courses/getCourse/?course_id=${courseID}`, )
         .then(res => {
             getCourseInfo(res.data);
         }) .catch(err => console.log(err))
 
-        axios.get(`http://127.0.0.1:5000/courses/getPrerequisite/?courseID=CG1000C1`, )
+        axios.get(`http://127.0.0.1:5000/courses/getPrerequisite/?course_id=CG1000C1`, )
         .then(res => {
             getPrereq( retrievePrereq(res.data) );           
         }) .catch(err => console.log(err))
@@ -49,7 +49,7 @@ const EngineerViewCourse = () => {
             <b>Pre-requisite(s):</b>
             { coursePrereq[0] === 'None' ? 'None' :
             coursePrereq.map( course =>
-                <Badge bg='success' key={course}>{course}</Badge>
+                <Badge bg='success' key={courseID + course}>{course}</Badge>
             )}
             <br />
             <b>Trainer:</b> {courseInfo.trainer} <br />
