@@ -5,6 +5,7 @@ import { Nav } from 'react-bootstrap'
 import TrainerViewResult from './TrainerViewResult'
 import TrainerHome from './TrainerHome'
 import TrainerCreateQuiz from './TrainerCreateQuiz'
+import TrainerManageCourse from './TrainerManageCourse'
 
 // This is the homepage for Trainer.
 // For any subsequent pages you are creating, create them in pages folder (e.g. HRCourses.js, HRPendingEnrolment.js)
@@ -20,13 +21,10 @@ const TrainerRouting = () => {
 
     const NavbarOptions = (
         <Nav className="me-auto">
-            <Nav.Link as={Link} to={`${url}/quiz`}>
-                Create Quiz
-            </Nav.Link>
-
+            {/* 
             <Nav.Link as={Link} to={`${url}/results`}>
                 Results
-            </Nav.Link>
+            </Nav.Link> */}
         </Nav>
     )
 
@@ -35,11 +33,9 @@ const TrainerRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
+                <Route exact path={`${path}/:courseID/:classID/`} component={TrainerManageCourse} />
+                <Route exact path={`${path}/:courseID/:classID/results`} component={TrainerViewResult} />
                 <Route path={`${path}/quiz`} component={TrainerCreateQuiz} />
-
-                <Route path={`${path}/results`} component={TrainerViewResult}>
-                    <h1>Results page</h1>
-                </Route>
             </Switch>
 
             {location.pathname === "/trainer" ? <TrainerHome /> : null }

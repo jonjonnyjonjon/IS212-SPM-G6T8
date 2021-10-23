@@ -71,8 +71,15 @@ CREATE TABLE classes (
     CONSTRAINT classes_fk1 FOREIGN KEY (trainer_email) REFERENCES trainers(email)
 );
 
-INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False);
-INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", True, False);
+-- populating data for johnappleseed.2021@aio.com
+INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "30/11/2021", False, False);
+INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "28/09/2021", "13/11/2021", True, False);
+INSERT INTO classes VALUES("BG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "02/10/2021", "23/12/2021", False, False);
+INSERT INTO classes VALUES("BG1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "08/11/2021", "28/12/2021", False, False);
+INSERT INTO classes VALUES("XK1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "17/10/2021", "29/12/2021", False, False);
+INSERT INTO classes VALUES("XK1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "13/11/2021", "27/11/2021", False, False);
+INSERT INTO classes VALUES("XK1000", "C3", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "14/09/2021", "25/12/2021", False, False);
+
 INSERT INTO classes VALUES("CG2000", "C1", "jacksparrow.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, False);
 INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
 
