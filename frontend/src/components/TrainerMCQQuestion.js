@@ -42,55 +42,6 @@ function TrainerMCQQuestion(props) {
                 
             </div>
             
-            {/* option 1
-            <Form.Check
-                type="radio"
-                name="option1"
-                id="option1"
-                value="1"
-                onChange={e => setField("answer", e.target.value)} /> 
-            <Form.Control 
-                type="text" 
-                placeholder="Option 1" 
-                onChange={e => setField("option", e.target.value)} />
-
-            option 2
-            <Form.Check
-                type="radio"
-                name="option2"
-                id="option2"
-                value="2"
-                onChange={e => setField("answer", e.target.value)} 
-            /> 
-            <Form.Control 
-                type="text" 
-                placeholder="Option 2" 
-                onChange={e => setField("option", e.target.value)} />
-
-            option 3
-            <Form.Check
-                type="radio"
-                name="option3"
-                id="option3"
-                value="3"
-                onChange={e => setField("answer", e.target.value)} /> 
-            <Form.Control 
-                type="text" 
-                placeholder="Option 3" 
-                onChange={e => setField("options", e.target.value)} />
-            
-            option 4
-            <Form.Check
-                type="radio"
-                name="option4"
-                id="option4"
-                value="4"
-                onChange={e => setField("answer", e.target.value)} /> 
-            <Form.Control 
-                type="text"
-                placeholder="Option 4" 
-                onChange={e => setField("options", e.target.value)} /> */}
-             
         </div>
     )
 }

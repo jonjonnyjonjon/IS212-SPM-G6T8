@@ -8,31 +8,21 @@ import {
 } from "react-bootstrap"
 import { useState, useEffect } from 'react'
 import axios from "axios"
+import { Link, useRouteMatch, useParams } from 'react-router-dom'
 
 
 const TrainerCreateQuiz = () => {
-
-    // const [courses, setCourses] = useState([]);
-
-    // useEffect(() => {
-    //     axios.get("http://127.0.0.1:5000/courses").then((res) => {
-    //     setCourses(res.data);
-    //     });
-    // }, []);
-
-    // console.log(courses[0].courseID)
     
+    const { url } = useRouteMatch()
     const [quizType, setQuizType] = useState("")
     const [quizDuration, setQuizDuration] = useState(0)
     
     const [allQns, setAllQns] = useState([])
-    // const [mcqQuestion, setMCQQuestion] = useState([])
-    // const [tfQuestion, setTFQuestion] = useState([])
+
 
     const [qnNum, setQnNum] = useState(1)
 
     const addMCQQuestion = () => {
-        // setMCQQuestion( mcqquestion => [...mcqquestion, <TrainerMCQQuestion />])
         setAllQns( allQns => [...allQns, <TrainerMCQQuestion key={qnNum} qnNum={qnNum} />])
         setQnNum(qnNum+1)
     }
@@ -127,8 +117,6 @@ const TrainerCreateQuiz = () => {
         
         console.log("sent to backend!")
         
-        
-        //     .then(console.log("sent to backend!"))
         alert("quiz created! redirecting back to manage course")
     }
 
@@ -148,20 +136,9 @@ const TrainerCreateQuiz = () => {
                     Duration of quiz (in minutes):
                     <Form.Control type="number" placeholder="30" onChange={e => setQuizDuration(e.target.value)} />
                 </Form.Label>
-                {/* <TrainerMCQQuestion /> */}
-                {/* <TrainerTFQuestion /> */}
+
                 <br />
                 
-                {/* <div>
-                    {mcqQuestion.map((a, i) => (
-                    <div key={i}>{a}</div>
-                    ))}
-                </div>
-                <div>
-                    {tfQuestion.map((a, i) => (
-                    <div key={i}>{a}</div>
-                    ))}
-                </div> */}
                 <div className="allQns">
                     {allQns.map((a, i) => (
                         a
