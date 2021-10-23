@@ -45,7 +45,7 @@ function TrainerChapter(props) {
         <Col>
           <Title>Quiz for Chapter {props.count}:</Title>
           <ButtonDiv>
-            {/* <Link to={`${url}/${props.id}`}> */}
+            {/* <Link to={`${url}/quiz/createQuestion`}> */}
             <Btn>
               Set Quiz
             </Btn>

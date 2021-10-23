@@ -21,10 +21,7 @@ const TrainerRouting = () => {
 
     const NavbarOptions = (
         <Nav className="me-auto">
-            <Nav.Link as={Link} to={`${url}/quiz`}>
-                Create Quiz
-            </Nav.Link>
-{/* 
+            {/* 
             <Nav.Link as={Link} to={`${url}/results`}>
                 Results
             </Nav.Link> */}
