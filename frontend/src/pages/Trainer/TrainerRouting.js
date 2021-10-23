@@ -24,10 +24,10 @@ const TrainerRouting = () => {
             <Nav.Link as={Link} to={`${url}/quiz`}>
                 Create Quiz
             </Nav.Link>
-
+{/* 
             <Nav.Link as={Link} to={`${url}/results`}>
                 Results
-            </Nav.Link>
+            </Nav.Link> */}
         </Nav>
     )
 
@@ -36,12 +36,9 @@ const TrainerRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
-                <Route path={`${path}/:courseID`} component={TrainerManageCourse} />
+                <Route exact path={`${path}/:courseID/:classID/`} component={TrainerManageCourse} />
+                <Route exact path={`${path}/:courseID/:classID/results`} component={TrainerViewResult} />
                 <Route path={`${path}/quiz`} component={TrainerCreateQuiz} />
-
-                <Route path={`${path}/results`} component={TrainerViewResult}>
-                    <h1>Results page</h1>
-                </Route>
             </Switch>
 
             {location.pathname === "/trainer" ? <TrainerHome /> : null }

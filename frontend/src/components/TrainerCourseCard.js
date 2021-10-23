@@ -57,12 +57,12 @@ function TrainerCourseCard(props) {
         <StartDate>Start Date: {props.startDate}</StartDate>
         <EndDate>End Date: {props.endDate}</EndDate>
         <ButtonDiv>
-          <Link to={`${url}/${props.id}`}>
+          <Link to={`${url}/${props.id}/${props.class}`}>
             <Btn>Manage</Btn>
           </Link>
         </ButtonDiv>
         <ButtonDiv>
-          <Link to={`${url}/${props.id}/results`}>
+          <Link to={`${url}/${props.id}/${props.class}/results`}>
             <Btn>Quiz Results</Btn>
           </Link>
         </ButtonDiv>

@@ -55,9 +55,7 @@ function TrainerHome() {
 
   var ongoingCourses = Array.from(sortCourses())[0][1]
   var incompleteCourses = Array.from(sortCourses())[1][1]
-
-  console.log(courses)
-
+  
   return (
     <Container>
       <Header>Course Manager</Header>

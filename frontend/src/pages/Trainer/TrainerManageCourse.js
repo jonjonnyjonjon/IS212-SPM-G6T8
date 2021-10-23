@@ -4,6 +4,7 @@ import { Container, Button } from 'react-bootstrap'
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import styled from "styled-components";
+import axios from 'axios';
 
 const Header = styled.h1`
   margin: 40px 0px;
@@ -16,19 +17,25 @@ const ChapterDiv = styled.div`
 
 const TrainerManageCourse = () => {
     const { url } = useRouteMatch()
-    const { courseID } = useParams()
+    const { courseID, classID } = useParams()
     const [allChaps, setAllChaps] = useState([])
     const [chapNum, setChapNum] = useState(1)
 
-    console.log(chapNum)
-
-
-    const addChapter = () => {
+    const addChapter = e => {
+        e.preventDefault()
+        let content = 'Replace content here'
+        let quizID = "quiz" + chapNum
+        axios.post("http://127.0.0.1:5000/chapters/addChapter", {
+            "courseID": courseID, 
+            "classID": classID, 
+            "chapterID": chapNum, 
+            "content": content,
+            "quiz_id": quizID
+        })
         setAllChaps( allChaps => [...allChaps, <TrainerChapter key={chapNum} count={chapNum} />])
-        setChapNum(chapNum+1)
+        setChapNum(chapNum + 1)
+        console.log(chapNum)
     }
-
-    console.log(allChaps)
 
     return (
         <Container>
