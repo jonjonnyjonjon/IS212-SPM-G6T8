@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("../db")
 
+// gets all courses
 router.get("/", (req, res) => {
 	let sql = "SELECT * from courses"
 
@@ -11,14 +12,33 @@ router.get("/", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
 })
 
-router.post("/courseID", (req, res) => {
-	let sql = `SELECT * from courses WHERE courseID="${req.body.courseID}"`
+router.get("/courseName", (req, res) => {
+	let keyword = req.query.keyword
+	let sql
+	if (keyword) {
+		sql =  `SELECT * from courses WHERE course_name LIKE "%${keyword}%"`
+	} else {
+		sql = "SELECT * from courses"
+	}
+
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+})
+
+router.get("/courseID", (req, res) => {
+	let sql = `SELECT * from courses WHERE course_id="${req.body.courseID}"`
 
 	db.query(sql, (err, rows) => {
 		if (err) {
@@ -35,14 +55,9 @@ router.post("/createCourse", (req, res) => {
 	let sql = `INSERT INTO courses VALUES ( \
 		"${req.body.courseID}", \
 		"${req.body.courseName}", \
-		"${req.body.class}", \
-		${req.body.size}, \
-		"${req.body.trainer}", \
-		"${req.body.enrolmentStart}", \
-		"${req.body.enrolmentEnd}", \
-		"${req.body.startDate}", \
-		"${req.body.endDate}", \
-		DEFAULT, DEFAULT)`
+		"${req.body.courseSummary}", \
+		${req.body.hasPrereq}
+	)`
 
 	db.query(sql, (err, result) => {
 		if (err) {
@@ -51,7 +66,9 @@ router.post("/createCourse", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record inserted to courses table")
+			res.status(200).send({
+				message: `${req.body.courseID} ${req.body.courseName} inserted to courses table`
+			})
 		}
 	})
 })
@@ -75,23 +92,9 @@ router.post("/editCourse", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record edited and saved into table")
-		}
-	})
-})
-
-router.post("/publishCourse", (req, res) => {
-	let sql = `UPDATE courses SET isPublished = True \
-		WHERE courseID = "${req.body.courseID}"`
-
-	db.query(sql, (err, result) => {
-		if (err) {
-			res.status(500).send({
-				message: err.message || "An error has occured.",
-				sql: sql
+			res.status(200).send({
+				message: `${req.body.courseID} ${req.body.courseName} edited.`
 			})
-		} else {
-			console.log(`Course ${req.body.courseID} is published.`)
 		}
 	})
 })

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="222px" preserveAspectRatio="none" style="width:636px;height:222px;" version="1.1" viewBox="0 0 636 222" width="636px" zoomAndPan="magnify"><defs/><g><!--MD5=[a6f11bb19cee6b13000111f5ad685e8b]
+cluster Dependencies--><path d="M150,127 L244,127 A4.5,4.5 0 0 1 247,130 L254,147.4844 L533,147.4844 A3,3 0 0 1 536,150.4844 L536,207 A3,3 0 0 1 533,210 L150,210 A3,3 0 0 1 147,207 L147,130 A3,3 0 0 1 150,127 " fill="#FFFFFF" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="147" x2="254" y1="147.4844" y2="147.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="94" x="151" y="141.0059">Dependencies</text><!--MD5=[564a394d57ce3e0a92ac6699042b9ef1]
+entity cors--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="46" x="163" y="160"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="158" y="165"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="158" y="184.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="26" x="173" y="182.0059">cors</text><!--MD5=[b84d8dbe3cf51322a9824c71d57d534f]
+entity dotenv--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="59" x="302.5" y="160"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="297.5" y="165"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="297.5" y="184.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="39" x="312.5" y="182.0059">dotenv</text><!--MD5=[6d151e53a42aadf92577082572a20d90]
+entity express--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="65" x="223.5" y="160"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="218.5" y="165"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="218.5" y="184.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="233.5" y="182.0059">express</text><!--MD5=[95056b5cbad1279cc73d9cc5c17a1af7]
+entity mysql--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="54" x="376" y="160"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="371" y="165"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="371" y="184.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="34" x="386" y="182.0059">mysql</text><!--MD5=[8f2731bd439a760758b337fee9e202b6]
+entity sequelize--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #383838; stroke-width: 1.0;" width="75" x="444.5" y="160"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="439.5" y="165"/><rect fill="#F8F8F8" height="5" style="stroke: #383838; stroke-width: 1.0;" width="10" x="439.5" y="184.4844"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="55" x="454.5" y="182.0059">sequelize</text><ellipse cx="25.9706" cy="47.242" fill="#F8F8F8" rx="19.9706" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="24" x="13.9706" y="50.9842">app</text><ellipse cx="180.8198" cy="47.242" fill="#F8F8F8" rx="34.8198" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="158.3198" y="50.9842">classes</text><ellipse cx="96.234" cy="47.242" fill="#F8F8F8" rx="36.234" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="47" x="72.734" y="50.9842">courses</text><ellipse cx="331.9434" cy="99.1547" fill="#F8F8F8" rx="14.4434" ry="12.1547" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="14" x="324.9434" y="102.8969">db</text><ellipse cx="494.098" cy="47.242" fill="#F8F8F8" rx="42.598" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="56" x="466.098" y="50.9842">engineers</text><ellipse cx="402.0269" cy="47.242" fill="#F8F8F8" rx="35.5269" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="46" x="379.0269" y="50.9842">enrolled</text><ellipse cx="588.1482" cy="47.242" fill="#F8F8F8" rx="37.6482" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="49" x="563.6482" y="50.9842">models</text><ellipse cx="331.9706" cy="47.242" fill="#F8F8F8" rx="19.9706" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="24" x="319.9706" y="50.9842">quiz</text><ellipse cx="263.9056" cy="47.242" fill="#F8F8F8" rx="33.4056" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="43" x="242.4056" y="50.9842">trainers</text><!--MD5=[ff9e0dcdfd49449c49675d28221957ed]
+link <b>app</b> to classes--><path d="M36.4994,35.81 C42.7064,30.032 51.0822,23.565 60,20.5 C90.2627,10.099 100.9781,12.649 132,20.5 C141.809,22.983 151.785,27.862 160.153,32.765 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;classes" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="164.625,35.476,159.0015,27.3904,160.349,32.8844,154.855,34.2319,164.625,35.476" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[5a427ebd384921690a5588ef6c0900ef]
+link <b>app</b> to cors--><path d="M38.026,57.621 C64.2147,78.572 126.839,128.6709 161.638,156.5105 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;cors" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="165.74,159.7918,161.212,151.0455,161.836,156.6679,156.2137,157.2919,165.74,159.7918" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[f75dc737b27764a343a92c42fdd6a70a]
+link <b>app</b> to courses--><path d="M46.2344,47 C49.0693,47 51.9043,47 54.7392,47 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;courses" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="59.8422,47,50.8422,43,54.8422,47,50.8422,51,59.8422,47" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[3f3867c990dbf450bbae27c464556ce5]
+link <b>app</b> to engineers--><path d="M36.4994,35.81 C42.7064,30.032 51.0822,23.565 60,20.5 C99.6147,6.885 396.099,11.457 437,20.5 C448.263,22.99 459.943,27.942 469.775,32.898 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;engineers" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="474.444,35.32,468.2974,27.6246,470.0058,33.0173,464.6131,34.7258,474.444,35.32" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[a7981322a15190205e98f6e0a6589c34]
+link <b>app</b> to enrolled--><path d="M36.4994,35.81 C42.7064,30.032 51.0822,23.565 60,20.5 C90.683,9.955 320.514,12.672 352,20.5 C361.975,22.98 372.148,27.859 380.691,32.762 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;enrolled" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="385.258,35.473,379.5611,27.439,380.9586,32.9205,375.4771,34.318,385.258,35.473" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[36d37c7b29be7aee90aace28decd0f3c]
+link <b>app</b> to express--><path d="M41.1088,55.803 C70.8076,71.023 135.987,103.816 160,111 C184.087,118.206 194.571,105.85 216,119 C229.857,127.5035 240.194,142.8031 246.885,155.4116 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;express" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="249.185,159.9176,248.6566,150.0829,246.9121,155.4641,241.531,153.7196,249.185,159.9176" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[b5b7d6e32124fb1cb38c469b072007dd]
+link <b>app</b> to quiz--><path d="M36.4994,35.81 C42.7064,30.032 51.0822,23.565 60,20.5 C109.807,3.382 247.074,3.732 297,20.5 C304.397,22.984 311.475,27.72 317.306,32.508 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;quiz" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="321.133,35.805,316.9257,26.9,317.3451,32.5413,311.7038,32.9606,321.133,35.805" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[335c6df8d9a7ef0a6aa8f1f82a6dd7d1]
+link <b>app</b> to trainers--><path d="M36.4994,35.81 C42.7064,30.032 51.0822,23.565 60,20.5 C92.7845,9.233 182.43,11.849 216,20.5 C225.644,22.985 235.423,27.866 243.615,32.768 " fill="none" id="&lt;b&gt;app&lt;/b&gt;-&gt;trainers" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="247.992,35.479,242.4464,27.3398,243.7411,32.8465,238.2344,34.1412,247.992,35.479" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[bbe2f8da208597ba9f230bcc33f98db7]
+link classes to db--><path d="M205.935,56.256 C236.247,66.294 286.687,82.996 313.659,91.927 " fill="none" id="classes-&gt;db" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="318.728,93.605,311.4428,86.9774,313.9817,92.0324,308.9267,94.5714,318.728,93.605" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f1a0c44ca79fd26d51fdcc4d001be14b]
+link classes to express--><path d="M187.921,59.812 C200.674,81.576 228.024,128.2537 243.903,155.3552 " fill="none" id="classes-&gt;express" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="246.539,159.8536,245.4389,150.0664,244.0107,155.5399,238.5371,154.1117,246.539,159.8536" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[ad065e30f4d6e77b009ed7795af0a08e]
+link courses to db--><path d="M122.754,55.813 C128.115,57.28 133.722,58.746 139,60 C202.076,74.987 277.738,88.644 312.632,94.701 " fill="none" id="courses-&gt;db" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="317.874,95.607,309.6866,90.1329,312.947,94.7556,308.3243,98.0161,317.874,95.607" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[a3ef767f0ef18ec3b15bdc418f9a8082]
+link courses to express--><path d="M113.773,58.452 C146.917,77.951 214.926,118.006 216,119 C227.359,129.5098 237.36,143.7609 244.52,155.384 " fill="none" id="courses-&gt;express" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="247.218,159.8589,245.996,150.0862,244.6361,155.5771,239.1451,154.2172,247.218,159.8589" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[3af339821872acae65baab62a7793959]
+link db to dotenv--><path d="M332,111.214 C332,122.688 332,140.7899 332,154.9463 " fill="none" id="db-&gt;dotenv" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="332,159.9636,336,150.9636,332,154.9636,328,150.9636,332,159.9636" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[561b59cf8122631e9385fcdfa4a4b77f]
+link db to mysql--><path d="M345.049,104.861 C352.399,108.065 361.399,112.815 368,119 C378.922,129.2338 387.718,143.6116 393.761,155.3663 " fill="none" id="db-&gt;mysql" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="396.02,159.893,395.5803,150.054,393.7874,155.4192,388.4222,153.6262,396.02,159.893" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[9348dfd5c8f905354b606e928961767a]
+link engineers to db--><path d="M465.411,56.824 C432.232,67.064 378.494,83.65 350.417,92.316 " fill="none" id="engineers-&gt;db" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="345.484,93.838,355.2633,95.0061,350.2617,92.3636,352.9042,87.3619,345.484,93.838" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[fda0052d22b584fed4fc6780996fbdda]
+link engineers to express--><path d="M478.243,59.147 C456.577,73.83 415.842,99.172 377,111 C341.971,121.667 326.52,100.362 295,119 C281.12,127.2075 271.06,142.522 264.637,155.2116 " fill="none" id="engineers-&gt;express" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="262.435,159.7498,269.9635,153.3999,264.6183,155.2517,262.7665,149.9065,262.435,159.7498" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[852c4a74db8ac126e82076f1aae23f61]
+link enrolled to db--><path d="M386.811,58.849 C374.921,67.342 358.484,79.083 346.717,87.488 " fill="none" id="enrolled-&gt;db" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="342.61,90.421,352.2587,88.4454,346.6789,87.5151,347.6092,81.9353,342.61,90.421" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[6f596d9eb8ed38b8aa38fd4124f0cec8]
+link enrolled to express--><path d="M396.303,60.05 C388.666,74.743 373.642,99.087 353,111 C330.462,124.007 317.131,105.312 295,119 C281.286,127.4821 271.218,142.7828 264.75,155.3972 " fill="none" id="enrolled-&gt;express" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="262.529,159.9055,270.0937,153.5988,264.7381,155.42,262.9169,150.0643,262.529,159.9055" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[e4ed54c4292f13e9b5c30f7f0a86aa89]
+link <b>models</b> to sequelize--><path d="M578.218,59.812 C560.12,81.666 521.22,128.6399 498.819,155.6901 " fill="none" id="&lt;b&gt;models&lt;/b&gt;-&gt;sequelize" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="495.371,159.8536,504.1927,155.4743,498.5606,156.0031,498.0318,150.371,495.371,159.8536" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[5a84203811f91826dd219a09ed571ab2]
+link quiz to db--><path d="M332,60.104 C332,66.552 332,74.577 332,81.58 " fill="none" id="quiz-&gt;db" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="332,86.693,336,77.693,332,81.693,328,77.693,332,86.693" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[5e4c35e22e63fb8bfa2990248c6d9249]
+link quiz to express--><path d="M325.256,59.359 C312.48,80.875 284.584,127.8589 268.364,155.1767 " fill="none" id="quiz-&gt;express" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="265.671,159.7116,273.7049,154.0145,268.2234,155.4121,266.8257,149.9307,265.671,159.7116" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[7499bcb70eec54cc4a3a1bd424b90180]
+link trainers to db--><path d="M278.755,58.849 C290.204,67.267 305.993,78.877 317.402,87.266 " fill="none" id="trainers-&gt;db" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="321.693,90.421,316.8107,81.8675,317.6644,87.4595,312.0723,88.3133,321.693,90.421" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[6967bce9871d1c25168c71f06bb2fc63]
+link trainers to express--><path d="M263.233,60.273 C261.869,82.096 259.007,127.8828 257.321,154.8626 " fill="none" id="trainers-&gt;express" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="257,159.9951,261.5538,151.2623,257.312,155.0048,253.5694,150.763,257,159.9951" style="stroke: #000000; stroke-width: 0.5;"/><script type="text/plantuml"><![CDATA[MD5=[e1ebc179661c7f1a69a1ef7bea223fe3]
+@startuml
+
+scale max 1920 width
+top to bottom direction
+
+skinparam nodesep 14
+skinparam ranksep 27
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+(<b>app</b>)
+(classes)
+(courses)
+(db)
+(engineers)
+(enrolled)
+(<b>models</b>)
+(quiz)
+(trainers)
+
+package "Dependencies" {
+  [cors]
+  [dotenv]
+  [express]
+  [mysql]
+  [sequelize]
+}
+
+(<b>app</b>) -[thickness=1]> (classes)
+(<b>app</b>) --[thickness=1]> [cors]
+(<b>app</b>) -[thickness=1]> (courses)
+(<b>app</b>) -[thickness=1]> (engineers)
+(<b>app</b>) -[thickness=1]> (enrolled)
+(<b>app</b>) --[thickness=1]> [express]
+(<b>app</b>) -[thickness=1]> (quiz)
+(<b>app</b>) -[thickness=1]> (trainers)
+(classes) --> (db)
+(classes) ---> [express]
+(courses) --> (db)
+(courses) ---> [express]
+(db) --> [dotenv]
+(db) --> [mysql]
+(engineers) --> (db)
+(engineers) ---> [express]
+(enrolled) --> (db)
+(enrolled) ---> [express]
+(<b>models</b>) ---[thickness=1]> [sequelize]
+(quiz) --> (db)
+(quiz) ---> [express]
+(trainers) --> (db)
+(trainers) ---> [express]
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>

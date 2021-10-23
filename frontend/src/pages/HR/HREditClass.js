@@ -11,38 +11,33 @@ import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom"
 import axios from "axios"
 
-const HREditCourse = () => {
-    const [courseID, setCourseID] = useState(useParams().courseID)
-    const [courseName, setCourseName] = useState("")
-    const [courseClass, setCourseClass] = useState("")
+const HREditClass = () => {
+    const { courseID, classID } = useParams()
+
     const [chosenTrainer, setChosenTrainer] = useState("")
     const [size, setSize] = useState(0)
     const [enrolmentStart, setEnrolmentStart] = useState("")
     const [enrolmentEnd, setEnrolmentEnd] = useState("")
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
+    const [classStart, setClassStart] = useState("")
+    const [classEnd, setClassEnd] = useState("")
 
     let history = useHistory()
     const [trainers, setTrainers] = useState([])
 
     // Get course information from courseID passed in URL param
-    useEffect(()=> {
-        axios.post("http://127.0.0.1:5000/courses/courseID", {
-            "courseID": courseID
-        })
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:5000/classes/class?courseID=${courseID}&classID=${classID}`)
             .then(res => {
                 const courseInfo = res.data[0]
-                setCourseName(courseInfo.courseName)
-                setCourseClass(courseInfo.class)
+                setChosenTrainer(courseInfo.trainer_email)
                 setSize(courseInfo.size)
-                setChosenTrainer(courseInfo.trainer)
-                setEnrolmentStart(courseInfo.enrolmentStart)
-                setEnrolmentEnd(courseInfo.enrolmentEnd)
-                setStartDate(courseInfo.startDate)
-                setEndDate(courseInfo.endDate)
+                setEnrolmentStart(courseInfo.enrolment_start)
+                setEnrolmentEnd(courseInfo.enrolment_end)
+                setClassStart(courseInfo.class_start)
+                setClassEnd(courseInfo.class_end)
             })
-            .catch(err => console.log(err))
-    })
+  
+    }, [courseID, classID])
 
     // Get all qualified trainers to teach this course
     useEffect(()=> {
@@ -57,20 +52,19 @@ const HREditCourse = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post("http://127.0.0.1:5000/courses/editCourse", {
+        axios.post("http://127.0.0.1:5000/classes/editClass", {
             "courseID": courseID,
-            "courseName": courseName,
-            "class": courseClass,
-            "size": size,
+            "classID": classID,
             "trainer": chosenTrainer,
+            "size": size,
             "enrolmentStart": enrolmentStart,
             "enrolmentEnd": enrolmentEnd,
-            "startDate": startDate,
-            "endDate": endDate
+            "classStart": classStart,
+            "classEnd": classEnd
         })
             .then(console.log("sent to backend!"))
-        alert("course edited successfully! redirecting back to courses page...")
-        history.push("/hr/courses")
+        alert("course edited successfully! redirecting back to previous page...")
+        history.goBack()
     }
 
     return (
@@ -78,28 +72,13 @@ const HREditCourse = () => {
             <h1>Editing course</h1>
             <Form>
                 <Form.Group className="mb-3">
-                    <Form.Label>Course ID</Form.Label>
-                    <Form.Control value={courseID} onChange={e => setCourseID(e.target.value)} />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Course Name</Form.Label>
-                    <Form.Control value={courseName} onChange={e => setCourseName(e.target.value)}/>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Class</Form.Label>
-                    <Form.Control value={courseClass} onChange={e => setCourseClass(e.target.value)}/>
-                </Form.Group>
- 
-                <Form.Group className="mb-3">
                     <Form.Label>Trainer</Form.Label>
                     <DropdownButton title={chosenTrainer}>                        
                         {trainers.map(trainer =>
                             <Dropdown.Item 
                                 key={trainer.email} 
-                                onClick={() => setChosenTrainer(trainer.name)}> 
-                                {trainer.name}
+                                onClick={() => setChosenTrainer(trainer.email)}> 
+                                {trainer.email}
                             </Dropdown.Item>    
                         )}
                     </DropdownButton>
@@ -122,12 +101,12 @@ const HREditCourse = () => {
 
                 <Form.Group className="mb-3">
                     <Form.Label>Start date</Form.Label>
-                    <Form.Control value={startDate} onChange={e => setStartDate(e.target.value)}/>
+                    <Form.Control value={classStart} onChange={e => setClassStart(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>End date</Form.Label>
-                    <Form.Control value={endDate} onChange={e => setEndDate(e.target.value)}/>
+                    <Form.Control value={classEnd} onChange={e => setClassEnd(e.target.value)}/>
                 </Form.Group>
 
                 <Button variant="primary" type="submit" onClick={e => handleSubmit(e)}>
@@ -138,4 +117,4 @@ const HREditCourse = () => {
     )
 }
 
-export default HREditCourse
+export default HREditClass
