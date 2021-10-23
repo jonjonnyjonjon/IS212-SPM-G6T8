@@ -64,37 +64,4 @@ const HREnrol = () => {
     )
 }
 
-export default HREnrol
-
-
-
-// <Modal show={show} onHide={handleClose}>
-//     <Modal.Header closeButton>
-//         <Modal.Title>Select engineers to enrol</Modal.Title>
-//     </Modal.Header>
-
-//     <Modal.Body>
-//         {selectedCourse}
-//         <div>
-//             {eligibleEngineers.map(engineer => 
-//                 <Form.Check 
-//                     type="checkbox"
-//                     key={engineer.email}
-//                     id={engineer.email}
-//                     label={engineer.name}
-//                     onClick={() => setSelectedEngineers(prev => [...prev, engineer.email])}
-//                 />
-//             )}
-//         </div>
-//     </Modal.Body>
-
-//     <Modal.Footer>
-//         <Button variant="secondary" onClick={handleClose}>
-//             Close
-//         </Button>
-//         <Button variant="primary" onClick={handleSaveChanges}>
-//             Save Changes
-//         </Button>
-//     </Modal.Footer>
-// </Modal>
-    
+export default HREnrol    

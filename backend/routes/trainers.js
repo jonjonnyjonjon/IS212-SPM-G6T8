@@ -11,7 +11,6 @@ router.get("/", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})

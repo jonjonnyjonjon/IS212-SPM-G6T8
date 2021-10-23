@@ -12,8 +12,7 @@ router.get("/", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
-			res.status(200).json(rows) 
+			res.json(rows) 
 		}
 	})
 })
@@ -33,7 +32,6 @@ router.get("/courseName", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
@@ -68,7 +66,9 @@ router.post("/createCourse", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record inserted to courses table")
+			res.status(200).send({
+				message: `${req.body.courseID} ${req.body.courseName} inserted to courses table`
+			})
 		}
 	})
 })
@@ -92,7 +92,9 @@ router.post("/editCourse", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record edited and saved into table")
+			res.status(200).send({
+				message: `${req.body.courseID} ${req.body.courseName} edited.`
+			})
 		}
 	})
 })

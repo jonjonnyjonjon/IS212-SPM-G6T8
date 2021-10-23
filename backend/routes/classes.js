@@ -14,7 +14,6 @@ router.get("/class", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
@@ -31,7 +30,6 @@ router.get("/courseID", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
@@ -56,7 +54,6 @@ router.get("/filter", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
@@ -72,7 +69,9 @@ router.post("/createClass", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record inserted to courses table")
+			res.status(200).send({
+				message: `Course ${req.body.courseID} ${req.body.classID} is created.`
+			})
 		}
 	})
 })
@@ -88,7 +87,9 @@ router.post("/publishClass", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log(`Course ${req.body.courseID} ${req.body.classID} is published.`)
+			res.status(200).send({
+				message: `Course ${req.body.courseID} ${req.body.classID} is published.`
+			})
 		}
 	})
 })
@@ -110,7 +111,9 @@ router.post("/editClass", (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record edited and saved into table")
+			res.status(200).send({
+				message: `Course ${req.body.courseID} ${req.body.classID} is edited.`
+			})
 		}
 	})
 })

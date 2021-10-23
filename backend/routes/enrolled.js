@@ -8,10 +8,10 @@ router.post("/", (req, res) => {
     for (let engineer of engineers) {
         insertValues += `("${engineer}", "${req.body.courseID}", "${req.body.classID}"),`
     }
-    // remove last comma
+
     insertValues = insertValues.slice(0, -1)
 	let sql = `INSERT INTO enrolled VALUES ${insertValues};`
-
+	console.log(sql)
 	db.query(sql, (err, rows) => {
 		if (err) {
 			res.status(500).send({
