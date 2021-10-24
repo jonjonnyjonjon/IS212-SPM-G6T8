@@ -10,7 +10,7 @@ import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
 import { useState } from "react"
 
-const HRCourses = () => {
+const HREnrol = () => {
     const [courses, setCourses] = useState([])
     const [keyword, setKeyword] = useState("")
 
@@ -25,10 +25,8 @@ const HRCourses = () => {
 
     return(
         <Container>
-            <h1>All courses</h1>
-            <Link to={`${url}/create`}className="mt-3">
-                <Button variant="info">Create course</Button>
-            </Link>
+            <h1>Enrol engineers</h1>
+
             <Form.Control 
                 type="text" 
                 onChange={e => setKeyword(e.target.value)}
@@ -54,7 +52,7 @@ const HRCourses = () => {
                             <td>{course.course_summary}</td>
                             <td>{course.has_prereq ? "Yes" : "No"}</td>
                             <td>
-                                <Link to={`${url}/${course.course_id}/${course.course_name}`}>
+                                <Link to={`${url}/${course.course_id}/${course.course_name}/${course.has_prereq}`}>
                                     <Button variant="warning">View</Button>
                                 </Link>
                             </td>
@@ -66,4 +64,4 @@ const HRCourses = () => {
     )
 }
 
-export default HRCourses
+export default HREnrol    

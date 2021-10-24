@@ -74,7 +74,7 @@ CREATE TABLE classes (
     CONSTRAINT classes_fk1 FOREIGN KEY (trainer_email) REFERENCES trainers(email)
 );
 
-# populating data for johnappleseed.2021@aio.com
+-- populating data for johnappleseed.2021@aio.com
 INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "30/11/2021", False, False);
 INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "28/09/2021", "13/11/2021", True, False);
 INSERT INTO classes VALUES("BG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "02/10/2021", "23/12/2021", False, False);

@@ -17,8 +17,7 @@ function TrainerViewResult() {
     const [key, setKey] = useState({});
 
     return (
-        <div>
-            <UserNavbar />
+        <Container>
             <h1>Quiz Results</h1>
             <h5>Fundamentals of Xerox Operations 100</h5>
             <br />
@@ -77,7 +76,7 @@ function TrainerViewResult() {
                     </tbody>
                 </Table>
             </Container>
-        </div>
+        </Container>
     )
 }
 

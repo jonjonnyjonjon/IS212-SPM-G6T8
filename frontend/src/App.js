@@ -2,7 +2,6 @@ import React from "react"
 import {
 	Switch, 
 	Route,
-	Link,
 	useLocation
 } from "react-router-dom"
 
