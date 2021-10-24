@@ -64,7 +64,7 @@ function EngineerHome() {
                                     <Card.Subtitle> {course.course_id} </Card.Subtitle>
                                     <Card.Text>C1</Card.Text><br/>
                                     <Card.Text> {course.course_summary} </Card.Text><br/>
-                                    <Card.Subtitle>From: </Card.Subtitle> {course.course_start} to {course.course_end} <br/><br/>
+                                    <Card.Subtitle>From: </Card.Subtitle> {course.class_start} to {course.class_end} <br/><br/>
                                     <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
                                 </Card.Body>
                             </Col>

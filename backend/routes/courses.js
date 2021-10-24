@@ -21,7 +21,7 @@ router.get("/getCourse", (req, res) => {
     
 	let sql = `
     SELECT 
-		course.course_id, course.course_name, course.course_summary, class.course_id, class.class_id, trainer.name as trainer_name, trainer.email as trainer_email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end
+		course.course_id, course.course_name, course.course_summary, class.course_id, class.class_id, trainer.name as trainer_name, trainer.email as trainer_email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
     FROM courses course, classes class, trainers trainer
     WHERE course.course_id = class.course_id
     AND trainer.email = class.trainer_email
@@ -44,7 +44,7 @@ router.get("/getCourse", (req, res) => {
 router.get("/getClassInfo", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, t.email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, t.email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
         FROM
             courses course, classes class, trainers t
         WHERE
@@ -99,7 +99,7 @@ router.get("/getPrereq", (req, res) => {
 router.get("/getCompleted", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, t.email as trainer_email, class.size, class.course_start, class.course_end
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, t.email as trainer_email, class.size, class.class_start, class.class_end
         FROM
             courses course, classes class, completed_courses completed, trainers t
         WHERE
@@ -128,7 +128,7 @@ router.get("/getCompleted", (req, res) => {
 router.get("/getOngoing", (req, res) => {
 	let sql = `
     SELECT
-        course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.course_start, class.course_end
+        course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.class_start, class.class_end
     FROM
         courses course, classes class, enrolled enroll, trainers t
     WHERE
@@ -159,29 +159,29 @@ router.get("/getOngoing", (req, res) => {
         (3) Have not completed */
 router.get("/getEligible", (req, res) => {
     let sql = `
-        SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end,
-        GROUP_CONCAT(cpr.prereq_course_id SEPARATOR ',') as prerequisites
-        FROM
-            courses course, classes class, course_prereq cpr, trainers t
-        WHERE
-            course.course_id = class.course_id
-        AND
-            class.is_published = 1
-        AND
-            class.material_status = 1
-        AND
-            class.course_id = cpr.course_id
-        AND
-            t.email = class.trainer_email
-        AND
-            class.course_id not in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com')
-        AND
-            cpr.prereq_course_id in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com')
-        AND
-            (class.course_id, class.class_id) not in (SELECT course_id, class_id FROM enrolled WHERE engineer_email = 'keithchiang.2019@aio.com')
-        GROUP BY
-            course.course_id;
+    SELECT
+        course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end,
+        GROUP_CONCAT(cpr.prereq_course_id) as prerequisites
+    FROM
+        courses course, classes class, course_prereq cpr, trainers t
+    WHERE
+        course.course_id = class.course_id
+    AND
+        class.is_published = 1
+    AND
+        class.material_status = 1
+    AND
+        class.course_id = cpr.course_id
+    AND
+        t.email = class.trainer_email
+    AND
+        class.course_id not in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com')
+    AND
+        cpr.prereq_course_id in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com')
+    AND
+        (class.course_id, class.class_id) not in (SELECT course_id, class_id FROM enrolled WHERE engineer_email = 'keithchiang.2019@aio.com')
+    GROUP BY
+        course.course_id, class.class_id;
     `
 
     db.query(sql, (err, result) => {
@@ -200,7 +200,7 @@ router.get("/getEligible", (req, res) => {
 router.get("/getIneligibleByPrereq", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end, cpr.prereq_course_id
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end, cpr.prereq_course_id
         FROM
             courses course, classes class, course_prereq cpr, trainers t
         WHERE
@@ -233,7 +233,7 @@ router.get("/getIneligibleByPrereq", (req, res) => {
 router.get("/getIneligibleByEnrolled", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end, cpr.prereq_course_id
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end, cpr.prereq_course_id
         FROM
             courses course, classes class, course_prereq cpr, trainers t
         WHERE
@@ -266,7 +266,7 @@ router.get("/getIneligibleByEnrolled", (req, res) => {
 router.get("/getIneligibleByCompleted", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
         FROM
             courses course, classes class, trainers t
         WHERE

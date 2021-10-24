@@ -56,8 +56,8 @@ const EngineerViewCourse = () => {
         
             <b>Enrolment period: </b> {courseInfo.enrolment_start} - {courseInfo.enrolment_end} <br />
 
-            <b>Course Start Date:</b> {courseInfo.course_start} <br/>
-            <b>Course End Date:</b> {courseInfo.course_end} <br/>
+            <b>Course Start Date:</b> {courseInfo.class_start} <br/>
+            <b>Course End Date:</b> {courseInfo.class_end} <br/>
 
             <br/><br/>
             Populate quiz stuff here later
