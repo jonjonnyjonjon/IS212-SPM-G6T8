@@ -41,8 +41,6 @@ function EngineerHome() {
         setKey(k)
     }
 
-    console.log(completedCourses);
-
     return (
         <Container>
             <h1>My Courses</h1><br/>

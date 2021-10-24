@@ -16,10 +16,9 @@ function EngineerBrowseCourse() {
     let history = useHistory()
 
     const [eligibleCourses, getEligibleCourses] = useState([]);
-    const [ineligiblePrereq, getIneligiblePrereq] = useState([]);
-    const [ineligibleEnrolled, getIneligibleEnrolled] = useState([]);
-    const [ineligibleCompleted, getIneligibleCompleted] = useState([]);
-    // const [prereqCourses, getPrereqCourses] = useState([]);
+    const [ineligibleByPrereq, getIneligibleByPrereq] = useState([]);
+    const [ineligibleByEnrolled, getIneligibleByEnrolled] = useState([]);
+    const [ineligibleByCompleted, getIneligibleByCompleted] = useState([]);
 
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/courses/getEligible")
@@ -27,19 +26,19 @@ function EngineerBrowseCourse() {
                 getEligibleCourses(res.data)
             })
 
-        axios.get("http://127.0.0.1:5000/courses/getIneligiblePrereq")
+        axios.get("http://127.0.0.1:5000/courses/getIneligibleByPrereq")
         .then(res => {
-            getIneligiblePrereq( res.data )
+            getIneligibleByPrereq( res.data )
         })
 
-        axios.get("http://127.0.0.1:5000/courses/getIneligibleEnrolled")
+        axios.get("http://127.0.0.1:5000/courses/getIneligibleByEnrolled")
         .then(res => {
-            getIneligibleEnrolled( res.data )
+            getIneligibleByEnrolled( res.data )
         })
 
-        axios.get("http://127.0.0.1:5000/courses/getIneligibleCompleted")
+        axios.get("http://127.0.0.1:5000/courses/getIneligibleByCompleted")
         .then(res => {
-            getIneligibleCompleted( res.data )
+            getIneligibleByCompleted( res.data )
         })
     }, [])
     
@@ -82,7 +81,7 @@ function EngineerBrowseCourse() {
                 </Card>
             )}
 
-            {ineligiblePrereq.map(course =>
+            {ineligibleByPrereq.map(course =>
                 <Card border='danger' style={{ width: '60rem' }} className='mb-3 text-muted' key={course.course_id + course.class_id}>
                     <Row>
                         <Col md={2}>
