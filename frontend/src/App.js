@@ -7,6 +7,7 @@ import {
 
 import HRRouting from "./pages/HR/HRRouting"
 import TrainerRouting from "./pages/Trainer/TrainerRouting"
+import EngineerRouting from "./pages/Engineer/EngineerRouting"
 import styled from "styled-components";
 import {Button} from "react-bootstrap"
 
@@ -41,7 +42,7 @@ function App() {
 			: null }
 			
 			<Switch>
-				<Route path="/engineer" />
+				<Route path="/engineer" component={EngineerRouting} />
 				<Route path="/trainer" component={TrainerRouting}/>
 				<Route path="/hr" component={HRRouting} />
 			</Switch>
