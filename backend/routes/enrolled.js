@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("../db")
 
+// Create new enrolled engineers
 router.post("/", (req, res) => {
     let engineers = req.body.engineers
     let insertValues = ""

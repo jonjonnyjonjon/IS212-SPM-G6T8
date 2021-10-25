@@ -6,9 +6,9 @@ USE spmg6t8;
 
 DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
-    course_id VARCHAR(255),
-    course_name VARCHAR(255),
-    course_summary VARCHAR(1000),
+    course_id VARCHAR(6),
+    course_name VARCHAR(50),
+    course_summary VARCHAR(100),
     has_prereq BOOLEAN DEFAULT False,
     
     PRIMARY KEY (course_id)
@@ -26,47 +26,49 @@ INSERT INTO courses VALUES ("BG3000", "Advanced Brother G1000", "Lorem Ipsum", T
 
 DROP TABLE IF EXISTS trainers;
 CREATE TABLE trainers (
-    email varchar(255),
-	name varchar(255),
-	password varchar(255),
+    email varchar(50),
+    password varchar(50),
+	name varchar(100),
     qualified varchar(255),
     
     PRIMARY KEY (email)
 );
 
-INSERT INTO trainers VALUES("johnappleseed.2021@aio.com", "John Appleseed", "ja", "CG1000");
-INSERT INTO trainers VALUES("jacksparrow.2021@aio.com", "Jack Sparrow", "js", "CG2000");
-INSERT INTO trainers VALUES("janedoe.2021@aio.com", "Jane Doe", "jd", "CG2000");
+INSERT INTO trainers VALUES("johnappleseed@aio.com", "ja", "John Appleseed", "CG1000");
+INSERT INTO trainers VALUES("jacksparrow@aio.com", "js", "Jack Sparrow", "CG2000");
+INSERT INTO trainers VALUES("janedoe@aio.com", "jd", "Jane Doe", "CG2000");
+INSERT INTO trainers VALUES("dwightschrute@aio.com", "ds", "Dwight Schrute", "XK1000");
+INSERT INTO trainers VALUES("barneystinson@aio.com", "bs", "Barney Stinson", "BG1000");
 
 ################################################################################################################
 
 DROP TABLE IF EXISTS engineers;
 CREATE TABLE engineers (
-    email varchar(255),
-    password varchar(255),
-	name varchar(255),
+    email varchar(50),
+    password varchar(50),
+	name varchar(100),
     
     PRIMARY KEY (email)
 );
 
-INSERT INTO engineers VALUES("keithchiang.2019@aio.com", "Keith Chiang", "kc");
-INSERT INTO engineers VALUES("htwong.2019@aio.com", "Jonathan Wong", "jw");
-INSERT INTO engineers VALUES("krystenng.2019@aio.com", "Krysten Ng", "kn");
-INSERT INTO engineers VALUES("hqyuen.2019@aio.com", "Yuen Huiqi", "hq");
+INSERT INTO engineers VALUES("keithchiang@aio.com", "kc", "Keith Chiang");
+INSERT INTO engineers VALUES("htwong@aio.com", "jw", "Jonathan Wong");
+INSERT INTO engineers VALUES("krystenng@aio.com", "kn", "Krysten Ng");
+INSERT INTO engineers VALUES("hqyuen@aio.com", "hq", "Yuen Huiqi");
 
 ################################################################################################################
 
 DROP TABLE IF EXISTS classes;
 CREATE TABLE classes (
-    course_id VARCHAR(255),
-    class_id VARCHAR(255),
-    trainer_email VARCHAR(255),
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
+    trainer_email VARCHAR(50),
     size INT,
     current_enrolled INT,
-    enrolment_start VARCHAR(255),
-    enrolment_end VARCHAR(255),
-    class_start VARCHAR(255),
-    class_end VARCHAR(255),
+    enrolment_start VARCHAR(10),
+    enrolment_end VARCHAR(10),
+    course_start VARCHAR(10),
+    course_end VARCHAR(10),
     material_status BOOLEAN DEFAULT False,
     is_published BOOLEAN DEFAULT False,
     
@@ -74,20 +76,10 @@ CREATE TABLE classes (
     CONSTRAINT classes_fk1 FOREIGN KEY (trainer_email) REFERENCES trainers(email)
 );
 
--- populating data for johnappleseed.2021@aio.com
-INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "30/11/2021", False, False);
-INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "28/09/2021", "13/11/2021", True, False);
-INSERT INTO classes VALUES("BG1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "02/10/2021", "23/12/2021", False, False);
-INSERT INTO classes VALUES("BG1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "08/11/2021", "28/12/2021", False, False);
-INSERT INTO classes VALUES("XK1000", "C1", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "17/10/2021", "29/12/2021", False, False);
-INSERT INTO classes VALUES("XK1000", "C2", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "13/11/2021", "27/11/2021", False, False);
-INSERT INTO classes VALUES("XK1000", "C3", "johnappleseed.2021@aio.com", 10, 0, "10/09/2021", "20/09/2021", "14/09/2021", "25/12/2021", False, False);
-
-INSERT INTO classes VALUES("CG1000", "C3", "jacksparrow.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
-INSERT INTO classes VALUES ("CG1000", "C4", "jacksparrow.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
-
-INSERT INTO classes VALUES("CG2000", "C1", "jacksparrow.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, False);
-INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
+INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False);
+INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", True, False);
+INSERT INTO classes VALUES("CG2000", "C1", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, False);
+INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
 
 # keith-newTestCases
 INSERT INTO classes VALUES("BG1000", "C3", "janedoe.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True); # keith-completed
@@ -100,17 +92,17 @@ INSERT INTO classes VALUES("XK1000", "C4", "janedoe.2021@aio.com", 10, 0, "12/10
 
 DROP TABLE IF EXISTS completed_courses;
 CREATE TABLE completed_courses (
-    engineer_email varchar(255),
-    course_id VARCHAR(255),
-    class_id VARCHAR(255),
-    completed_date VARCHAR(255),
+    engineer_email varchar(50),
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
+    completed_date VARCHAR(10),
     
     CONSTRAINT completed_courses_pk PRIMARY KEY (engineer_email, course_id, class_id),
     CONSTRAINT completed_courses_fk1 FOREIGN KEY (engineer_email) REFERENCES engineers(email),
     CONSTRAINT completed_courses_fk2 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
 
-INSERT INTO completed_courses VALUES("htwong.2019@aio.com", "CG1000", "C1", "08/10/2021");
+INSERT INTO completed_courses VALUES("htwong@aio.com", "CG1000", "C1", "08/10/2021");
 
 INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "CG1000", "C1", "08/10/2021");
 INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "CG2000", "C2", "08/10/2021");
@@ -120,8 +112,8 @@ INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "BG1000", "C3",
 
 DROP TABLE IF EXISTS course_prereq;
 CREATE TABLE course_prereq (
-    course_id VARCHAR(255),
-    prereq_course_id VARCHAR(255),
+    course_id VARCHAR(6),
+    prereq_course_id VARCHAR(6),
 
     CONSTRAINT prereq_pk PRIMARY KEY (course_id, prereq_course_id),
     CONSTRAINT prereq_pk1 FOREIGN KEY (course_id) REFERENCES courses(course_id),
@@ -140,9 +132,9 @@ INSERT INTO course_prereq VALUES("BG3000", "BG2000");
 
 DROP TABLE IF EXISTS enrolled;
 CREATE TABLE enrolled (
-    engineer_email VARCHAR(255),
-    course_id VARCHAR(255),
-    class_id VARCHAR(255),
+    engineer_email VARCHAR(50),
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
     
     CONSTRAINT enrolled_pk PRIMARY KEY (engineer_email, course_id, class_id),
     CONSTRAINT enrolled_fk1 FOREIGN KEY (engineer_email) REFERENCES engineers(email),
@@ -155,9 +147,9 @@ INSERT INTO enrolled VALUES("keithchiang.2019@aio.com", "BG2000", "C1");
 
 DROP TABLE IF EXISTS enrol_request;
 CREATE TABLE enrol_request (
-    engineer_email VARCHAR(255),
-    course_id VARCHAR(255),
-    class_id VARCHAR(255),
+    engineer_email VARCHAR(50),
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
     
     CONSTRAINT enrol_request_pk PRIMARY KEY (engineer_email, course_id, class_id),
     CONSTRAINT enrol_request_fk1 FOREIGN KEY (engineer_email) REFERENCES engineers(email),
@@ -166,53 +158,48 @@ CREATE TABLE enrol_request (
 
 ################################################################################################################
 
-DROP TABLE IF EXISTS course_materials;
-CREATE TABLE course_materials (
-    course_id VARCHAR(255),
-    class_id VARCHAR(255),
-    chapter_id VARCHAR(255),
-    content VARCHAR(255),
-    quiz_id VARCHAR(255),
+DROP TABLE IF EXISTS teaching_materials;
+CREATE TABLE teaching_materials (
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
+    chapter_id VARCHAR(10),
+    content VARCHAR(100),
     
-    CONSTRAINT course_materials_pk PRIMARY KEY (course_id, class_id, chapter_id),
-    CONSTRAINT course_materials_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
-    # CONSTRAINT course_materials_fk2 FOREIGN KEY (quiz_id) REFERENCES quizzes(quiz_id)
+    CONSTRAINT teaching_materials_pk PRIMARY KEY (course_id, class_id, chapter_id),
+    CONSTRAINT teaching_materials_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
-
-INSERT INTO course_materials VALUES("CG1000", "C1", "123", "Dummy Content", "1");
 
 ################################################################################################################
 
 DROP TABLE IF EXISTS quizzes;
 CREATE TABLE quizzes (
-    quiz_id VARCHAR(64),
-    course_id VARCHAR(64),
-    class_id VARCHAR(64),
-    chapter_id VARCHAR(64),
-    has_questions BOOLEAN,
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
+    chapter_id VARCHAR(10),
     
-    CONSTRAINT quizzes_pk PRIMARY KEY (quiz_id, course_id, class_id, chapter_id),
-    CONSTRAINT quizzes_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
-    # CONSTRAINT quizzes_fk2 FOREIGN KEY (chapter_id) REFERENCES course_materials(chapter_id)
+    CONSTRAINT quizzes_pk PRIMARY KEY (course_id, class_id, chapter_id),
+    CONSTRAINT quizzes_fk1 FOREIGN KEY (course_id, class_id, chapter_id) REFERENCES teaching_materials(course_id, class_id, chapter_id)
 );
 
 ################################################################################################################
 
 DROP TABLE IF EXISTS quiz_questions;
 CREATE TABLE quiz_questions (
-    quiz_id VARCHAR(255),
-    question_id VARCHAR(255),
-    question VARCHAR(255),
-    type VARCHAR(255),
+    course_id VARCHAR(6),
+    class_id VARCHAR(2),
+    chapter_id VARCHAR(10),
+    question_id VARCHAR(100),
+    question VARCHAR(100),
+    type VARCHAR(20),
     duration INT,
-    option1 VARCHAR(255),
-    option2 VARCHAR(255),
-    option3 VARCHAR(255),
-    option4 VARCHAR(255),
-    answer VARCHAR(255),
+    option1 VARCHAR(100),
+    option2 VARCHAR(100),
+    option3 VARCHAR(100),
+    option4 VARCHAR(100),
+    answer VARCHAR(100),
     
-    CONSTRAINT quiz_questions_pk PRIMARY KEY (quiz_id, question_id),
-    CONSTRAINT quiz_questions_fk1 FOREIGN KEY (quiz_id) REFERENCES quizzes(quiz_id)
+    CONSTRAINT quiz_questions_pk PRIMARY KEY (course_id, class_id, chapter_id, question_id),
+    CONSTRAINT quiz_questions_fk1 FOREIGN KEY (course_id, class_id, chapter_id) REFERENCES teaching_materials(course_id, class_id, chapter_id)
 );
 
 ################################################################################################################

@@ -23,8 +23,6 @@ app.use("/enrolled", enrolledRoute)
 app.use('/chapters', chaptersRoute)
 app.use('/quiz', quizRoute)
 
-app.listen(5000, "127.0.0.1", () => {
-  console.log('Example app listening on port 5000!');
-});
+app.listen(5000, "127.0.0.1");
 
 module.exports = app

@@ -2,8 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("../db")
 
-
-// gets all courses
+// get all course materials
 router.get("/", (req, res) => {
 	let sql = "select * from course_materials"
 
@@ -13,12 +12,10 @@ router.get("/", (req, res) => {
 				message: err.message || "An error has occured."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(rows) 
 		}
 	})
 })
-
 
 // post new chapter to db
 router.post("/addChapter", (req, res) => {
@@ -38,7 +35,9 @@ router.post("/addChapter", (req, res) => {
 			})
             console.log(sql)
 		} else {
-			console.log("1 record inserted to course_materials table")
+			res.status(200).send({
+				message: "1 record inserted to course_materials table"
+			})
 		}
 	})
 })

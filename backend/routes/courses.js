@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("../db")
 
-// gets all courses
+// Get all courses
 router.get("/", (req, res) => {
 	let sql = "SELECT * from classes left join courses on classes.course_id = courses.course_id WHERE trainer_email = 'johnappleseed.2021@aio.com'"
 
@@ -17,27 +17,7 @@ router.get("/", (req, res) => {
 	})
 })
 
-router.get("/getCourse", (req, res) => {
-    
-	let sql = `
-    SELECT 
-		course.course_id, course.course_name, course.course_summary, class.course_id, class.class_id, trainer.name as trainer_name, trainer.email as trainer_email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
-    FROM courses course, classes class, trainers trainer
-    WHERE course.course_id = class.course_id
-    AND trainer.email = class.trainer_email
-    AND course.course_id = "${req.query.course_id}"`
-	db.query(sql, (err, result) => {
-		if (err) {
-			res.status(500).send({
-				message: err.message || "An error has occurred."
-			})
-		} else {
-			// array of rows are already in the format of "data": []
-			res.json(result[0])
-		}
-	})
-    
-})
+// Get course by its course name
 router.get("/courseName", (req, res) => {
 	let keyword = req.query.keyword
 	let sql
@@ -58,11 +38,65 @@ router.get("/courseName", (req, res) => {
 	})
 })
 
+// Get course by its course ID
 router.get("/courseID", (req, res) => {
-	let sql = `SELECT * from courses WHERE course_id="${req.body.courseID}"`
+	let sql = `SELECT * from courses WHERE course_id="${req.query.courseID}"`
 
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+})
 
-// Retrieve a course's class information (engineer viewing a course)
+// Create a course
+router.post("/createCourse", (req, res) => {
+	let sql = `INSERT INTO courses VALUES ( \
+		"${req.body.courseID}", \
+		"${req.body.courseName}", \
+		"${req.body.courseSummary}", \
+		${req.body.hasPrereq}
+	)`
+
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.status(500).send({
+				message: `${req.body.courseID} ${req.body.courseName} has been added to courses table.`
+			})
+		}
+	})
+
+})
+
+router.get("/getCourse", (req, res) => {
+	let sql = `
+    SELECT 
+		course.course_id, course.course_name, course.course_summary, class.course_id, class.class_id, trainer.name as trainer_name, trainer.email as trainer_email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
+    FROM courses course, classes class, trainers trainer
+    WHERE course.course_id = class.course_id
+    AND trainer.email = class.trainer_email
+    AND course.course_id = "${req.query.course_id}"`
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.json(result[0])
+		}
+	})
+    
+})
+
+// Get a course's class information (engineer viewing a course)
 router.get("/getClassInfo", (req, res) => {
 	let sql = `
         SELECT
@@ -84,14 +118,13 @@ router.get("/getClassInfo", (req, res) => {
 				message: err.message || "An error has occurred."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(result[0])
 		}
 	})
     
 })
 
-// Retrieve a SPECIFIC course's prerequisites
+// Get a SPECIFIC course's prerequisites
 router.get("/getPrereq", (req, res) => {
 	let sql = `
         SELECT
@@ -110,21 +143,13 @@ router.get("/getPrereq", (req, res) => {
 				message: err.message || "An error has occurred."
 			})
 		} else {
-			// array of rows are already in the format of "data": []
 			res.json(result)
 		}
 	})
     
 })
-router.post("/createCourse", (req, res) => {
-	let sql = `INSERT INTO courses VALUES ( \
-		"${req.body.courseID}", \
-		"${req.body.courseName}", \
-		"${req.body.courseSummary}", \
-		${req.body.hasPrereq}
-	)`
 
-// Retrieve completed courses + course details FOR engineer='keithchiang.2019@aio.com'
+// Get completed courses + course details FOR engineer='keithchiang.2019@aio.com'
 router.get("/getCompleted", (req, res) => {
 	let sql = `
         SELECT
@@ -155,7 +180,7 @@ router.get("/getCompleted", (req, res) => {
 	})
 })
 
-// Retrieve ongoing courses + details FOR engineer='keithchiang.2019@aio.com'
+// Get ongoing courses + details FOR engineer='keithchiang.2019@aio.com'
 router.get("/getOngoing", (req, res) => {
 	let sql = `
     SELECT
@@ -185,7 +210,7 @@ router.get("/getOngoing", (req, res) => {
 	})
 })
 
-// Retrieve ineligible courses + details FOR engineer='keithchiang.2019@aio.com'
+// Get ineligible courses + details FOR engineer='keithchiang.2019@aio.com'
 // Reason: Ineligible BECAUSE has completed it
 router.get("/getIneligibleByCompleted", (req, res) => {
 	let sql = `
@@ -215,7 +240,5 @@ router.get("/getIneligibleByCompleted", (req, res) => {
 		}
 	})
 })
-
-
 
 module.exports = router

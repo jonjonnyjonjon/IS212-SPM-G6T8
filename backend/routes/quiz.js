@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const db = require("../db")
 
+// Get all quiz questions
 router.get("/", (req, res) => {
 	let sql = "SELECT * from quiz_questions"
 
@@ -16,6 +17,7 @@ router.get("/", (req, res) => {
 	})
 })
 
+// Create a quiz question
 router.post('/createQuestion', (req, res) => {
 	let sql = `INSERT INTO quiz_questions VALUES ( \
 		'${req.body.quiz_id}', \
@@ -30,7 +32,6 @@ router.post('/createQuestion', (req, res) => {
 		'${req.body.answer}'
 	)`
 	
-
 	db.query(sql, (err, result) => {
 		if (err) {
 			res.status(500).send({

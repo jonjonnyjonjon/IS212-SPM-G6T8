@@ -50,7 +50,7 @@ const ClassesContainer = (props) => {
                             <td>{a_class.class_start} - {a_class.class_end}</td>
                             {filter === "pending" ? <td>{a_class.material_status === 0 ? "No" : "Yes"}</td> : null}
                             <td>
-                                <Link to={`${url}/edit/${a_class.class_id}`}>
+                                <Link to={`${url}/editClass/${a_class.class_id}`}>
                                     <Button variant="warning">Edit</Button>
                                 </Link>
                             </td>
