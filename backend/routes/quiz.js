@@ -20,7 +20,9 @@ router.get("/", (req, res) => {
 // Create a quiz question
 router.post('/createQuestion', (req, res) => {
 	let sql = `INSERT INTO quiz_questions VALUES ( \
-		'${req.body.quiz_id}', \
+		'${req.body.course_id}', \
+		'${req.body.class_id}', \
+		'${req.body.chapter_id}', \
 		'${req.body.question_id}', \
 		'${req.body.question}', \
 		'${req.body.type}', \
@@ -46,7 +48,39 @@ router.post('/createQuestion', (req, res) => {
 
 router.get('/getMCQQuestions', (req, res) => {
 	
+	let sql = "SELECT question_id, question, option1, option2, option3, option4 from quiz_questions WHERE option3 != '' AND option4 != ''"
+
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+	
+})
+
+router.get('/getTFQuestions', (req, res) => {
+	
 	let sql = "SELECT question_id, question, option1, option2, option3, option4 from quiz_questions WHERE option3 = '' AND option4 = ''"
+
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+	
+})
+
+router.get('/getQuiz', (req, res) => {
+	
+	let sql = "SELECT course_id, class_id, chapter_id, duration FROM quiz_questions"
 
 	db.query(sql, (err, rows) => {
 		if (err) {

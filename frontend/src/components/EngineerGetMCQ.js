@@ -1,10 +1,7 @@
 import { 
     Container,
-    Button,
-    Table,
     Form
  } from 'react-bootstrap'
-import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
 import { useState, useEffect } from "react"
 
@@ -12,8 +9,6 @@ import { useState, useEffect } from "react"
 const EngineerGetMCQ = () => {
     
     const [quiz, setQuiz] = useState([])
-
-    const { url } = useRouteMatch()
 
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/quiz/getMCQQuestions").then((res) => {
