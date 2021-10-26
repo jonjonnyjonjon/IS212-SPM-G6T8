@@ -48,8 +48,9 @@ const EngineerTakeQuiz = () => {
 
     return(
         <Container>
-            <h1> {quiz.course_id} </h1>
-
+            <h1> Course ID: {quiz[0].course_id} </h1>
+            <h1> Quiz No: {quiz[0].chapter_id} </h1>
+            <br />
             <EngineerGetMCQ/>
             <EngineerGetTF/>
             <ButtonDiv>
