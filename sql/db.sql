@@ -81,6 +81,14 @@ INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed@aio.com", 10, 0, "10/0
 INSERT INTO classes VALUES("CG2000", "C1", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, False);
 INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
 
+# huiqi- johnappleseed Test Cases
+INSERT INTO classes VALUES("BG1000", "C7", "johnappleseed@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/11/2021", True, True); # ongoing
+INSERT INTO classes VALUES ("BG2000", "C3", "johnappleseed@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "23/11/2021", True, True); # ongoing
+INSERT INTO classes VALUES ("BG3000", "C2", "johnappleseed@aio.com", 10, 0, "01/09/2021", "15/09/2021", "23/10/2021", "27/11/2021", True, True); # ongoing
+INSERT INTO classes VALUES ("CG3000", "C3", "johnappleseed@aio.com", 10, 0, "01/09/2021", "15/09/2021", "27/11/2021", "3/12/2021", True, True); # incomplete
+INSERT INTO classes VALUES("XK1000", "C6", "johnappleseed@aio.com", 10, 0, "12/10/2021", "20/10/2021", "3/11/2021", "27/12/2021", True, True); # incomplete
+
+
 # keith-newTestCases
 INSERT INTO classes VALUES("BG1000", "C3", "janedoe@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True); # keith-completed
 INSERT INTO classes VALUES ("BG2000", "C1", "janedoe@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ongoing
@@ -168,7 +176,6 @@ CREATE TABLE teaching_materials (
     CONSTRAINT teaching_materials_pk PRIMARY KEY (course_id, class_id, chapter_id),
     CONSTRAINT teaching_materials_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
-
 
 ################################################################################################################
 
