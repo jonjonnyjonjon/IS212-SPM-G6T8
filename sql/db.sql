@@ -177,6 +177,7 @@ CREATE TABLE teaching_materials (
     CONSTRAINT teaching_materials_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
 
+INSERT INTO teaching_materials VALUES("CG1000", "C1", "1", "youtube.com");
 ################################################################################################################
 
 DROP TABLE IF EXISTS quiz_questions;
