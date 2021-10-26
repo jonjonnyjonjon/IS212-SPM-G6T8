@@ -8,22 +8,7 @@ import {
 } from "react-bootstrap"
 import { useState, useEffect } from 'react'
 import axios from "axios"
-import { useRouteMatch, useParams } from 'react-router-dom'
-import styled from "styled-components";
-
-const ButtonDiv = styled.div`
-  font-size: 15px;
-  height: 100%;
-  margin-bottom: 40px;
-`;
-
-const Btn = styled(Button)`
-  font-size: 15px;
-  font-weight: 600;
-  width: 10%;
-  height: 30%;
-  background-color: #5d5fef;
-`;
+import { Link, useRouteMatch, useParams } from 'react-router-dom'
 
 
 const TrainerCreateQuiz = () => {
@@ -116,9 +101,7 @@ const TrainerCreateQuiz = () => {
             }
 
             axios.post("http://127.0.0.1:5000/quiz/createQuestion", {
-                "course_id": 'CG1000',
-                "class_id": 'C1',
-                "chapter_id": '1',
+                "quiz_id": '1',
                 "question_id": qnID,
                 "question": title,
                 "type": quizType,
@@ -167,11 +150,9 @@ const TrainerCreateQuiz = () => {
                 <Button variant="outline-info" size="sm" onClick={addTFQuestion}>Add True/False Question</Button>
                 <br />
                 <br />
-                <ButtonDiv>
-                <Btn type="submit" onClick={e => handleSubmit(e)}>
-                    Create Quiz
-                </Btn>
-                </ButtonDiv>
+                <Button type="submit" onClick={e => handleSubmit(e)}>
+                    Preview Quiz
+                </Button>
             </Form>
         </Container>
     )
