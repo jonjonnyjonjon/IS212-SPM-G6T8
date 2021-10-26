@@ -210,6 +210,115 @@ router.get("/getOngoing", (req, res) => {
 	})
 })
 
+/*  Get eligible courses + details FOR engineer='keithchiang.2019@aio.com'
+	Eligible means:
+	(1) Met prereq AND
+	(2) Not currently taking AND
+	(3) Have not completed */
+router.get("/getEligible", (req, res) => {
+	let sql = `
+	SELECT
+		course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end,
+		GROUP_CONCAT(cpr.prereq_course_id) as prerequisites
+	FROM
+		courses course, classes class, course_prereq cpr, trainers t
+	WHERE
+		course.course_id = class.course_id
+	AND
+		class.is_published = 1
+	AND
+		class.material_status = 1
+	AND
+		class.course_id = cpr.course_id
+	AND
+		t.email = class.trainer_email
+	AND
+		class.course_id not in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com')
+	AND
+		cpr.prereq_course_id in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com')
+	AND
+		(class.course_id, class.class_id) not in (SELECT course_id, class_id FROM enrolled WHERE engineer_email = 'keithchiang.2019@aio.com')
+	GROUP BY
+		course.course_id, class.class_id;
+	`
+
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.json(result)
+		}
+	})
+})
+	
+// Get ineligible courses + details FOR engineer='keithchiang.2019@aio.com'
+// Reason: Ineligible BECAUSE prerequisites not met
+router.get("/getIneligibleByPrereq", (req, res) => {
+	let sql = `
+		SELECT
+			course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end, cpr.prereq_course_id
+		FROM
+			courses course, classes class, course_prereq cpr, trainers t
+		WHERE
+			course.course_id = class.course_id
+		AND
+			class.is_published = 1
+		AND
+			class.material_status = 1
+		AND
+			class.course_id = cpr.course_id
+		AND
+			t.email = class.trainer_email
+		AND 
+			cpr.prereq_course_id not in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang.2019@aio.com');
+	`
+
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.json(result)
+		}
+	})
+})
+	
+// Get ineligible courses + details FOR engineer='keithchiang.2019@aio.com'
+// Reason: Ineligible BECAUSE already enrolled currently
+router.get("/getIneligibleByEnrolled", (req, res) => {
+	let sql = `
+		SELECT
+			course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.course_start, class.course_end, cpr.prereq_course_id
+		FROM
+			courses course, classes class, course_prereq cpr, trainers t
+		WHERE
+			course.course_id = class.course_id
+		AND
+			class.is_published = 1
+		AND
+			class.material_status = 1
+		AND
+			class.course_id = cpr.course_id
+		AND
+			t.email = class.trainer_email
+		AND 
+			(class.course_id, class.class_id) in (SELECT course_id, class_id FROM enrolled WHERE engineer_email = 'keithchiang.2019@aio.com');
+	`
+
+	db.query(sql, (err, result) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.json(result)
+		}
+	})
+})
+
 // Get ineligible courses + details FOR engineer='keithchiang.2019@aio.com'
 // Reason: Ineligible BECAUSE has completed it
 router.get("/getIneligibleByCompleted", (req, res) => {
