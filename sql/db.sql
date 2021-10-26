@@ -82,11 +82,11 @@ INSERT INTO classes VALUES("CG2000", "C1", "jacksparrow@aio.com", 10, 0, "20/09/
 INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
 
 # keith-newTestCases
-INSERT INTO classes VALUES("BG1000", "C3", "janedoe.2021@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True); # keith-completed
-INSERT INTO classes VALUES ("BG2000", "C1", "janedoe.2021@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ongoing
-INSERT INTO classes VALUES ("BG3000", "C1", "janedoe.2021@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ineligibleToTake
-INSERT INTO classes VALUES ("CG3000", "C1", "janedoe.2021@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ongoing
-INSERT INTO classes VALUES("XK1000", "C4", "janedoe.2021@aio.com", 10, 0, "12/10/2021", "20/10/2021", "21/10/2021", "21/11/2021", True, True); # keith-toEnroll
+INSERT INTO classes VALUES("BG1000", "C3", "janedoe@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True); # keith-completed
+INSERT INTO classes VALUES ("BG2000", "C1", "janedoe@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ongoing
+INSERT INTO classes VALUES ("BG3000", "C1", "janedoe@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ineligibleToTake
+INSERT INTO classes VALUES ("CG3000", "C1", "janedoe@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True); # keith-ongoing
+INSERT INTO classes VALUES("XK1000", "C4", "janedoe@aio.com", 10, 0, "12/10/2021", "20/10/2021", "21/10/2021", "21/11/2021", True, True); # keith-toEnroll
 
 ################################################################################################################
 
@@ -104,9 +104,9 @@ CREATE TABLE completed_courses (
 
 INSERT INTO completed_courses VALUES("htwong@aio.com", "CG1000", "C1", "08/10/2021");
 
-INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "CG1000", "C1", "08/10/2021");
-INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "CG2000", "C2", "08/10/2021");
-INSERT INTO completed_courses VALUES("keithchiang.2019@aio.com", "BG1000", "C3", "08/10/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG1000", "C1", "08/10/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG2000", "C2", "08/10/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "BG1000", "C3", "08/10/2021");
 
 ################################################################################################################
 
@@ -141,7 +141,7 @@ CREATE TABLE enrolled (
     CONSTRAINT enrolled_fk2 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
 
-INSERT INTO enrolled VALUES("keithchiang.2019@aio.com", "BG2000", "C1");
+INSERT INTO enrolled VALUES("keithchiang@aio.com", "BG2000", "C1");
 
 ################################################################################################################
 
