@@ -169,17 +169,6 @@ CREATE TABLE teaching_materials (
     CONSTRAINT teaching_materials_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
 
-################################################################################################################
-
-DROP TABLE IF EXISTS quizzes;
-CREATE TABLE quizzes (
-    course_id VARCHAR(6),
-    class_id VARCHAR(2),
-    chapter_id VARCHAR(10),
-    
-    CONSTRAINT quizzes_pk PRIMARY KEY (course_id, class_id, chapter_id),
-    CONSTRAINT quizzes_fk1 FOREIGN KEY (course_id, class_id, chapter_id) REFERENCES teaching_materials(course_id, class_id, chapter_id)
-);
 
 ################################################################################################################
 
