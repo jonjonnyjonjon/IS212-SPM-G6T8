@@ -44,4 +44,20 @@ router.post('/createQuestion', (req, res) => {
 	})
 })
 
+router.get('/getMCQQuestions', (req, res) => {
+	
+	let sql = "SELECT question_id, question, option1, option2, option3, option4 from quiz_questions WHERE option3 = '' AND option4 = ''"
+
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+	
+})
+
 module.exports = router

@@ -14,6 +14,7 @@ import { Link, useRouteMatch, useParams } from 'react-router-dom'
 const TrainerCreateQuiz = () => {
     
     const { url } = useRouteMatch()
+    const { courseID, classID, chapNum } = useParams()
     const [quizType, setQuizType] = useState("")
     const [quizDuration, setQuizDuration] = useState(0)
     
@@ -122,7 +123,9 @@ const TrainerCreateQuiz = () => {
 
     return (
         <Container>
-            <h1>Chapter 1 Quiz</h1>
+            <h1>Course: {courseID}</h1>
+            <h2>Class: {classID}</h2>
+            <h3>Chapter {chapNum} Quiz</h3>
             <Form>
                 <Form.Label>
                     Select your quiz type: <br />

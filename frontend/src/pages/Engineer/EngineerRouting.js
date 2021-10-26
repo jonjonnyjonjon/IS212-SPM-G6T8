@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Nav } from 'react-bootstrap'
-
 import { Link, Route, Switch, useRouteMatch, useLocation, withRouter } from "react-router-dom"
 import UserNavbar from "../../components/UserNavbar"
-
+import EngineerTakeQuiz from './EngineerTakeQuiz'
 import EngineerHome from './EngineerHome'
 import EngineerBrowseCourse from "./EngineerBrowseCourse"
 import EngineerViewCourse from "./EngineerViewCourse"
@@ -33,6 +32,7 @@ const EngineerRouting = () => {
                 <Route path={`${path}/home`} component={EngineerHome} />
                 <Route exact path={`${path}/browseCourses`} component={EngineerBrowseCourse} />
                 <Route exact path={`${path}/browseCourses/viewCourse/:courseID`} component={withRouter(EngineerViewCourse)} />
+                <Route path={`${path}/quiz`} component={EngineerTakeQuiz} />
             </Switch>
 
             {location.pathname === "/engineer" ? <EngineerHome /> : null }
