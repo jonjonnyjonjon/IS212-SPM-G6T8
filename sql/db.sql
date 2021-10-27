@@ -67,8 +67,8 @@ CREATE TABLE classes (
     current_enrolled INT,
     enrolment_start VARCHAR(10),
     enrolment_end VARCHAR(10),
-    course_start VARCHAR(10),
-    course_end VARCHAR(10),
+    class_start VARCHAR(10),
+    class_end VARCHAR(10),
     material_status BOOLEAN DEFAULT False,
     is_published BOOLEAN DEFAULT False,
     
