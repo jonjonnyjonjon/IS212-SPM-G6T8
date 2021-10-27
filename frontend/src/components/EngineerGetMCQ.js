@@ -21,7 +21,8 @@ const EngineerGetMCQ = () => {
         <Container>
             {quiz.map(quiz =>
                   <Form key={quiz.question_id}>
-                    <Form.Label> {quiz.question}
+                    <Form.Label> 
+                    <b>Question: {quiz.question}</b>
                     <Form.Check type="radio" label={quiz.option1} name="question" />
                     <Form.Check type="radio" label={quiz.option2} name="question"/>
                     <Form.Check type="radio" label={quiz.option3} name="question" />

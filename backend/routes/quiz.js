@@ -80,7 +80,7 @@ router.get('/getTFQuestions', (req, res) => {
 
 router.get('/getQuiz', (req, res) => {
 	
-	let sql = "SELECT course_id, class_id, chapter_id, duration FROM quiz_questions"
+	let sql = "SELECT course_id, class_id, chapter_id, duration, type FROM quiz_questions"
 
 	db.query(sql, (err, rows) => {
 		if (err) {
