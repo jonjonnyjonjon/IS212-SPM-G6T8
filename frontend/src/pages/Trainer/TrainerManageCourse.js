@@ -22,19 +22,20 @@ const ExistingChapterDiv = styled.div`
 const TrainerManageCourse = () => {
     // const { url } = useRouteMatch()
     const { courseID, classID } = useParams()
-
     const [chapters, setChapters] = useState([])
+    const [allChaps, setAllChaps] = useState([])
+    const [chapNum, setChapNum] = useState(0)
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:5000/chapters/getAllChapters?course_id=${courseID}&class_id=${classID}`)
             .then(res => {
                 setChapters(res.data)
+                setChapNum(res.data.length)
             })
     }, [courseID, classID])
 
     // console.log(Object.entries(chapters))
-    const [allChaps, setAllChaps] = useState([])
-    const [chapNum, setChapNum] = useState(1)
+    
     // console.log(allChaps)
     console.log(allChaps)
     console.log(chapters.length)
@@ -61,6 +62,7 @@ const TrainerManageCourse = () => {
 
     return (
         <Container>
+            {chapNum}
             <Header>Course: {courseID}</Header>
             <Button onClick={addChapter}> Add Chapter </Button>
             <ExistingChapterDiv><h1> Hi </h1></ExistingChapterDiv>
