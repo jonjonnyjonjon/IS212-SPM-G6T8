@@ -174,9 +174,7 @@ router.get("/getCompleted", (req, res) => {
 				message: err.message || "An error has occurred."
 			})
 		} else {
-			res.status(200).send(
-				res.json(result)
-			)
+			res.json(result)
 		}
 	})
 })
