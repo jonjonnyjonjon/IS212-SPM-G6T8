@@ -24,6 +24,7 @@ function EngineerBrowseCourse() {
         axios.get("http://127.0.0.1:5000/courses/getEligible")
             .then(res => {
                 getEligibleCourses(res.data)
+                console.log(res.data)
             })
 
         axios.get("http://127.0.0.1:5000/courses/getIneligibleByPrereq")
@@ -62,7 +63,7 @@ function EngineerBrowseCourse() {
                                         ? course.prerequisites.split(',').map( prereq =>
                                             <Badge bg='dark' className='me-2' key={prereq}> {prereq} </Badge> )
                                         : <Badge bg='dark' className='me-2' key={course.prerequisites}> {course.prerequisites} </Badge>
-                                    }
+                                    }``
                                 </Card.Subtitle> <br/><br/>
                                 <Card.Subtitle>Trainer:</Card.Subtitle> {course.trainer_name} <br/><br/>
                                 <Card.Subtitle>Class:</Card.Subtitle> {course.class_id} <br/><br/>
