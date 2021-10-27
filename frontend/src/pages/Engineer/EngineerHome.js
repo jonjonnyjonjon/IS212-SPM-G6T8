@@ -14,7 +14,6 @@ import { Link, useRouteMatch, useHistory } from 'react-router-dom'
 import axios from "axios"
 import styled from "styled-components";
 
-
 const CourseTabs = styled(Tabs)`
     margin: 20px 50px;
 `;
