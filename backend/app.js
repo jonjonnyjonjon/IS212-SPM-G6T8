@@ -6,6 +6,12 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 
+// Routes for Heroku
+app.use(express.static(path.join("../", 'build')));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join("../", 'build', 'index.html'));
+});
+
 // Import routes
 const coursesRoute = require("./routes/courses")
 const trainersRoute = require("./routes/trainers")
