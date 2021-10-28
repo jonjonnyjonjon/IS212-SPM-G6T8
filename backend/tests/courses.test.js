@@ -2,19 +2,6 @@ const request = require("supertest");
 const app = require("../app");
 const db = require("../db")
 
-// Either to just initialize the database connection from the start = no setup/teardown
-// beforeEach(() => {
-	// connect to sql
-	// use fs.readFile to read sql file
-	// use db.query on the file
-// 	initializeDatabase()
-// })
-
-afterAll(done => {
-	db.destroy()
-	done()
-})
-
 describe("Test the /courses path", () => {
 	test("GET /courses", done => {
 		request(app)
