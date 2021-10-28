@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import TrainerChapter from "../../components/TrainerChapter";
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Modal, Form } from 'react-bootstrap'
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import styled from "styled-components";
@@ -20,7 +20,6 @@ const ExistingChapterDiv = styled.div`
 `
 
 const TrainerManageCourse = () => {
-    // const { url } = useRouteMatch()
     const { courseID, classID } = useParams()
     const [chapters, setChapters] = useState([])
     const [allChaps, setAllChaps] = useState([])
@@ -35,7 +34,7 @@ const TrainerManageCourse = () => {
     }, [courseID, classID])
 
     const addChapter = e => {
-        setAllChaps( allChaps => [...allChaps, <TrainerChapter key={chapNum} count={chapNum} />])
+        setAllChaps( allChaps => [...allChaps, <TrainerChapter key={chapNum} count={chapNum} class_id={classID} course_id={courseID} />])
         setChapNum(chapNum + 1)
         // e.preventDefault()
         console.log(chapNum)
@@ -46,6 +45,7 @@ const TrainerManageCourse = () => {
             "content": "",
         })
     }
+    console.log(chapters)
 
     return (
         <Container>
@@ -53,7 +53,7 @@ const TrainerManageCourse = () => {
             <Button onClick={addChapter}> Add Chapter </Button>
             <ExistingChapterDiv>
                 {chapters.map(chapter => 
-                    <TrainerChapter key={chapter.chapter_id} count={chapter.chapter_id}></TrainerChapter>
+                    <TrainerChapter key={chapter.chapter_id} count={chapter.chapter_id} class_id={classID} course_id={courseID} /> 
                     )}
                 </ExistingChapterDiv>
             <ChapterDiv className="allChaps">
