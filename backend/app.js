@@ -1,16 +1,17 @@
 const express = require('express');
 const cors = require('cors')
 const app = express();
+const path = require('path')
 
 // Middlewares
 app.use(express.json())
 app.use(cors())
 
 // Routes for Heroku
-app.use(express.static(path.join("../", 'build')));
-app.get('/*', (req, res) => {
-  res.sendFile(path.join("../", 'build', 'index.html'));
-});
+app.use(express.static(path.join(__dirname, "..", 'build')));
+// app.get('/*', (req, res) => {
+//     res.sendFile(path.join(__dirname, "..", 'build', 'index.html'));
+// });
 
 // Import routes
 const coursesRoute = require("./routes/courses")
