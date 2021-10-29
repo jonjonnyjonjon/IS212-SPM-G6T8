@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
     user: process.env.RDS_USERNAME,
     password: process.env.RDS_PASSWORD,
     port: process.env.RDS_PORT,
-    database: "spmg6t8"
+    database: process.env.RDS_DB_NAME
 })
 
 // open the MySQL connection
