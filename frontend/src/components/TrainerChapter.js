@@ -38,9 +38,10 @@ const Btn2 = styled(Button)`
 `;
 
 function TrainerChapter(props) {
-
+  const { url } = useRouteMatch()
   const [show, setShow] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+  const [quizUploaded, setQuizUploaded] = useState(false);
   const handleShow = () => {
     setShow(true);
     setUploaded(true);
@@ -55,6 +56,15 @@ function TrainerChapter(props) {
           }
         })
 } , [props.course_id, props.class_id, props.count])
+
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:5000/chapters/getQuizQuestions?course_id=${props.course_id}&class_id=${props.class_id}&chapter_id=${props.count}`)
+        .then(res => {
+          if (!!res.data.length) {
+            setQuizUploaded(true)
+          }
+        })
+  } , [props.course_id, props.class_id, props.count])
 
   return (
     <Container>
@@ -91,9 +101,15 @@ function TrainerChapter(props) {
         <Col>
           <Title>Quiz for Chapter {props.count}:</Title>
           <ButtonDiv>
-            {/* <Link to={`${url}/quiz/createQuestion`}> */}
-            <Btn1>Set Quiz</Btn1>
-            {/* </Link> */}
+            {!quizUploaded ? (
+                <Link to={`${url}/chapter${props.count}/quiz`}>
+                <Btn1>Set Quiz</Btn1>
+                </Link>
+              ) : (
+                <Btn2 disabled={quizUploaded}>
+                  Quiz already set!
+                </Btn2>
+              )}
           </ButtonDiv>
         </Col>
       </Row>

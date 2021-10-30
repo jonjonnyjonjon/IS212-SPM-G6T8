@@ -101,3 +101,23 @@ router.get("/getChapterContent", (req, res) => {
     }
   });
 });
+
+// Get quiz questions by course ID and class ID and chapter ID
+router.get("/getQuizQuestions", (req, res) => {
+  let courseID = req.query.course_id;
+  let classID = req.query.class_id;
+  let chapterID = req.query.chapter_id;
+
+  let sql = `SELECT question_id from quiz_questions WHERE 
+	course_id="${courseID}" and class_id="${classID}" and chapter_id=${chapterID}`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "An error has occured.",
+      });
+    } else {
+      res.json(rows);
+    }
+  });
+});

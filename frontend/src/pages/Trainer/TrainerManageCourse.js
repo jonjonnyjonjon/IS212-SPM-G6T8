@@ -36,8 +36,7 @@ const TrainerManageCourse = () => {
     const addChapter = e => {
         setAllChaps( allChaps => [...allChaps, <TrainerChapter key={chapNum} count={chapNum} class_id={classID} course_id={courseID} />])
         setChapNum(chapNum + 1)
-        // e.preventDefault()
-        console.log(chapNum)
+        e.preventDefault()
         axios.post("http://127.0.0.1:5000/chapters/addChapter", {
             "courseID": courseID, 
             "classID": classID, 
@@ -45,7 +44,6 @@ const TrainerManageCourse = () => {
             "content": "",
         })
     }
-    console.log(chapters)
 
     return (
         <Container>
