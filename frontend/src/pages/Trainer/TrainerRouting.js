@@ -35,7 +35,7 @@ const TrainerRouting = () => {
             <Switch>
                 <Route exact path={`${path}/:courseID/:classID/`} component={TrainerManageCourse} />
                 <Route exact path={`${path}/:courseID/:classID/results`} component={TrainerViewResult} />
-                <Route path={`${path}/quiz`} component={TrainerCreateQuiz} />
+                <Route path={`${path}/:courseID/:classID/chapter:chapterID/quiz`} component={TrainerCreateQuiz} />
             </Switch>
 
             {location.pathname === "/trainer" ? <TrainerHome /> : null }
