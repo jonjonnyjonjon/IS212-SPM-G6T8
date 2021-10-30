@@ -37,12 +37,7 @@ const Btn2 = styled(Button)`
   background-color: #5d5fef;
 `;
 
-// const uploadMaterial = () => {
-
-// }
-
 function TrainerChapter(props) {
-  // const { url } = useRouteMatch();
 
   const [show, setShow] = useState(false);
   const [uploaded, setUploaded] = useState(false);
@@ -50,6 +45,16 @@ function TrainerChapter(props) {
     setShow(true);
     setUploaded(true);
   };
+
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:5000/chapters/getChapterContent?course_id=${props.course_id}&class_id=${props.class_id}&chapter_id=${props.count}`)
+        .then(res => {
+          let content = res.data[0]['content']
+          if (!!content) {
+            setUploaded(true)
+          }
+        })
+} , [props.course_id, props.class_id, props.count])
 
   return (
     <Container>
@@ -84,7 +89,6 @@ function TrainerChapter(props) {
         </Col>
 
         <Col>
-          {/* <Link to={`${url}/${props.id}`}> */}
           <Title>Quiz for Chapter {props.count}:</Title>
           <ButtonDiv>
             {/* <Link to={`${url}/quiz/createQuestion`}> */}

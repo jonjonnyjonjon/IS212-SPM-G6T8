@@ -80,3 +80,24 @@ router.post("/uploadContent", (req, res) => {
 });
 
 module.exports = router;
+
+
+// Get content by course ID and class ID and chapter ID
+router.get("/getChapterContent", (req, res) => {
+  let courseID = req.query.course_id;
+  let classID = req.query.class_id;
+  let chapterID = req.query.chapter_id;
+
+  let sql = `SELECT content from teaching_materials WHERE 
+	course_id="${courseID}" and class_id="${classID}" and chapter_id=${chapterID}`;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "An error has occured.",
+      });
+    } else {
+      res.json(rows);
+    }
+  });
+});
