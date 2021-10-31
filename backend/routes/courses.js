@@ -192,8 +192,8 @@ router.get("/getOngoing", (req, res) => {
 	(1) Met prereq AND
 	(2) Not currently taking AND
 	(3) Have not completed */
-router.get("/getEligible", (req, res) => {
-	let sql = `
+router.get("/getEligibleWithPrereq", (req, res) => {
+	let prereqSql = `
 	SELECT
 		course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end,
 		GROUP_CONCAT(cpr.prereq_course_id) as prerequisites
@@ -221,7 +221,7 @@ router.get("/getEligible", (req, res) => {
 		course.course_id, class.class_id;
 	`
 
-	db.query(sql, (err, result) => {
+	db.query(prereqSql, (err, result) => {
 		if (err) {
 			res.status(500).send({
 				message: err.message || "An error has occurred."
@@ -231,6 +231,49 @@ router.get("/getEligible", (req, res) => {
 		}
 	})
 })
+
+/*  Get eligible courses + details FOR engineer='keithchiang@aio.com'
+	Eligible means:
+	(1) Met prereq AND
+	(2) Not currently taking AND
+	(3) Have not completed */
+	router.get("/getEligibleNoPrereq", (req, res) => {
+		let sql = `
+		SELECT
+			course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
+		FROM
+			courses course, classes class, course_prereq cpr, trainers t
+		WHERE
+			course.course_id = class.course_id
+		AND
+			class.is_published = 1
+		AND
+			class.material_status = 1
+		AND
+			course.course_id not in (SELECT course_id FROM course_prereq)
+		AND
+			t.email = class.trainer_email
+		AND
+			class.course_id not in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang@aio.com')
+		AND
+			class.course_id not in (SELECT course_id FROM enrolled WHERE engineer_email = 'keithchiang@aio.com')
+		AND
+			class.course_id not in (SELECT course_id FROM enrol_request WHERE engineer_email = 'keithchiang@aio.com')
+		GROUP BY
+			course.course_id, class.class_id;
+		`
+	
+		db.query(sql, (err, result) => {
+			if (err) {
+				res.status(500).send({
+					message: err.message || "An error has occurred."
+				})
+			} else {
+				res.json(result)
+			}
+		})
+	})
+
 	
 // Get ineligible courses + details FOR engineer='keithchiang@aio.com'
 // Reason: Ineligible BECAUSE prerequisites not met

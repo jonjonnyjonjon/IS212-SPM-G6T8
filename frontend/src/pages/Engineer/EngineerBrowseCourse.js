@@ -19,7 +19,8 @@ import {
  `;
 
 function EngineerBrowseCourse() {
-    const [eligibleCourses, getEligibleCourses] = useState([]);
+    const [eligibleCoursesWithPrereq, getEligibleCoursesWithPrereq] = useState([]);
+    const [eligibleCoursesNoPrereq, getEligibleCoursesNoPrereq] = useState([]);
     const [pendingEnrolment, getPendingEnrolment] = useState([]);
     const [ineligibleByPrereq, getIneligibleByPrereq] = useState([]);
     const [ineligibleByEnrolled, getIneligibleByEnrolled] = useState([]);
@@ -37,9 +38,18 @@ function EngineerBrowseCourse() {
             getPendingEnrolment(res.data)
         })
 
-        axios.get("http://127.0.0.1:5000/courses/getEligible")
+        axios.get("http://127.0.0.1:5000/courses/getEligibleWithPrereq")
             .then(res => {
-                getEligibleCourses(res.data)
+                console.log(res.data)
+                getEligibleCoursesWithPrereq(res.data)
+            })
+
+        axios.get("http://127.0.0.1:5000/courses/getEligibleNoPrereq")
+            .then(res => {
+                for (let row of res.data) {
+                    row.prerequisites = ""
+                }
+                getEligibleCoursesNoPrereq(res.data)
             })
 
         axios.get("http://127.0.0.1:5000/courses/getIneligibleByPrereq")
@@ -49,6 +59,7 @@ function EngineerBrowseCourse() {
 
         axios.get("http://127.0.0.1:5000/courses/getIneligibleByEnrolled")
         .then(res => {
+
             getIneligibleByEnrolled( res.data )
         })
 
@@ -103,7 +114,7 @@ function EngineerBrowseCourse() {
                         )
 
                     }
-                    {eligibleCourses.map(course =>
+                    {eligibleCoursesWithPrereq.map(course =>
                         <Card border='dark' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
                             <Row>
                                 <Col md={2}>
@@ -116,10 +127,10 @@ function EngineerBrowseCourse() {
                                         <Card.Subtitle className='mb-3'> {course.course_id} </Card.Subtitle> 
                                         <Card.Subtitle>
                                             Course pre-requisite(s): <br/>
-                                            { course.prerequisites.indexOf(',') != -1
+                                            { course.prerequisites.indexOf(',') !== -1
                                                 ? course.prerequisites.split(',').map( prereq =>
                                                     <Badge bg='dark' className='me-2' key={prereq}> {prereq} </Badge> )
-                                                : <Badge bg='dark' className='me-2' key={course.prerequisites}> {course.prerequisites} </Badge>
+                                                : 'None'
                                             }
                                         </Card.Subtitle> <br/><br/>
                                         <Card.Subtitle>Trainer:</Card.Subtitle> {course.trainer_name} <br/><br/>
@@ -139,9 +150,40 @@ function EngineerBrowseCourse() {
                             </Row>
                         </Card>
                     )}
+                    {eligibleCoursesNoPrereq.map(course =>
+                        <Card border='dark' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
+                            <Row>
+                                <Col md={2}>
+                                    <Card.Img src="holder.js/100px180" />
+                                </Col>
+
+                                <Col md={8}>
+                                    <Card.Body>
+                                        <Card.Title> {course.course_name} </Card.Title>
+                                        <Card.Subtitle className='mb-3'> {course.course_id} </Card.Subtitle> 
+                                        <Card.Subtitle>
+                                            Course pre-requisite(s): <br/>
+                                        </Card.Subtitle> None<br/><br/>
+                                        <Card.Subtitle>Trainer:</Card.Subtitle> {course.trainer_name} <br/><br/>
+                                        <Card.Subtitle>Class:</Card.Subtitle> {course.class_id} <br/><br/>
+                                        <Card.Subtitle>Course summary: </Card.Subtitle>
+                                        <Card.Text> {course.course_summary} </Card.Text>
+                                    </Card.Body>
+                                </Col>
+                                
+                                <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                                    <Link to={`${url}/viewCourse/${course.course_id}/${course.class_id}`}> 
+                                        <Button className="stretched-link me-2" variant="primary">
+                                                    Find out more
+                                        </Button>
+                                    </Link>
+                                </Col>
+                            </Row>
+                        </Card>
+                    )}
                 </Tab>
 
-                <Tab eventKey="ineligible" title="Ineligible classes">
+                <Tab eventKey="ineligible" title="Ineligible for Enrolment">
                     {ineligibleByEnrolled.map(course =>
                         <Card border='warning' style={{ width: '60rem' }} className='mb-3 text-muted' key={course.course_id + course.class_id}>
                             <Row>

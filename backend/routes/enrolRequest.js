@@ -11,8 +11,6 @@ router.post("/enrol", (req, res) => {
 		"${req.body.classID}"
 	)`
 
-	console.log(sql);
-
 	db.query(sql, (err) => {
 		if (err) {
 			res.status(500).send({
