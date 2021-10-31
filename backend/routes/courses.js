@@ -77,26 +77,6 @@ router.post("/createCourse", (req, res) => {
 
 })
 
-router.get("/getCourse", (req, res) => {
-	let sql = `
-    SELECT 
-		course.course_id, course.course_name, course.course_summary, class.course_id, class.class_id, trainer.name as trainer_name, trainer.email as trainer_email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
-    FROM courses course, classes class, trainers trainer
-    WHERE course.course_id = class.course_id
-    AND trainer.email = class.trainer_email
-    AND course.course_id = "${req.query.course_id}"`
-	db.query(sql, (err, result) => {
-		if (err) {
-			res.status(500).send({
-				message: err.message || "An error has occurred."
-			})
-		} else {
-			res.json(result[0])
-		}
-	})
-    
-})
-
 // Get a course's class information (engineer viewing a course)
 router.get("/getClassInfo", (req, res) => {
 	let sql = `
@@ -234,7 +214,9 @@ router.get("/getEligible", (req, res) => {
 	AND
 		cpr.prereq_course_id in (SELECT course_id from completed_courses WHERE engineer_email = 'keithchiang@aio.com')
 	AND
-		(class.course_id, class.class_id) not in (SELECT course_id, class_id FROM enrolled WHERE engineer_email = 'keithchiang@aio.com')
+		class.course_id not in (SELECT course_id FROM enrolled WHERE engineer_email = 'keithchiang@aio.com')
+	AND
+		class.course_id not in (SELECT course_id FROM enrol_request WHERE engineer_email = 'keithchiang@aio.com')
 	GROUP BY
 		course.course_id, class.class_id;
 	`
