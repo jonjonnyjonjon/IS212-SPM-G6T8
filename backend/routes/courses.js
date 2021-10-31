@@ -4,8 +4,7 @@ const db = require("../db")
 
 // Get all courses
 router.get("/", (req, res) => {
-	let sql = "SELECT * from classes left join courses on classes.course_id = courses.course_id where trainer_email = 'johnappleseed@aio.com'"
-
+	let sql = "SELECT * from courses;"
 
 	db.query(sql, (err, rows) => {
 		if (err) {
