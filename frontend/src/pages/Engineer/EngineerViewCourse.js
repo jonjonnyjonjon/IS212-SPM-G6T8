@@ -57,7 +57,7 @@ const EngineerViewCourse = () => {
             <h1 className='mt-4'> {courseInfo.course_name} </h1>
             <h4 className='mt-2'> {courseInfo.course_id} </h4><br />
             <h5>Course Summary:</h5>
-            <p>{courseInfo.course_summary}</p>
+            <p> {courseInfo.course_summary} </p>
 
             <b>Course pre-requisite(s): </b>
             { coursePrereq[0] === 'None' ? 'None' :

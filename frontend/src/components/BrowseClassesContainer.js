@@ -75,8 +75,6 @@ const BrowseClassesContainer = (props) => {
                                         : '')
                                 } <br/><br/>
                                 <Card.Subtitle>Class:</Card.Subtitle> {thisClass.class_id} <br/><br/>
-                                <Card.Subtitle>Course summary: </Card.Subtitle>
-                                <Card.Text> {thisClass.course_summary} </Card.Text>
                             </Card.Body>
                         </Col>
                         
