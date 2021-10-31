@@ -8,19 +8,41 @@ DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
     course_id VARCHAR(6),
     course_name VARCHAR(50),
-    course_summary VARCHAR(100),
+    course_summary VARCHAR(500),
     has_prereq BOOLEAN DEFAULT False,
     
     PRIMARY KEY (course_id)
 );
 
-INSERT INTO courses VALUES("CG1000", "Intro to Canon G1000", "You will learn more about the Canon Printer G1000.", False);
-INSERT INTO courses VALUES("CG2000", "Intro to Canon G2000", "You will learn more about the Canon Printer G2000.", False);
-INSERT INTO courses VALUES("CG3000", "Intro Canon G3000", "You will learn more about the Canon Printer G3000.", False);
-INSERT INTO courses VALUES("XK1000", "Intro to Xerox K1000", "You will learn more about the Xerox Printer K1000. Ipsum", False);
-INSERT INTO courses VALUES ("BG1000", "Intro to Brother G1000", "You will learn more about the Brother Printer G1000. Ipsum", False);
-INSERT INTO courses VALUES ("BG1001", "Intermediate Brother G1001", "You will learn more about the Brother Printer G1001. Ipsum", True);
-INSERT INTO courses VALUES ("BG1002", "Advanced Brother G1002", "You will learn more about the Brother Printer G1002. Ipsum", True);
+INSERT INTO courses VALUES("CG1000", "Intro to Canon G1000", "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", False);
+
+INSERT INTO courses VALUES("CG2000", "Intro to Canon G2000",  "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", True);
+INSERT INTO courses VALUES("CG3000", "Intro Canon G3000",  "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", True);
+INSERT INTO courses VALUES("XK1000", "Intro to Xerox K1000",  "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", False);
+INSERT INTO courses VALUES ("BG1000", "Intro to Brother G1000",  "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", False);
+INSERT INTO courses VALUES ("BG2000", "Intermediate Brother G1000",  "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", True);
+INSERT INTO courses VALUES ("BG3000", "Advanced Brother G1000",  "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", True);
 
 ################################################################################################################
 

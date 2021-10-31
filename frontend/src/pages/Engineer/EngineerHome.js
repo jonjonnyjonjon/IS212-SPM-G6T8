@@ -1,19 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { 
-    Button,
-    Container,
-    Card,
-    Row,
-    Col,
-    Tabs,
-    Tab
- } from 'react-bootstrap'
+import { Button, Container, Card, Row, Col, Tabs, Tab, Alert } from 'react-bootstrap'
 
 import { useEffect, useState } from "react"
-import { Link, useRouteMatch, useHistory } from 'react-router-dom'
 import axios from "axios"
 import styled from "styled-components";
-
 
 const CourseTabs = styled(Tabs)`
     margin: 20px 50px;
@@ -21,6 +11,7 @@ const CourseTabs = styled(Tabs)`
 
 function EngineerHome() {
     const [ongoingCourses, getOngoing] = useState([]);
+    const [pendingEnrolment, getPendingEnrolment] = useState([]);
     const [completedCourses, getCompleted] = useState([]);
     const [key, setKey] = useState("ongoing");
 
@@ -35,6 +26,11 @@ function EngineerHome() {
             .then(res => {
                 getCompleted(res.data)
                 })
+
+        axios.get("http://127.0.0.1:5000/enrolRequest/getPendingRequest")
+            .then(res => {
+                getPendingEnrolment(res.data)
+            })
     }, [])
 
     const renderTab = (k) => {
@@ -51,56 +47,81 @@ function EngineerHome() {
                 className="mb-3"
             >
 
-            <Tab eventKey="ongoing" title="Ongoing">
-            {ongoingCourses.map(course =>
-                    <Card border='warning' style={{ width: '60rem' }} className='mb-3'>
-                        <Row key={course.course_id + course.class_id}>
-                            <Col md={2}>
-                                <Card.Img src="holder.js/100px180" />
-                            </Col>
-                            <Col md={8}>
-                                <Card.Body>
-                                    <Card.Title> {course.course_name} </Card.Title>
-                                    <Card.Subtitle> {course.course_id} </Card.Subtitle>
-                                    <Card.Text>C1</Card.Text><br/>
-                                    <Card.Text> {course.course_summary} </Card.Text><br/>
-                                    <Card.Subtitle>From: </Card.Subtitle> {course.class_start} to {course.class_end} <br/><br/>
-                                    <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
-                                </Card.Body>
-                            </Col>
-                            <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                                <Button className="stretched-link" variant="warning">Course content</Button>
-                            </Col>
-                        </Row>
-                    </Card>
-                )}
-            </Tab>
+                <Tab eventKey="ongoing" title="Ongoing Courses">
+                    {ongoingCourses.map(course =>
+                        <Card border='primary' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
+                            <Row>
+                                <Col md={2}>
+                                    <Card.Img src="holder.js/100px180" />
+                                </Col>
+                                <Col md={8}>
+                                    <Card.Body>
+                                        <Card.Title> {course.course_name} </Card.Title>
+                                        <Card.Subtitle> {course.course_id} </Card.Subtitle>
+                                        <Card.Text> {course.class_id} </Card.Text><br/>
+                                        <Card.Text> {course.course_summary} </Card.Text><br/>
+                                        <Card.Subtitle>From: </Card.Subtitle> {course.class_start} to {course.class_end} <br/><br/>
+                                        <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
+                                    </Card.Body>
+                                </Col>
+                                <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                                    <Button className="stretched-link" variant="primary">Course content</Button>
+                                </Col>
+                            </Row>
+                        </Card>
+                    )}
+                </Tab>
 
-            <Tab eventKey="pending" title="Pending">Pending</Tab>
+                <Tab eventKey="pending" title="Pending Enrolment">
+                    {pendingEnrolment.length === 0
+                    ? <Alert variant="light">No pending enrolments.</Alert>
+                    :   pendingEnrolment.map(course =>
+                            <Card border='danger' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
+                                <Row>
+                                    <Col md={2}>
+                                        <Card.Img src="holder.js/100px180" />
+                                    </Col>
+                                    <Col md={8}>
+                                        <Card.Body>
+                                            <Card.Title> {course.course_name} </Card.Title>
+                                            <Card.Subtitle> {course.course_id} </Card.Subtitle>
+                                            <Card.Text> {course.class_id} </Card.Text><br/>
+                                            <Card.Text> {course.course_summary} </Card.Text><br/>
+                                            <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
+                                        </Card.Body>
+                                    </Col>
+                                    <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                                        <Button className="stretched-link" variant="danger">Withdraw</Button>
+                                    </Col>
+                                </Row>
+                            </Card>
+                    )}
+                </Tab>
 
-            <Tab eventKey="completed" title="Completed">
-                {completedCourses.map(course =>
-                    <Card border='success' style={{ width: '60rem' }} className='mb-3'>
-                        <Row key={course.course_id + course.class_id}>
-                            <Col md={2}>
-                                <Card.Img src="holder.js/100px180" />
-                            </Col>
-                            <Col md={8}>
-                                <Card.Body>
-                                    <Card.Title> {course.course_name} </Card.Title>
-                                    <Card.Subtitle> {course.course_id} </Card.Subtitle><br/>
-                                    <Card.Text> {course.course_summary} </Card.Text><br/>
-                                    <Card.Subtitle> Completed on:</Card.Subtitle> {course.course_end} <br/><br/>
-                                    <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
-                                </Card.Body>
-                            </Col>
-                            <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                                <Button className="stretched-link" variant="success">Review</Button>
-                            </Col>
-                        </Row>
-                    </Card>
-                )}
-            </Tab>
+                <Tab eventKey="completed" title="Completed Courses">
+                    {completedCourses.map(course =>
+                        <Card border='success' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
+                            <Row>
+                                <Col md={2}>
+                                    <Card.Img src="holder.js/100px180" />
+                                </Col>
+                                <Col md={8}>
+                                    <Card.Body>
+                                        <Card.Title> {course.course_name} </Card.Title>
+                                        <Card.Subtitle> {course.course_id} </Card.Subtitle>
+                                        <Card.Text> {course.class_id} </Card.Text><br/>
+                                        <Card.Text> {course.course_summary} </Card.Text><br/>
+                                        <Card.Subtitle>Completed on:</Card.Subtitle> {course.course_end} <br/><br/>
+                                        <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
+                                    </Card.Body>
+                                </Col>
+                                <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                                    <Button className="stretched-link" variant="success">Review</Button>
+                                </Col>
+                            </Row>
+                        </Card>
+                    )}
+                </Tab>
 
             </CourseTabs>
         </Container>

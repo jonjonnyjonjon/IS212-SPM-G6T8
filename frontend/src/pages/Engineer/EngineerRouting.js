@@ -32,7 +32,7 @@ const EngineerRouting = () => {
             <Switch>
                 <Route path={`${path}/home`} component={EngineerHome} />
                 <Route exact path={`${path}/browseCourses`} component={EngineerBrowseCourse} />
-                <Route exact path={`${path}/browseCourses/viewCourse/:courseID`} component={withRouter(EngineerViewCourse)} />
+                <Route exact path={`${path}/browseCourses/viewCourse/:courseID/:classID`} component={withRouter(EngineerViewCourse)} />
                 <Route exact path={`${path}/quiz`} component={EngineerTakeQuiz} />
             </Switch>
 
