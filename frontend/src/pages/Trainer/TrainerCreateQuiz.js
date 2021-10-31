@@ -6,9 +6,9 @@ import {
     Container,
     Button
 } from "react-bootstrap"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from "axios"
-import { useRouteMatch, useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import styled from "styled-components";
 
 const ButtonDiv = styled.div`
@@ -64,7 +64,6 @@ const TrainerCreateQuiz = () => {
             let qnTitle = qnInputs[1].value
             let qnOptions = qnInputs[2].children
             let qnType = allQns[i].className
-
             let optionValues = []
             let answer = ""
             for (let j = 0; j < qnOptions.length; j++) {
@@ -78,19 +77,14 @@ const TrainerCreateQuiz = () => {
                     }
                 } else if (qnType === "tf") {
                     optionValues = ["True", "False", "", ""]
-                    // console.log(qnOptions[j].children[0].checked)
                     answer = (qnOptions[j].children[0].checked) ? "True" : answer
                 }
-    
             }
-
             qnsInfo.push({
                 "qnTitle": qnTitle,
                 "optionValues": optionValues,
                 "answer": answer 
             })
-
-
         }
 
         let title = ''
@@ -156,9 +150,7 @@ const TrainerCreateQuiz = () => {
                     <h5>Duration of quiz (in minutes):</h5>
                     <Form.Control type="number" placeholder="30" onChange={e => setQuizDuration(e.target.value)} />
                 </Form.Label>
-
                 <br />
-                
                 <div className="allQns">
                     {allQns.map((a, i) => (
                         a

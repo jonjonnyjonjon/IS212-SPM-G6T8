@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import TrainerChapter from "../../components/TrainerChapter";
-import { Container, Button, Modal, Form } from 'react-bootstrap'
-import { Link, useRouteMatch, useParams } from 'react-router-dom'
+import { Container, Button} from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import styled from "styled-components";
 import axios from 'axios';
