@@ -81,7 +81,7 @@ router.post("/createCourse", (req, res) => {
 router.get("/getClassInfo", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, t.email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, t.email, class.size, class.current_enrolled, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
         FROM
             courses course, classes class, trainers t
         WHERE
@@ -280,7 +280,7 @@ router.get("/getEligibleWithPrereq", (req, res) => {
 router.get("/getIneligibleByPrereq", (req, res) => {
 	let sql = `
 		SELECT
-			course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end, cpr.prereq_course_id
+			course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end, cpr.prereq_course_id
 		FROM
 			courses course, classes class, course_prereq cpr, trainers t
 		WHERE
@@ -313,7 +313,7 @@ router.get("/getIneligibleByPrereq", (req, res) => {
 router.get("/getIneligibleByEnrolled", (req, res) => {
 	let sql = `
 		SELECT
-			course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end, cpr.prereq_course_id
+			course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end, cpr.prereq_course_id
 		FROM
 			courses course, classes class, course_prereq cpr, trainers t
 		WHERE
@@ -346,7 +346,7 @@ router.get("/getIneligibleByEnrolled", (req, res) => {
 router.get("/getIneligibleByCompleted", (req, res) => {
 	let sql = `
         SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
+            course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, class.trainer_email, class.size, class.enrolment_start, class.enrolment_end, class.class_start, class.class_end
         FROM
             courses course, classes class, trainers t
         WHERE

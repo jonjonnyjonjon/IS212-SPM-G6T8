@@ -6,8 +6,8 @@ import axios from "axios"
 import { Container, Badge, Button } from 'react-bootstrap'
 
 const EngineerViewCourse = () => {
-    const [courseID, setCourseID] = useState(useParams().courseID)
-    const [classID, setClassID] = useState(useParams().classID)
+    const [courseID] = useState(useParams().courseID)
+    const [classID] = useState(useParams().classID)
     const [courseInfo, getCourseInfo] = useState("")
     const [coursePrereq, getPrereq] = useState( [] )
 
@@ -15,14 +15,14 @@ const EngineerViewCourse = () => {
         axios.get(`http://127.0.0.1:5000/courses/getClassInfo/?course_id=${courseID}&class_id=${classID}`, )
         .then(res => {
             getCourseInfo(res.data);
-        }) .catch(err => console.log(err))
+        }).catch(err => console.log(err))
 
         axios.get(`http://127.0.0.1:5000/courses/getPrereq/?course_id=${courseID}`, )
         .then(res => {
             getPrereq( retrievePrereq(res.data) );           
-        }) .catch(err => console.log(err))
+        }).catch(err => console.log(err))
 
-    }, [])
+    }, [courseID, classID])
 
     let history = useHistory()
 
@@ -34,7 +34,7 @@ const EngineerViewCourse = () => {
             );
 
             return results
-        } else if ( data.length == 1 ) {
+        } else if ( data.length === 1 ) {
             return [data[0].prereq_course_id]
         } else {
             return ['None']
@@ -43,13 +43,11 @@ const EngineerViewCourse = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log(courseInfo.course_id)
         axios.post("http://127.0.0.1:5000/enrolRequest/enrol", {
             "engineerEmail": 'keithchiang@aio.com',
             "courseID": courseInfo.course_id,
             "classID": courseInfo.class_id
         })
-            .then( console.log("Request has been sent to backend!") )
         alert("Enrolment has been requested! Now redirecting back to previous page...")
         history.goBack()
     }

@@ -1,13 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { 
-    Button,
-    Container,
-    Card,
-    Row,
-    Col,
-    Tabs,
-    Tab
- } from 'react-bootstrap'
+import { Button, Container, Card, Row, Col, Tabs, Tab, Alert } from 'react-bootstrap'
 
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -28,7 +20,6 @@ function EngineerHome() {
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/courses/getOngoing")
             .then(res => {
-                console.log(res.data)
                 getOngoing(res.data)
             })
         axios.get("http://127.0.0.1:5000/courses/getCompleted")
@@ -38,7 +29,6 @@ function EngineerHome() {
 
         axios.get("http://127.0.0.1:5000/enrolRequest/getPendingRequest")
             .then(res => {
-                console.log(res.data)
                 getPendingEnrolment(res.data)
             })
     }, [])
@@ -83,26 +73,28 @@ function EngineerHome() {
                 </Tab>
 
                 <Tab eventKey="pending" title="Pending Enrolment">
-                    {pendingEnrolment.map(course =>
-                        <Card border='danger' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
-                            <Row>
-                                <Col md={2}>
-                                    <Card.Img src="holder.js/100px180" />
-                                </Col>
-                                <Col md={8}>
-                                    <Card.Body>
-                                        <Card.Title> {course.course_name} </Card.Title>
-                                        <Card.Subtitle> {course.course_id} </Card.Subtitle>
-                                        <Card.Text> {course.class_id} </Card.Text><br/>
-                                        <Card.Text> {course.course_summary} </Card.Text><br/>
-                                        <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
-                                    </Card.Body>
-                                </Col>
-                                <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                                    <Button className="stretched-link" variant="danger">Withdraw</Button>
-                                </Col>
-                            </Row>
-                        </Card>
+                    {pendingEnrolment.length === 0
+                    ? <Alert variant="light">No pending enrolments.</Alert>
+                    :   pendingEnrolment.map(course =>
+                            <Card border='danger' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
+                                <Row>
+                                    <Col md={2}>
+                                        <Card.Img src="holder.js/100px180" />
+                                    </Col>
+                                    <Col md={8}>
+                                        <Card.Body>
+                                            <Card.Title> {course.course_name} </Card.Title>
+                                            <Card.Subtitle> {course.course_id} </Card.Subtitle>
+                                            <Card.Text> {course.class_id} </Card.Text><br/>
+                                            <Card.Text> {course.course_summary} </Card.Text><br/>
+                                            <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
+                                        </Card.Body>
+                                    </Col>
+                                    <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
+                                        <Button className="stretched-link" variant="danger">Withdraw</Button>
+                                    </Col>
+                                </Row>
+                            </Card>
                     )}
                 </Tab>
 
