@@ -79,8 +79,13 @@ router.get('/getTFQuestions', (req, res) => {
 })
 
 router.get('/getQuiz', (req, res) => {
+
+	let courseID = req.query.course_id;
+	let classID = req.query.class_id;
+	let chapterID = req.query.chapter_id;
 	
-	let sql = "SELECT course_id, class_id, chapter_id, duration, type FROM quiz_questions"
+	let sql = `SELECT course_id, class_id, chapter_id, duration, type FROM quiz_questions WHERE
+	course_id="${courseID}" and class_id="${classID}" and chapter_id="${chapterID}"`
 
 	db.query(sql, (err, rows) => {
 		if (err) {

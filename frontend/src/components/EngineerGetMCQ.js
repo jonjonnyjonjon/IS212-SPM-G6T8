@@ -9,7 +9,7 @@ import { useState, useEffect } from "react"
 const EngineerGetMCQ = () => {
     
     const [quiz, setQuiz] = useState([])
-
+    
     useEffect(() => {
         axios.get("http://127.0.0.1:5000/quiz/getMCQQuestions").then((res) => {
           setQuiz(res.data);

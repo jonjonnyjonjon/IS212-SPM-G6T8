@@ -152,7 +152,7 @@ const TrainerCreateQuiz = () => {
                 </Form.Label>
                 <br />
                 <div className="allQns">
-                    {allQns.map((a, i) => (
+                    {allQns.length === 0 ? null : allQns.map((a, i) => (
                         a
                     ))}
                 </div>

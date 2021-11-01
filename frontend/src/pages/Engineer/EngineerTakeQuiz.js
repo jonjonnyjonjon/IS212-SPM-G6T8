@@ -2,7 +2,7 @@ import {
     Container,
     Button
  } from 'react-bootstrap'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, useParams } from 'react-router-dom'
 import axios from "axios"
 import { useState, useEffect } from "react"
 import EngineerGetMCQ from '../../components/EngineerGetMCQ'
@@ -26,14 +26,13 @@ const Btn = styled(Button)`
 
 const EngineerTakeQuiz = () => {
 
+    const { courseID, classID, chapterID, duration } = useParams()
+
     const [quiz, getQuiz] = useState([])
 
     const { url } = useRouteMatch()
 
     const [allQns, getAllQns] = useState([])
-
-    // const [timeLeft, setTimeLeft] = useState(quiz[0].duration)
-
 
     const getMCQQuestion = () => {
         getAllQns( allQns => [...allQns, <EngineerGetMCQ/>])
@@ -42,16 +41,17 @@ const EngineerTakeQuiz = () => {
     const getTFQuestion = () => {
         getAllQns( allQns => [...allQns, <EngineerGetTF/>])
     }
+    const [timeLeft, setTimeLeft] = useState()
+
+    const [questionType, setQuestionType] = useState()
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/quiz/getQuiz").then((res) => {
+        axios.get(`http://127.0.0.1:5000/quiz/getQuiz?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`).then((res) => {
           getQuiz(res.data);
+          setTimeLeft(res.data[0].duration*60)
+          setQuestionType(res.data[0].type)
         });
       }, []);
-    
-    // let time = parseInt(quiz[0].duration)
-    // console.log(time)
-    const [timeLeft, setTimeLeft] = useState(120)
 
     useEffect(() => {
         const timer =
@@ -61,9 +61,9 @@ const EngineerTakeQuiz = () => {
 
     return(
         <Container>
-            {/* <h1> Course ID: {quiz[0].course_id} </h1>
-            <h2> Quiz No: {quiz[0].chapter_id} </h2>
-            <h6>Type: {quiz[0].type}</h6> */}
+            <h1> Course ID: {courseID} </h1>
+            <h2> Quiz No: {chapterID} </h2>
+            <h6>Type: {questionType} </h6>
             <div>Duration: {timeLeft} seconds</div>
             <br />
             <EngineerGetMCQ/>
