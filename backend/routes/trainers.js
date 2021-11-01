@@ -33,4 +33,20 @@ router.post("/qualified", (req, res) => {
 	})
 })
 
+// Get all courses under trainer_email = johnappleseed@aio.com
+router.get("/getTrainerCourses", (req, res) => {
+	let sql = `SELECT * from classes left join courses on 
+	courses.course_id = classes.course_id where trainer_email = 'johnappleseed@aio.com'`
+
+	db.query(sql, (err, rows) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occured."
+			})
+		} else {
+			res.json(rows) 
+		}
+	})
+})
+
 module.exports = router
