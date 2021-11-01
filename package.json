@@ -5,7 +5,7 @@
 	"main": "app.js",
 	"scripts": {
 		"test": "jest --forceExit --coverage --coverageDirectory=output/coverage/jest",
-		"start": "node app.js",
+		"start": "node app.js && npm run start --prefix client",
     	"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix client && npm run build --prefix client"
 	},
 	"jest": {
