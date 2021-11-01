@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const path = require('path')
+const PORT = process.env.PORT || 5000
 
 // Middlewares
 app.use(express.json())
@@ -32,6 +33,6 @@ app.use("/enrolled", enrolledRoute)
 app.use('/chapters', chaptersRoute)
 app.use('/quiz', quizRoute)
 
-app.listen(5000, "127.0.0.1");
+app.listen(PORT, "127.0.0.1");
 
 module.exports = app
