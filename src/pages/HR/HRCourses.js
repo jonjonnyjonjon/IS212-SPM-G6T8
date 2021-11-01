@@ -17,7 +17,7 @@ const HRCourses = () => {
     const { url } = useRouteMatch()
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/courses/courseName?keyword=${keyword}`)
+        axios.get(`/courses/courseName?keyword=${keyword}`)
             .then(res => {
                 setCourses(res.data)
             })
