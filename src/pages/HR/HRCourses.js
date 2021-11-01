@@ -47,19 +47,21 @@ const HRCourses = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {courses.map(course =>
-                        <tr key={course.course_id}>
-                            <td>{course.course_id}</td>
-                            <td>{course.course_name}</td>
-                            <td>{course.course_summary}</td>
-                            <td>{course.has_prereq ? "Yes" : "No"}</td>
-                            <td>
-                                <Link to={`${url}/${course.course_id}/${course.course_name}`}>
-                                    <Button variant="warning">View</Button>
-                                </Link>
-                            </td>
-                        </tr>
-                    )}
+                    {courses.length === 0 ? null :
+                        courses.map(course =>
+                            <tr key={course.course_id}>
+                                <td>{course.course_id}</td>
+                                <td>{course.course_name}</td>
+                                <td>{course.course_summary}</td>
+                                <td>{course.has_prereq ? "Yes" : "No"}</td>
+                                <td>
+                                    <Link to={`${url}/${course.course_id}/${course.course_name}`}>
+                                        <Button variant="warning">View</Button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </Table>
         </Container>
