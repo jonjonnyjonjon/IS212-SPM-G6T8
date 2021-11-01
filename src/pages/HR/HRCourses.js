@@ -17,7 +17,8 @@ const HRCourses = () => {
     const { url } = useRouteMatch()
 
     useEffect(() => {
-        axios.get(`/courses/courseName?keyword=${keyword}`)
+        const query = keyword === "" ? "" : `=${keyword}`
+        axios.get(`http://localhost:5000/courses/courseName?keyword${query}`)
             .then(res => {
                 setCourses(res.data)
             })
