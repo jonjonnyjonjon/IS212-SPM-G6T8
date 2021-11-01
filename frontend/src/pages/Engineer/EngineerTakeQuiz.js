@@ -10,17 +10,17 @@ import EngineerGetTF from '../../components/EngineerGetTF'
 import styled from "styled-components";
 
 const ButtonDiv = styled.div`
-  font-size: 15px;
-  height: 100%;
-  margin-bottom: 40px;
+	font-size: 15px;
+	height: 100%;
+	margin-bottom: 40px;
 `;
 
 const Btn = styled(Button)`
-  font-size: 15px;
-  font-weight: 600;
-  width: 10%;
-  height: 30%;
-  background-color: #5d5fef;
+	font-size: 15px;
+	font-weight: 600;
+	width: 10%;
+	height: 30%;
+	background-color: #5d5fef;
 `;
 
 

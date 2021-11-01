@@ -38,7 +38,7 @@ const HRRouting = () => {
             <UserNavbar options={NavbarOptions}/>
 
             <Switch>
-                <Route exact path={`${path}/courses/:courseID/:courseName/edit/:classID`} component={HREditClass} />
+                <Route exact path={`${path}/courses/:courseID/:courseName/editClass/:classID`} component={HREditClass} />
                 <Route exact path={`${path}/courses/:courseID/:courseName/create`} component={HRCreateClass} />
 
                 <Route path={`${path}/courses/:courseID/:courseName`} component={HRClasses} />

@@ -4,27 +4,46 @@ import {
     Container,
     Card,
     Row,
-    Col, Badge,
+    Tabs,
+    Tab,
+    Col, Badge
  } from 'react-bootstrap'
 
  import { useEffect, useState } from "react"
- import { Link, useRouteMatch, useHistory } from 'react-router-dom'
+ import { Link, useRouteMatch } from 'react-router-dom'
+ import BrowseClassesContainer from "../../components/BrowseClassesContainer"
  import axios from "axios"
+ import styled from "styled-components";
+
+ const CourseTabs = styled(Tabs)`
+     margin: 20px 50px;
+ `;
 
 function EngineerBrowseCourse() {
-    const { url } = useRouteMatch()
-    let history = useHistory()
-
-    const [eligibleCourses, getEligibleCourses] = useState([]);
+    const [eligibleCoursesWithPrereq, getEligibleCoursesWithPrereq] = useState([]);
+    const [eligibleCoursesNoPrereq, getEligibleCoursesNoPrereq] = useState([]);
+    const [pendingEnrolment, getPendingEnrolment] = useState([]);
     const [ineligibleByPrereq, getIneligibleByPrereq] = useState([]);
     const [ineligibleByEnrolled, getIneligibleByEnrolled] = useState([]);
     const [ineligibleByCompleted, getIneligibleByCompleted] = useState([]);
+    const [key, setKey] = useState("eligible");
+
+    const { url } = useRouteMatch()
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/courses/getEligible")
+        axios.get("http://127.0.0.1:5000/enrolRequest/getPendingRequest")
+        .then(res => {
+            getPendingEnrolment(res.data)
+        })
+
+        axios.get("http://127.0.0.1:5000/courses/getEligibleWithPrereq")
             .then(res => {
-                getEligibleCourses(res.data)
-                console.log(res.data)
+                getEligibleCoursesWithPrereq(res.data)
+            })
+
+        axios.get("http://127.0.0.1:5000/courses/getEligibleNoPrereq")
+            .then(res => {
+                getEligibleCoursesNoPrereq(res.data)
             })
 
         axios.get("http://127.0.0.1:5000/courses/getIneligibleByPrereq")
@@ -34,6 +53,7 @@ function EngineerBrowseCourse() {
 
         axios.get("http://127.0.0.1:5000/courses/getIneligibleByEnrolled")
         .then(res => {
+
             getIneligibleByEnrolled( res.data )
         })
 
@@ -42,70 +62,37 @@ function EngineerBrowseCourse() {
             getIneligibleByCompleted( res.data )
         })
     }, [])
+
+    const renderTab = (k) => {
+        setKey(k)
+    }
     
     return (
         <Container>
             <h1>Browse Courses</h1><br/>
+            <CourseTabs
+                id="controlled-tab-example"
+                activeKey={key}
+                onSelect={  (k) => renderTab(k) }
+                className="mb-3"
+            >
 
-            {eligibleCourses.map(course =>
-                <Card border='dark' style={{ width: '60rem' }} className='mb-3' key={course.course_id + course.class_id}>
-                    <Row>
-                        <Col md={2}>
-                            <Card.Img src="holder.js/100px180" />
-                        </Col>
+                <Tab eventKey="eligible" title="Eligible for Enrolment">
+                    {
+                        pendingEnrolment.length === 0 ? "" :
+                        <BrowseClassesContainer filter="pendingEnrolment" classes={pendingEnrolment}/>
+                    }
+                    <BrowseClassesContainer filter="eligibleWithPrereq" classes={eligibleCoursesWithPrereq}/>
+                    <BrowseClassesContainer filter="eligibleNoPrereq" classes={eligibleCoursesNoPrereq}/>
+                </Tab>
 
-                        <Col md={8}>
-                            <Card.Body>
-                                <Card.Title> {course.course_name} </Card.Title>
-                                <Card.Subtitle className='mb-3'> {course.course_id} </Card.Subtitle> 
-                                <Card.Subtitle>
-                                    { course.prerequisites.indexOf(',') != -1
-                                        ? course.prerequisites.split(',').map( prereq =>
-                                            <Badge bg='dark' className='me-2' key={prereq}> {prereq} </Badge> )
-                                        : <Badge bg='dark' className='me-2' key={course.prerequisites}> {course.prerequisites} </Badge>
-                                    }``
-                                </Card.Subtitle> <br/><br/>
-                                <Card.Subtitle>Trainer:</Card.Subtitle> {course.trainer_name} <br/><br/>
-                                <Card.Subtitle>Class:</Card.Subtitle> {course.class_id} <br/><br/>
-                                <Card.Text> {course.course_summary} </Card.Text>
-                            </Card.Body>
-                        </Col>
-                        
-                        <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                            <Link to={`${url}/viewCourse/${course.course_id}`}> 
-                                <Button className="stretched-link me-2" variant="primary">
-                                            Find out more
-                                </Button>
-                            </Link>
-                        </Col>
-                    </Row>
-                </Card>
-            )}
-
-            {ineligibleByPrereq.map(course =>
-                <Card border='danger' style={{ width: '60rem' }} className='mb-3 text-muted' key={course.course_id + course.class_id}>
-                    <Row>
-                        <Col md={2}>
-                            <Card.Img src="holder.js/100px180" />
-                        </Col>
-
-                        <Col md={8}>
-                            <Card.Body>
-                                <Card.Title> {course.course_name} </Card.Title>
-                                <Card.Subtitle className='mb-3'> {course.course_id} </Card.Subtitle> 
-
-                                <Card.Subtitle>Trainer:</Card.Subtitle> {course.name} <br/><br/>
-                                <Card.Subtitle>Class:</Card.Subtitle> {course.class_id} <br/><br/>
-                                <Card.Text> {course.course_summary} </Card.Text>
-                            </Card.Body>
-                        </Col>
-                        
-                        <Col md={2} className='my-auto' style={{verticalAlign: 'center'}}>
-                            Not fulfilled: { course.prereq_course_id}
-                        </Col>
-                    </Row>
-                </Card>
-            )}
+                <Tab eventKey="ineligible" title="Ineligible for Enrolment">
+                    <BrowseClassesContainer filter="ineligibleEnrolled" classes={ineligibleByEnrolled}/>
+                    <BrowseClassesContainer filter="ineligiblePrereq" classes={ineligibleByPrereq}/>
+                    <BrowseClassesContainer filter="ineligibleCompleted" classes={ineligibleByCompleted}/>
+                </Tab>
+                
+            </CourseTabs>
 
         </Container>
     );

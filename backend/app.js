@@ -14,14 +14,18 @@ const quizRoute = require('./routes/quiz')
 const classesRoute = require("./routes/classes")
 const enrolledRoute = require("./routes/enrolled")
 const chaptersRoute = require("./routes/chapters")
+const enrolRequestRoute = require("./routes/enrolRequest")
+const teachingMaterialsRoute = require("./routes/teachingMaterials")
 
 app.use("/courses", coursesRoute)
 app.use("/classes", classesRoute)
 app.use("/trainers", trainersRoute)
 app.use("/engineers", engineersRoute)
+app.use('/enrolRequest', enrolRequestRoute)
 app.use("/enrolled", enrolledRoute)
 app.use('/chapters', chaptersRoute)
 app.use('/quiz', quizRoute)
+app.use('/teachingMaterials', teachingMaterialsRoute)
 
 app.listen(5000, "127.0.0.1");
 
