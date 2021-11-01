@@ -35,11 +35,11 @@ INSERT INTO courses VALUES ("BG1000", "Intro to Brother G1000",  "
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
 Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
 ", False);
-INSERT INTO courses VALUES ("BG2000", "Intermediate Brother G1000",  "
+INSERT INTO courses VALUES ("BG1001", "Intermediate Brother G1000",  "
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
 Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
 ", True);
-INSERT INTO courses VALUES ("BG3000", "Advanced Brother G1000",  "
+INSERT INTO courses VALUES ("BG1002", "Advanced Brother G1000",  "
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
 Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
 ", True);
@@ -206,12 +206,21 @@ DROP TABLE IF EXISTS teaching_materials;
 CREATE TABLE teaching_materials (
     course_id VARCHAR(6),
     class_id VARCHAR(2),
-    chapter_id VARCHAR(10),
+    chapter_id INT,
     content VARCHAR(100),
     
     CONSTRAINT teaching_materials_pk PRIMARY KEY (course_id, class_id, chapter_id),
     CONSTRAINT teaching_materials_fk1 FOREIGN KEY (course_id, class_id) REFERENCES classes(course_id, class_id)
 );
+
+INSERT INTO teaching_materials VALUES ("BG1001", "C1", 1, "https://www.youtube.com/embed/Mol0i4PKTjs");
+INSERT INTO teaching_materials VALUES ("BG1001", "C1", 2, "https://www.youtube.com/embed/hd-fjsmwBNk");
+INSERT INTO teaching_materials VALUES ("BG1001", "C1", 3, "https://www.youtube.com/embed/qy2XnjFDEfo");
+INSERT INTO teaching_materials VALUES ("BG1001", "C1", 4, "https://www.youtube.com/embed/bFM3lsG8LGM");
+
+INSERT INTO teaching_materials VALUES ("CG2000", "C2", 1, "https://www.youtube.com/embed/Fb1caXoBXwU");
+INSERT INTO teaching_materials VALUES ("CG2000", "C2", 2, "https://www.youtube.com/embed/OgJk7CGzAUQ");
+INSERT INTO teaching_materials VALUES ("CG2000", "C2", 3, "https://www.youtube.com/embed/6CTlnaXm6sU");
 
 ################################################################################################################
 
@@ -219,7 +228,7 @@ DROP TABLE IF EXISTS quiz_questions;
 CREATE TABLE quiz_questions (
     course_id VARCHAR(6),
     class_id VARCHAR(2),
-    chapter_id VARCHAR(10),
+    chapter_id INT,
     question_id VARCHAR(100),
     question VARCHAR(100),
     type VARCHAR(20),

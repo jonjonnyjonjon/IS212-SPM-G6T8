@@ -7,7 +7,7 @@ import EngineerTakeQuiz from './EngineerTakeQuiz'
 import EngineerHome from './EngineerHome'
 import EngineerBrowseCourse from "./EngineerBrowseCourse"
 import EngineerViewCourse from "./EngineerViewCourse"
-
+import EngineerTakeClass from "./EngineerTakeClass"
 
 const EngineerRouting = () => {
     const { url, path } = useRouteMatch()
@@ -21,7 +21,6 @@ const EngineerRouting = () => {
             <Nav.Link as={Link} to={`${url}/browseCourses`}>
                 Browse Courses
             </Nav.Link>
-
         </Nav>
     )
 
@@ -34,6 +33,7 @@ const EngineerRouting = () => {
                 <Route exact path={`${path}/browseCourses`} component={EngineerBrowseCourse} />
                 <Route exact path={`${path}/browseCourses/viewCourse/:courseID/:classID`} component={withRouter(EngineerViewCourse)} />
                 <Route exact path={`${path}/quiz`} component={EngineerTakeQuiz} />
+                <Route exact path={`${path}/course/:courseID/:classID`} component={EngineerTakeClass} />
             </Switch>
 
             {location.pathname === "/engineer" ? <EngineerHome /> : null }
