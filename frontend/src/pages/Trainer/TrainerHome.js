@@ -41,8 +41,6 @@ function TrainerHome() {
       var startDate = new Date(start[2], start[1]-1, start[0])
       let end = courses[i]["class_end"].split("/")
       var endDate = new Date(end[2], end[1]-1, end[0])
-      // console.log(CourseMap.get("ongoing"))
-
       if (today > startDate & today < endDate) {
         CourseMap.get("ongoing").push(courses[i])
       } 

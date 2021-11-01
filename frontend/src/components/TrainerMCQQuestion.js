@@ -13,7 +13,6 @@ function TrainerMCQQuestion(props) {
             <Form.Label>
                 <b>Question Type: MCQ</b>
             </Form.Label>
-            {/* question title */}
             <Form.Control 
                 type="text" 
                 placeholder="Enter Question Here: Eg: What do you need to do before you turn on a printer?" 
