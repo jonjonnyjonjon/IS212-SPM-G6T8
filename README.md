@@ -1,22 +1,20 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Downloading dependencies
+Download the project's dependencies.
+```
+cd backend
+npm install
 
-### `npm install`
-Run this in frontend and backend folder to install all dependencies required to start.
+cd frontend
+npm install
+```
 
 ## Starting the fronend and backend
+Start the backend before the frontend.
 
-### `npm start`
+### Backend folder
+To start the Backend, type the following to run the web app on port 5000.
+```npm start```
 
-Runs the app in the development mode for frontend.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `node app.js`
-
-This runs the backend codes. Run this first before frontend when testing for API calls.
+### Frontend folder
+To start the frontend, type the following to run the web app on port 3000.
+```npm start```
