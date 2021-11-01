@@ -10,9 +10,9 @@ app.use(express.json())
 
 // Routes for Heroku
 app.use(express.static(path.join(__dirname, "..", "build")))
-// app.get('/*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-// });
+app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 
 // Import routes
