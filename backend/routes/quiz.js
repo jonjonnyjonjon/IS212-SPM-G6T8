@@ -47,8 +47,14 @@ router.post('/createQuestion', (req, res) => {
 })
 
 router.get('/getMCQQuestions', (req, res) => {
+
+	let courseID = req.query.course_id;
+	let classID = req.query.class_id;
+	let chapterID = req.query.chapter_id;
 	
-	let sql = "SELECT question_id, question, option1, option2, option3, option4 from quiz_questions WHERE option3 != '' AND option4 != ''"
+	let sql = `SELECT course_id, class_id, chapter_id, question_id, question, option1, option2, option3, option4 from 
+	quiz_questions WHERE option3 != '' AND option4 != '' AND
+	course_id="${courseID}" and class_id="${classID}" and chapter_id="${chapterID}"`
 
 	db.query(sql, (err, rows) => {
 		if (err) {
@@ -63,8 +69,14 @@ router.get('/getMCQQuestions', (req, res) => {
 })
 
 router.get('/getTFQuestions', (req, res) => {
+
+	let courseID = req.query.course_id;
+	let classID = req.query.class_id;
+	let chapterID = req.query.chapter_id;
 	
-	let sql = "SELECT question_id, question, option1, option2, option3, option4 from quiz_questions WHERE option3 = '' AND option4 = ''"
+	let sql = `SELECT course_id, class_id, chapter_id, question_id, question, option1, option2, option3, option4 from 
+	quiz_questions WHERE option3 = '' AND option4 = '' AND
+	course_id="${courseID}" and class_id="${classID}" and chapter_id="${chapterID}"`
 
 	db.query(sql, (err, rows) => {
 		if (err) {

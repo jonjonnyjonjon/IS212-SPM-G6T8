@@ -26,7 +26,7 @@ const Btn = styled(Button)`
 
 const EngineerTakeQuiz = () => {
 
-    const { courseID, classID, chapterID, duration } = useParams()
+    const { courseID, classID, chapterID } = useParams()
 
     const [quiz, getQuiz] = useState([])
 

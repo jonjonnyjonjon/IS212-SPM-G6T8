@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Col, Container, Form, Row, Button, Modal } from "react-bootstrap"
-import { useHistory, useParams } from "react-router-dom"
+import { useHistory, useParams, Link, useRouteMatch } from "react-router-dom"
 import { Stepper, Step, StepLabel, StepContent, FormGroup } from "@mui/material"
 
 import completionBadge from "../../img/completion-badge.png"
@@ -14,6 +14,7 @@ const EngineerTakeClass = () => {
     const [modalShow, setModalShow] = useState(false)
     const [doneModalShow, setDoneModalShow] = useState(false)
     const history = useHistory()
+    const { url } = useRouteMatch()
 
     useEffect(async () => {
         const query = `courseID=${courseID}&classID=${classID}`
@@ -83,7 +84,9 @@ const EngineerTakeClass = () => {
 
                     <Row>
                         <Col>
-                            <Button>Take Quiz!</Button>
+                            <Link to={`${url}/chapter${activeStep+1}/quiz`}>
+                                <Button>Take Quiz!</Button>
+                            </Link>
                         </Col>
 
                         <Col>
