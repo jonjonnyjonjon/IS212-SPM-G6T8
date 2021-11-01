@@ -26,7 +26,7 @@ function EngineerHome() {
 
     // To change to retrieveOngoing once endpoint is completed
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/courses/getOngoing")
+        axios.get("/courses/getOngoing")
             .then(res => {
                 getOngoing(res.data)
             })
