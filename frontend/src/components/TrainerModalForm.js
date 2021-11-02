@@ -29,6 +29,11 @@ function TrainerModalForm(props) {
             "chapterID": props.chapter_id, 
             "content": content
         })
+
+        axios.post(`http://127.0.0.1:5000/teachingMaterials/updateMaterialStatus`, {
+          "courseID": props.course_id, 
+          "classID": props.class_id, 
+        })
         handleClose()
     };
 
