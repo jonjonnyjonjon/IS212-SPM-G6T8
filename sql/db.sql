@@ -151,7 +151,7 @@ INSERT INTO completed_courses VALUES("krystenng@aio.com", "CG3000", "C1", "08/10
 INSERT INTO completed_courses VALUES("zhoukankan@aio.com", "XK1000", "C1", "08/10/2021");
 
 INSERT INTO completed_courses VALUES("yuenhuiqi@aio.com", "BG1000", "C1", "08/10/2021");
-INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG1000", "C2", "08/10/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "BG1000", "C2", "08/10/2021");
 
 INSERT INTO completed_courses VALUES("krystenng@aio.com", "BG1001", "C1", "08/10/2021");
 
