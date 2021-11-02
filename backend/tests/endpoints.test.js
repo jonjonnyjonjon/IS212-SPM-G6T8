@@ -140,3 +140,175 @@ describe("chapters endpoints", () => {
 			})
 	})
 })
+
+// Quiz Testing Endpoints – Krysten
+
+describe("quiz endpoints", () => {
+	
+	// Test – Creating a new MCQ question in a given chapter in a quiz
+	test("POST /quiz/createQuestion will add 1 new record to quiz_questions table", done => {
+		const question = {
+			course_id: "BG1000", 
+			class_id: "C7",
+			chapter_id: "1",
+			question_id: "8",
+			question: "testing",
+			type: "ungraded",
+			duration: 30,
+			option1: "test",
+			option2: "testt",
+			option3: "testtt",
+			option4: "testttt",
+			answer: "test"
+		}
+
+		request(app)
+			.post('/quiz/createQuestion')
+			.send(question)
+			.then(res => {
+				expect(res.statusCode).toBe(200)
+				expect(res.body.message).toStrictEqual("1 record inserted to quiz_questions table")
+				done()
+			})
+	})
+
+	// Test – Checking that the MCQ question is in the question table
+	test("GET /quiz/getMCQQuestions returns the correct MCQ question given course & class & chapter", done => {
+		const courseID = "BG1000"
+		const classID = "C7"
+		const chapterID = "1"
+
+		const question = {
+			course_id: "BG1000", 
+			class_id: "C7",
+			chapter_id: "1",
+			question_id: "8",
+			question: "testing",
+			option1: "test",
+			option2: "testt",
+			option3: "testtt",
+			option4: "testttt"
+		}
+
+		request(app)
+			.get(`/quiz/getMCQQuestions?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
+			.then(res => {
+				expect(res.body).toContainEqual(question)
+				expect(res.statusCode).toBe(200)
+				done()
+			})
+  	})
+
+	// Test – Creating a new TF question in a given chapter in a quiz
+	test("POST /quiz/createQuestion will add 1 record inserted to quiz_questions table", done => {
+		const question = {
+			course_id: "BG1000", 
+			class_id: "C7",
+			chapter_id: "1",
+			question_id: "5",
+			question: "Is it okay to shout at your customers?",
+			type: "ungraded",
+			duration: 30,
+			option1: "True",
+			option2: "False",
+			option3: "",
+			option4: "",
+			answer: "False"
+		}
+
+		request(app)
+			.post('/quiz/createQuestion')
+			.send(question)
+			.then(res => {
+				expect(res.statusCode).toBe(200)
+				expect(res.body.message).toStrictEqual("1 record inserted to quiz_questions table")
+				done()
+			})
+	})
+
+	// Test – Checking that the TF question is in the question table
+	test("GET /quiz/getTFQuestions returns the correct TF question given course & class & chapter", done => {
+		const courseID = "BG1000"
+		const classID = "C7"
+		const chapterID = "1"
+
+		const question = {
+			course_id: "BG1000", 
+			class_id: "C7",
+			chapter_id: "1",
+			question_id: "5",
+			question: "Is it okay to shout at your customers?",
+			option1: "True",
+			option2: "False",
+			option3: "",
+			option4: ""
+		}
+
+		request(app)
+			.get(`/quiz/getTFQuestions?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
+			.then(res => {
+				expect(res.body).toContainEqual(question)
+				expect(res.statusCode).toBe(200)
+				done()
+			})
+  	})
+
+	// Test – Deleting that MCQ questions for a given chapter
+	test("POST /quiz/deleteQuestion will delete 1 record from quiz_questions table", done => {
+		const courseID = "BG1000"
+		const classID = "C7"
+		const chapterID = "1"
+		const questionID = "5"
+
+		request(app)
+			.post(`/quiz/deleteQuestion?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}&question_id=${questionID}`)
+			.then(res => {
+				expect(res.statusCode).toBe(200)
+				expect(res.body.message).toStrictEqual("1 record deleted from quiz_questions table")
+				done()
+			})
+	})
+
+	// Test – Deleting that TF question for a given chapter
+	test("POST /quiz/deleteQuestion will delete 1 record from quiz_questions table", done => {
+		const courseID = "BG1000"
+		const classID = "C7"
+		const chapterID = "1"
+		const questionID = "8"
+
+		request(app)
+			.post(`/quiz/deleteQuestion?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}&question_id=${questionID}`)
+			.then(res => {
+				expect(res.statusCode).toBe(200)
+				expect(res.body.message).toStrictEqual("1 record deleted from quiz_questions table")
+				done()
+			})
+	})
+
+	//Invalid Test - If the question is already in the database
+	test("POST /quiz/createQuestion will not add 1 new record to quiz_questions table", done => {
+		const question = {
+			course_id: "BG2000", 
+			class_id: "C3",
+			chapter_id: "1",
+			question_id: "1",
+			question: "testing",
+			type: "ungraded",
+			duration: 30,
+			option1: "test",
+			option2: "testt",
+			option3: "testtt",
+			option4: "testttt",
+			answer: "test"
+		}
+
+		request(app)
+			.post('/quiz/createQuestion')
+			.send(question)
+			.then(res => {
+				expect(res.statusCode).toBe(500)
+				done()
+			})
+	})
+
+})
