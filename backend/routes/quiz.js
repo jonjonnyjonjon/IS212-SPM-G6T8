@@ -41,7 +41,9 @@ router.post('/createQuestion', (req, res) => {
 				sql: sql
 			})
 		} else {
-			console.log("1 record inserted to question table")
+			res.send({
+				message: "1 record inserted to quiz_questions table"
+			})
 		}
 	})
 })
@@ -96,7 +98,7 @@ router.get('/getQuiz', (req, res) => {
 	let classID = req.query.class_id;
 	let chapterID = req.query.chapter_id;
 	
-	let sql = `SELECT course_id, class_id, chapter_id, duration, type FROM quiz_questions WHERE
+	let sql = `SELECT course_id, class_id, chapter_id, question_id, duration, type FROM quiz_questions WHERE
 	course_id="${courseID}" and class_id="${classID}" and chapter_id="${chapterID}"`
 
 	db.query(sql, (err, rows) => {
@@ -110,5 +112,30 @@ router.get('/getQuiz', (req, res) => {
 	})
 	
 })
+
+// Delete question from DB (for testing purposes)
+router.post("/deleteQuestion", (req, res) => {
+
+	let courseID = req.query.course_id
+	let classID = req.query.class_id
+	let chapterID = req.query.chapter_id
+	let questionID = req.query.question_id
+  
+	let sql = `DELETE FROM quiz_questions WHERE 
+	course_id = '${courseID}' and class_id = '${classID}' and chapter_id = ${chapterID} and question_id = ${questionID}`;
+  
+	db.query(sql, (err, result) => {
+	  if (err) {
+		res.status(500).send({
+		  message: err.message || "An error has occured.",
+		  sql: sql,
+		});
+	  } else {
+		res.status(200).send({
+		  message: "1 record deleted from quiz_questions table"
+		})
+	  }
+	})
+  })
 
 module.exports = router

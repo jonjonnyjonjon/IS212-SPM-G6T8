@@ -246,4 +246,10 @@ CREATE TABLE quiz_questions (
     CONSTRAINT quiz_questions_fk1 FOREIGN KEY (course_id, class_id, chapter_id) REFERENCES teaching_materials(course_id, class_id, chapter_id)
 );
 
+INSERT INTO quiz_questions VALUES ("BG1001", "C1", 1, "1", "How to turn on a printer?", "ungraded", 30, "Press the on button for long", "Wait there for it to auto print", "Connect to the computer", "Hit it", "Press the on button for long");
+INSERT INTO quiz_questions VALUES ("BG1001", "C1", 1, "2", "What do you do first when nothing gets printed out?", "ungraded", 30, "Reboot the printer", "Wait there", "Force shutdown it ", "Hit it", "Reboot the printer");
+INSERT INTO quiz_questions VALUES ("BG1001", "C1", 1, "3", "What do you do when the paper stuck?", "ungraded", 30, "Hurry pull out the paper", "Print multiple things so the paper will come out eventually", "Wait there", "Pull out the paper slowly and make sure the it is cleared afterwards", "Pull out the paper slowly and make sure the it is cleared afterwards");
+INSERT INTO quiz_questions VALUES ("BG1001", "C1", 1, "4", "Is it okay to shout at your customers?", "ungraded", 30, "True", "False", "", "", "False");
+INSERT INTO quiz_questions VALUES ("BG1001", "C1", 1, "5", "Is it okay to leave without solving customer problems? ", "ungraded", 30, "True", "False", "", "", "False");
+
 ################################################################################################################

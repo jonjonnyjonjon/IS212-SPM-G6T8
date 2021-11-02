@@ -2,7 +2,7 @@ import {
     Container,
     Button
  } from 'react-bootstrap'
-import { useRouteMatch, useParams } from 'react-router-dom'
+import { useRouteMatch, useParams, useHistory } from 'react-router-dom'
 import axios from "axios"
 import { useState, useEffect } from "react"
 import EngineerGetMCQ from '../../components/EngineerGetMCQ'
@@ -27,6 +27,8 @@ const Btn = styled(Button)`
 const EngineerTakeQuiz = () => {
 
     const { courseID, classID, chapterID } = useParams()
+
+    const history = useHistory()
 
     const [quiz, getQuiz] = useState([])
 
@@ -57,7 +59,16 @@ const EngineerTakeQuiz = () => {
         const timer =
         timeLeft > 0 && setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
         return () => clearInterval(timer)
-      }, [timeLeft])
+    }, [timeLeft])
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        alert("Quiz Created! Redirecting you back to manage course page! :)")
+        
+        history.push(`/engineer/course/${courseID}/${classID}`)
+
+    }
 
     return(
         <Container>
@@ -69,7 +80,9 @@ const EngineerTakeQuiz = () => {
             <EngineerGetMCQ/>
             <EngineerGetTF/>
             <ButtonDiv>
-                <Btn>Submit</Btn>
+                <Btn type="submit" onClick={e => handleSubmit(e)}>
+                    Submit
+                </Btn>
             </ButtonDiv>
         </Container>
     )
