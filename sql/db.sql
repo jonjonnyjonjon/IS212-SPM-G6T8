@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
     course_id VARCHAR(6),
     course_name VARCHAR(50),
-    course_summary VARCHAR(500),
+    course_summary VARCHAR(1000),
     has_prereq BOOLEAN DEFAULT False,
     
     PRIMARY KEY (course_id)

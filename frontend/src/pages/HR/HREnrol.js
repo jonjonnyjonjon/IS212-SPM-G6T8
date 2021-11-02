@@ -39,7 +39,6 @@ const HREnrol = () => {
                     <tr>
                         <th>Course ID</th>
                         <th>Course Name</th>
-                        <th>Course Summary</th>
                         <th>Pre-requisites?</th>
                         <th>View all classes</th>
                     </tr>
@@ -49,7 +48,6 @@ const HREnrol = () => {
                         <tr key={course.course_id}>
                             <td>{course.course_id}</td>
                             <td>{course.course_name}</td>
-                            <td>{course.course_summary}</td>
                             <td>{course.has_prereq ? "Yes" : "No"}</td>
                             <td>
                                 <Link to={`${url}/${course.course_id}/${course.course_name}/${course.has_prereq}`}>

@@ -7,7 +7,8 @@ import {
     Col, Badge
  } from 'react-bootstrap'
 
- import { Link, useRouteMatch } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
+import printerImg from "../img/printer.png"
 
 const BrowseClassesContainer = (props) => {
     const { url } = useRouteMatch()
@@ -51,7 +52,7 @@ const BrowseClassesContainer = (props) => {
                 <Card border={borderColour} style={{ width: '60rem' }} className={cardBootstrapClassName} key={thisClass.course_id + thisClass.class_id}>
                     <Row>
                         <Col md={2}>
-                            <Card.Img src="holder.js/100px180" />
+                            <img src={ printerImg } alt="printer img" width={200} />
                         </Col>
 
                         <Col md={8}>
