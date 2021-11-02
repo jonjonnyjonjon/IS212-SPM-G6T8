@@ -38,7 +38,7 @@ describe("courses endpoints", () => {
 		})
   	})
 })
-
+ 
 describe("classes endpoints", () => {
 	test("GET /classes/class returns the correct trainer given class", done => {
 		const courseID = "CG3000"

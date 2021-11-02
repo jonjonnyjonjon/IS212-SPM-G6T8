@@ -108,11 +108,14 @@ INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed@aio.com", 10, 0, "10/0
 INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", True, False);
 
 INSERT INTO classes VALUES("CG2000", "C1", "johnappleseed@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, False);
-INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, True);
+INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/11/2021", True, True);
 INSERT INTO classes VALUES ("CG2000", "C3", "janedoe@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", False, False);
+INSERT INTO classes VALUES ("CG2000", "C4", "jacksparrow@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "23/11/2021", True, True);
+INSERT INTO classes VALUES ("CG2000", "C5", "jacksparrow@aio.com", 10, 0, "01/09/2021", "15/09/2021", "23/10/2021", "27/11/2021", True, True);
 
 INSERT INTO classes VALUES ("CG3000", "C1", "dwightschrute@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True);
-INSERT INTO classes VALUES ("CG3000", "C2", "jacksparrow@aio.com", 10, 0, "01/09/2021", "15/09/2021", "27/11/2021", "3/12/2021", True, True);
+INSERT INTO classes VALUES ("CG3000", "C2", "jacksparrow@aio.com", 10, 0, "01/09/2021", "15/09/2021", "27/11/2021", "3/12/2021", True, False);
+INSERT INTO classes VALUES ("CG3000", "C3", "jacksparrow@aio.com", 10, 0, "12/10/2021", "20/10/2021", "3/11/2021", "27/12/2021", False, False);
 
 INSERT INTO classes VALUES("XK1000", "C1", "barneystinson@aio.com", 10, 0, "12/10/2021", "20/10/2021", "3/11/2021", "27/12/2021", True, True); 
 INSERT INTO classes VALUES("XK1000", "C2", "barneystinson@aio.com", 10, 0, "12/10/2021", "20/10/2021", "21/10/2021", "21/11/2021", True, True);
@@ -151,7 +154,7 @@ INSERT INTO completed_courses VALUES("krystenng@aio.com", "CG3000", "C1", "08/10
 INSERT INTO completed_courses VALUES("zhoukankan@aio.com", "XK1000", "C1", "08/10/2021");
 
 INSERT INTO completed_courses VALUES("yuenhuiqi@aio.com", "BG1000", "C1", "08/10/2021");
-INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG1000", "C2", "08/10/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "BG1000", "C2", "08/10/2021");
 
 INSERT INTO completed_courses VALUES("krystenng@aio.com", "BG1001", "C1", "08/10/2021");
 
