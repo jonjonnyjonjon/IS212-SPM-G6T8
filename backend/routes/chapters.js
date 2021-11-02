@@ -82,7 +82,7 @@ router.get("/getAllChapters", (req, res) => {
   });
 });
 
-// Get all course materials by course ID and class ID
+// Update course materials given course ID and class ID
 router.post("/uploadContent", (req, res) => {
 
   let sql = `UPDATE teaching_materials
@@ -101,9 +101,6 @@ router.post("/uploadContent", (req, res) => {
     }
   });
 });
-
-module.exports = router;
-
 
 // Get content by course ID and class ID and chapter ID
 router.get("/getChapterContent", (req, res) => {
@@ -144,3 +141,5 @@ router.get("/getQuizQuestions", (req, res) => {
     }
   });
 });
+
+module.exports = router;
