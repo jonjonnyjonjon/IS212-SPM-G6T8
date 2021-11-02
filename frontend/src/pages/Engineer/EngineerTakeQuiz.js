@@ -1,8 +1,8 @@
-import {
-	Container,
-	Button
-} from 'react-bootstrap'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { 
+    Container,
+    Button
+ } from 'react-bootstrap'
+import { useRouteMatch, useParams } from 'react-router-dom'
 import axios from "axios"
 import { useState, useEffect } from "react"
 import EngineerGetMCQ from '../../components/EngineerGetMCQ'
@@ -26,38 +26,53 @@ const Btn = styled(Button)`
 
 const EngineerTakeQuiz = () => {
 
-	const [quiz, setQuiz] = useState([])
+    const { courseID, classID, chapterID } = useParams()
 
-	const { url } = useRouteMatch()
+    const [quiz, getQuiz] = useState([])
 
-	const [allQns, setAllQns] = useState([])
+    const { url } = useRouteMatch()
 
-	const addMCQQuestion = () => {
-		setAllQns(allQns => [...allQns, <EngineerGetMCQ />])
-	}
+    const [allQns, getAllQns] = useState([])
 
-	const addTFQuestion = () => {
-		setAllQns(allQns => [...allQns, <EngineerGetTF />])
-	}
+    const getMCQQuestion = () => {
+        getAllQns( allQns => [...allQns, <EngineerGetMCQ/>])
+    }
 
-	useEffect(() => {
-		axios.get("http://127.0.0.1:5000/quiz/getQuiz").then((res) => {
-			setQuiz(res.data);
-		});
-	}, []);
+    const getTFQuestion = () => {
+        getAllQns( allQns => [...allQns, <EngineerGetTF/>])
+    }
+    const [timeLeft, setTimeLeft] = useState()
 
-	return (
-		<Container>
-			<h1> Course ID: {quiz[0].course_id} </h1>
-			<h1> Quiz No: {quiz[0].chapter_id} </h1>
-			<br />
-			<EngineerGetMCQ />
-			<EngineerGetTF />
-			<ButtonDiv>
-				<Btn>Submit</Btn>
-			</ButtonDiv>
-		</Container>
-	)
+    const [questionType, setQuestionType] = useState()
+
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:5000/quiz/getQuiz?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`).then((res) => {
+          getQuiz(res.data);
+          setTimeLeft(res.data[0].duration*60)
+          setQuestionType(res.data[0].type)
+        });
+      }, []);
+
+    useEffect(() => {
+        const timer =
+        timeLeft > 0 && setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
+        return () => clearInterval(timer)
+      }, [timeLeft])
+
+    return(
+        <Container>
+            <h1> Course ID: {courseID} </h1>
+            <h2> Quiz No: {chapterID} </h2>
+            <h6>Type: {questionType} </h6>
+            <div>Duration: {timeLeft} seconds</div>
+            <br />
+            <EngineerGetMCQ/>
+            <EngineerGetTF/>
+            <ButtonDiv>
+                <Btn>Submit</Btn>
+            </ButtonDiv>
+        </Container>
+    )
 }
 
 export default EngineerTakeQuiz

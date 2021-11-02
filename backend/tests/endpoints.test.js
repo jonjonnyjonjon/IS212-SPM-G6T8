@@ -2,6 +2,8 @@ const request = require("supertest");
 const app = require("../app");
 const db = require("../db")
 
+// Courses & Classes Testing Endpoints – Jonathan
+
 describe("courses endpoints", () => {
 	test("GET /courses and returns total number of courses", done => {
 		request(app)
@@ -76,4 +78,65 @@ describe("classes endpoints", () => {
 				done()
 			})
   	})
+})
+
+
+// Chapters Testing Endpoints – Huiqi
+
+describe("chapters endpoints", () => {
+	
+	// Test – Creating a new chapter for a given course
+	test("POST /chapters/addChapter will add 1 new record to teaching_materials table", done => {
+		const chapter = {
+			courseID: "BG1000", 
+			classID: "C7",
+			chapterID: "300",
+			content: "testing"
+		}
+
+		request(app)
+			.post('/chapters/addChapter')
+			.send(chapter)
+			.then(res => {
+				expect(res.statusCode).toBe(200)
+				expect(res.body.message).toStrictEqual("1 record inserted to teaching_materials table")
+				done()
+			})
+	})
+
+	// Test – Checking that the new chapter is present in DB for a given course
+	test("GET /chapters/getAllChapters returns the correct chapters given course & class", done => {
+		const courseID = "BG1000"
+		const classID = "C7"
+
+		const chapter = {
+			course_id: "BG1000", 
+			class_id: "C7",
+			chapter_id: "300",
+			content: "testing"
+		}
+
+		request(app)
+			.get(`/chapters/getAllChapters?course_id=${courseID}&class_id=${classID}`)
+			.then(res => {
+				expect(res.body).toContainEqual(chapter)
+				expect(res.statusCode).toBe(200)
+				done()
+			})
+  	})
+
+	// Test – Deleting that chapter for a given course
+	test("POST /chapters/deleteChapter will delete 1 record from teaching_materials table", done => {
+		const courseID = "BG1000"
+		const classID = "C7"
+		const chapterID = "300"
+
+		request(app)
+			.post(`/chapters/deleteChapter?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
+			.then(res => {
+				expect(res.statusCode).toBe(200)
+				expect(res.body.message).toStrictEqual("1 record deleted from teaching_materials table")
+				done()
+			})
+	})
 })
