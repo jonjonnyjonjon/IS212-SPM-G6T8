@@ -4,14 +4,17 @@ import {
  } from 'react-bootstrap'
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom'
 
 
 const EngineerGetMCQ = () => {
+
+    const { courseID, classID, chapterID } = useParams()
     
     const [quiz, setQuiz] = useState([])
-
+    
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/quiz/getMCQQuestions").then((res) => {
+        axios.get(`http://127.0.0.1:5000/quiz/getMCQQuestions?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`).then((res) => {
           setQuiz(res.data);
         });
       }, []);
@@ -21,7 +24,8 @@ const EngineerGetMCQ = () => {
         <Container>
             {quiz.map(quiz =>
                   <Form key={quiz.question_id}>
-                    <Form.Label> {quiz.question}
+                    <Form.Label> 
+                    <b>Question: {quiz.question}</b>
                     <Form.Check type="radio" label={quiz.option1} name="question" />
                     <Form.Check type="radio" label={quiz.option2} name="question"/>
                     <Form.Check type="radio" label={quiz.option3} name="question" />
