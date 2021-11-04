@@ -80,6 +80,7 @@ describe("classes endpoints", () => {
   	})
 })
 
+// =================================================================================================================================
 
 // Chapters Testing Endpoints – Huiqi
 
@@ -89,8 +90,8 @@ describe("chapters endpoints", () => {
 	test("POST /chapters/addChapter will add 1 new record to teaching_materials table", done => {
 		const chapter = {
 			courseID: "BG1000", 
-			classID: "C7",
-			chapterID: "300",
+			classID: "C1",
+			chapterID: 300,
 			content: "testing"
 		}
 
@@ -107,12 +108,12 @@ describe("chapters endpoints", () => {
 	// Test – Checking that the new chapter is present in DB for a given course
 	test("GET /chapters/getAllChapters returns the correct chapters given course & class", done => {
 		const courseID = "BG1000"
-		const classID = "C7"
+		const classID = "C1"
 
 		const chapter = {
 			course_id: "BG1000", 
-			class_id: "C7",
-			chapter_id: "300",
+			class_id: "C1",
+			chapter_id: 300,
 			content: "testing"
 		}
 
@@ -128,8 +129,8 @@ describe("chapters endpoints", () => {
 	// Test – Deleting that chapter for a given course
 	test("POST /chapters/deleteChapter will delete 1 record from teaching_materials table", done => {
 		const courseID = "BG1000"
-		const classID = "C7"
-		const chapterID = "300"
+		const classID = "C1"
+		const chapterID = 300
 
 		request(app)
 			.post(`/chapters/deleteChapter?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
@@ -139,7 +140,46 @@ describe("chapters endpoints", () => {
 				done()
 			})
 	})
+
+	// Invalid Test – Creating a new chapter for a course that's not in the database
+	test("POST /chapters/addChapter will result in status code 500", done => {
+		const chapter = {
+			courseID: "BG8000", 
+			classID: "C9",
+			chapterID: 300,
+			content: "testing"
+		}
+
+		request(app)
+			.post('/chapters/addChapter')
+			.send(chapter)
+			.then(res => {
+				expect(res.statusCode).toBe(500)
+				done()
+			})
+	})
+
+	// Invalid Test – Creating a chapter for a course that already existed in the database
+	test("POST /chapters/addChapter will result in status code 500", done => {
+		const chapter = {
+			courseID: "BG1001", 
+			classID: "C1",
+			chapterID: 1,
+			content: "testing"
+		}
+
+		request(app)
+			.post('/chapters/addChapter')
+			.send(chapter)
+			.then(res => {
+				expect(res.statusCode).toBe(500)
+				done()
+			})
+	})
 })
+
+
+// =================================================================================================================================
 
 // Quiz Testing Endpoints – Krysten
 
@@ -312,3 +352,7 @@ describe("quiz endpoints", () => {
 	})
 
 })
+
+// =================================================================================================================================
+
+//  Testing Endpoints – Keith
