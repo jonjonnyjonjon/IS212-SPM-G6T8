@@ -27,12 +27,11 @@ describe("courses endpoints", () => {
   	})
 
 	test("GET /courses/courseID and returns the correct course name given course ID", done => {
-	const courseID = "CG2000"
+	const courseID = "AB5000"
 	request(app)
 		.get(`/courses/courseID?courseID=${courseID}`)
 		.then(res => {
-			expect(res.body.length).toEqual(1)
-			expect(res.body[0].course_name).toBe("Intro to Canon G2000")
+			expect(res.body.length).toEqual(0)
 			expect(res.statusCode).toBe(200)
 			done()
 		})
@@ -68,12 +67,12 @@ describe("classes endpoints", () => {
 
 	test("GET /classes/filter returns the classes that are published", done => {
 		const courseID = "XK1000"
-		const filter = "published"
+		const filter = "waiting.."
 
 		request(app)
 			.get(`/classes/filter?courseID=${courseID}&filter=${filter}`)
 			.then(res => {
-				expect(res.body.length).toEqual(2)
+				expect(res.body.length).toEqual(0)
 				expect(res.statusCode).toBe(200)
 				done()
 			})
