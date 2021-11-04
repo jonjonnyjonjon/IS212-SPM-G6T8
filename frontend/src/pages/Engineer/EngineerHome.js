@@ -114,7 +114,7 @@ function EngineerHome() {
                                         <Card.Subtitle> {course.course_id} </Card.Subtitle>
                                         <Card.Text> {course.class_id} </Card.Text><br/>
                                         <Card.Text> {course.course_summary} </Card.Text><br/>
-                                        <Card.Subtitle>Completed on:</Card.Subtitle> {course.course_end} <br/><br/>
+                                        <Card.Subtitle>Completed on:</Card.Subtitle> {course.completed_date} <br/><br/>
                                         <Card.Subtitle>Course Trainer: </Card.Subtitle> {course.trainer_name}
                                     </Card.Body>
                                 </Col>

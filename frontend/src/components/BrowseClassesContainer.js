@@ -39,7 +39,7 @@ const BrowseClassesContainer = (props) => {
         borderColour = "danger"
 
     } else if (filter === "ineligibleCompleted") {
-        message = "Already completed"
+        message = "Course has been already been completed"
         borderColour = "success"
     } else if (filter === "pendingEnrolment") {
         message = "Pending Enrolment"
@@ -63,9 +63,8 @@ const BrowseClassesContainer = (props) => {
                                 { filter === "eligibleWithPrereq"
                                     ?   <Card.Subtitle>
                                             Course pre-requisite(s): <br/>
-                                            { thisClass.prerequisites.indexOf(',') !== -1
-                                                ? thisClass.prerequisites.split(',').map( prereq =>
-                                                    <Badge bg='dark' className='me-2' key={prereq}> {prereq} </Badge> )
+                                            { thisClass.prerequisites !== ""
+                                                ? <Badge bg='dark' className='me-2' key={thisClass.prerequisites}> {thisClass.prerequisites} </Badge>
                                                 : 'None'
                                             }
                                         </Card.Subtitle>
