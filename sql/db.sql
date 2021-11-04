@@ -19,6 +19,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blan
 Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
 ", False);
 
+INSERT INTO courses VALUES("CG1001", "Intermediate Canon G1000", "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", True);
+
+INSERT INTO courses VALUES("CG1002", "Advanced Canon G1000", "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
+Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
+", True);
+
 INSERT INTO courses VALUES("CG2000", "Intro to Canon G2000",  "
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec est blandit, tristique sem at, tempor risus. Proin nec augue odio. Suspendisse ut sapien nec nulla aliquet venenatis. Donec venenatis cursus mauris sit amet ullamcorper. Sed cursus dolor sed nisi accumsan varius. Sed in lorem justo. Etiam tellus arcu, tincidunt nec metus nec, iaculis suscipit diam.
 Vivamus vitae felis dictum, pulvinar mauris vitae, volutpat mauris. Ut ligula dui, sollicitudin a diam et, imperdiet posuere tellus. Morbi sit amet eleifend sapien, vitae tincidunt eros. Proin ut metus tortor. Fusce venenatis non ante eu rhoncus. Nulla nisl nisi, imperdiet eu hendrerit non, efficitur et diam. Cras ultricies odio orci, ac sollicitudin mi fringilla at. Morbi diam odio, imperdiet non urna quis, fringilla tincidunt ex. Phasellus sit amet maximus urna. Sed sit amet tellus non lorem ultricies feugiat.
@@ -56,7 +66,7 @@ CREATE TABLE trainers (
     PRIMARY KEY (email)
 );
 
-INSERT INTO trainers VALUES("johnappleseed@aio.com", "ja", "John Appleseed", "CG1000, CG2000");
+INSERT INTO trainers VALUES("johnappleseed@aio.com", "ja", "John Appleseed", "CG1000, CG1001, CG1002, CG2000");
 INSERT INTO trainers VALUES("jacksparrow@aio.com", "js", "Jack Sparrow", "CG2000, CG3000");
 INSERT INTO trainers VALUES("janedoe@aio.com", "jd", "Jane Doe", "CG2000");
 INSERT INTO trainers VALUES("dwightschrute@aio.com", "ds", "Dwight Schrute", "CG3000");
@@ -106,6 +116,8 @@ CREATE TABLE classes (
 
 INSERT INTO classes VALUES("CG1000", "C1", "johnappleseed@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", False, False);
 INSERT INTO classes VALUES("CG1000", "C2", "johnappleseed@aio.com", 10, 0, "10/09/2021", "20/09/2021", "24/09/2021", "08/10/2021", True, False);
+INSERT INTO classes VALUES ("CG1001", "C1", "johnappleseed@aio.com", 10, 0, "01/09/2021", "15/09/2021", "16/09/2021", "20/10/2021", True, True);
+INSERT INTO classes VALUES("CG1002", "C1", "johnappleseed@aio.com", 10, 0, "12/10/2021", "20/10/2021", "21/10/2021", "21/11/2021", True, True);
 
 INSERT INTO classes VALUES("CG2000", "C1", "johnappleseed@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/10/2021", True, False);
 INSERT INTO classes VALUES ("CG2000", "C2", "jacksparrow@aio.com", 10, 0, "20/09/2021", "30/09/2021", "01/10/2021", "08/11/2021", True, True);
@@ -145,9 +157,8 @@ CREATE TABLE completed_courses (
 
 INSERT INTO completed_courses VALUES("htwong@aio.com", "CG1000", "C1", "08/10/2021");
 INSERT INTO completed_courses VALUES("chrisposkitt@aio.com", "CG1000", "C1", "08/10/2021");
-INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG1000", "C1", "08/10/2021");
-
-INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG2000", "C2", "08/10/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG1000", "C1", "08/09/2021");
+INSERT INTO completed_courses VALUES("keithchiang@aio.com", "CG1001", "C1", "08/10/2021");
 
 INSERT INTO completed_courses VALUES("krystenng@aio.com", "CG3000", "C1", "08/10/2021");
 
@@ -173,6 +184,8 @@ CREATE TABLE course_prereq (
 
 INSERT INTO course_prereq VALUES("BG1001", "BG1000");
 INSERT INTO course_prereq VALUES("BG1002", "BG1001");
+INSERT INTO course_prereq VALUES("CG1001", "CG1000");
+INSERT INTO course_prereq VALUES("CG1002", "CG1001");
 
 ################################################################################################################
 
