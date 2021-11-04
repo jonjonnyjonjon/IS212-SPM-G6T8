@@ -484,7 +484,7 @@ describe("Testing courses endpoints", () => {
 	})
 
 	describe("Checking retrieval of Eligible classes with prerequisite", () => {
-		test("GET /courses/getEligibleNoPrereq SHOULD RETURN 1 class", done => {
+		test("GET /courses/getEligibleWithPrereq SHOULD RETURN 1 class", done => {
 			request(app)
 				.get("/courses/getEligibleWithPrereq")
 				.then(res => {
