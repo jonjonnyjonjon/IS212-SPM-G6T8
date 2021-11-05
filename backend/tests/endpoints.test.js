@@ -244,7 +244,7 @@ describe("quiz endpoints", () => {
 			course_id: "CG2000", 
 			class_id: "C2",
 			chapter_id: 1,
-			question_id: "5",
+			question_id: "9",
 			question: "Is it okay to shout at your customers?",
 			type: "ungraded",
 			duration: 30,
@@ -275,7 +275,7 @@ describe("quiz endpoints", () => {
 			course_id: "CG2000", 
 			class_id: "C2",
 			chapter_id: 1,
-			question_id: "5",
+			question_id: "9",
 			question: "Is it okay to shout at your customers?",
 			option1: "True",
 			option2: "False",
@@ -297,7 +297,7 @@ describe("quiz endpoints", () => {
 		const courseID = "CG2000"
 		const classID = "C2"
 		const chapterID = 1
-		const questionID = "5"
+		const questionID = "8"
 
 		request(app)
 			.post(`/quiz/deleteQuestion?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}&question_id=${questionID}`)
@@ -313,7 +313,7 @@ describe("quiz endpoints", () => {
 		const courseID = "CG2000"
 		const classID = "C2"
 		const chapterID = 1
-		const questionID = "8"
+		const questionID = "9"
 
 		request(app)
 			.post(`/quiz/deleteQuestion?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}&question_id=${questionID}`)
