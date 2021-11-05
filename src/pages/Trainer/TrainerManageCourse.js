@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { BASE_API_URL } from "../../utils/constants"
 
 const Header = styled.h1`
   margin: 40px 0px;
@@ -27,7 +28,7 @@ const TrainerManageCourse = () => {
   useEffect(() => {
     axios
       .get(
-        `http://127.0.0.1:5000/chapters/getAllChapters?course_id=${courseID}&class_id=${classID}`
+        `${BASE_API_URL}/chapters/getAllChapters?course_id=${courseID}&class_id=${classID}`
       )
       .then((res) => {
         setChapters(res.data);
@@ -47,7 +48,7 @@ const TrainerManageCourse = () => {
     ]);
     setChapNum(chapNum + 1);
     e.preventDefault();
-    axios.post("http://127.0.0.1:5000/chapters/addChapter", {
+    axios.post(`${BASE_API_URL}/chapters/addChapter`, {
       courseID: courseID,
       classID: classID,
       chapterID: chapNum,

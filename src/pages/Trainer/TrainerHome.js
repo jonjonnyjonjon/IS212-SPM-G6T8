@@ -4,6 +4,7 @@ import { Container, Tabs, Tab } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { BASE_API_URL } from "../../utils/constants"
 
 const Header = styled.h2`
   margin: 40px 0px 10px 0px;
@@ -27,7 +28,7 @@ function TrainerHome() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5000/trainers/getTrainerCourses")
+      .get(`${BASE_API_URL}/trainers/getTrainerCourses`)
       .then((res) => {
         setCourses(res.data);
       });

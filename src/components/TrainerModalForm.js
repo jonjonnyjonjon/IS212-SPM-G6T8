@@ -2,6 +2,7 @@ import {Form, Modal, Button} from "react-bootstrap";
 import styled from "styled-components";
 import { useState } from 'react'
 import axios from "axios";
+import { BASE_API_URL } from "../utils/constants"
 
 const Title = styled.h5`
     margin: 20px 20px 0px 20px;
@@ -23,14 +24,14 @@ function TrainerModalForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://127.0.0.1:5000/chapters/uploadContent`, {
+        axios.post(`${BASE_API_URL}/chapters/uploadContent`, {
             "courseID": props.course_id, 
             "classID": props.class_id, 
             "chapterID": props.chapter_id, 
             "content": content
         })
 
-        axios.post(`http://127.0.0.1:5000/teachingMaterials/updateMaterialStatus`, {
+        axios.post(`${BASE_API_URL}/teachingMaterials/updateMaterialStatus`, {
           "courseID": props.course_id, 
           "classID": props.class_id, 
         })

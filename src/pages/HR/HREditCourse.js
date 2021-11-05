@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom"
 import axios from "axios"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HREditCourse = () => {
     const [courseID, setCourseID] = useState(useParams().courseID)
@@ -26,7 +27,7 @@ const HREditCourse = () => {
 
     // Get course information from courseID passed in URL param
     useEffect(()=> {
-        axios.post("http://127.0.0.1:5000/courses/courseID", {
+        axios.post(`${BASE_API_URL}/courses/courseID`, {
             "courseID": courseID
         })
             .then(res => {
@@ -45,7 +46,7 @@ const HREditCourse = () => {
 
     // Get all qualified trainers to teach this course
     useEffect(()=> {
-        axios.post("http://127.0.0.1:5000/trainers/qualified", {
+        axios.post(`${BASE_API_URL}/trainers/qualified`, {
             "courseID": courseID
         })
             .then(res => {
@@ -56,7 +57,7 @@ const HREditCourse = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post("http://127.0.0.1:5000/courses/editCourse", {
+        axios.post(`${BASE_API_URL}/courses/editCourse`, {
             "courseID": courseID,
             "courseName": courseName,
             "class": courseClass,

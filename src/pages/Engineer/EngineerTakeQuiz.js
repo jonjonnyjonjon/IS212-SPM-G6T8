@@ -7,6 +7,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import EngineerGetMCQ from '../../components/EngineerGetMCQ'
 import EngineerGetTF from '../../components/EngineerGetTF'
+import { BASE_API_URL } from "../../utils/constants"
 
 const EngineerTakeQuiz = () => {
 
@@ -17,7 +18,7 @@ const EngineerTakeQuiz = () => {
     const [questionType, setQuestionType] = useState()
     
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/quiz/getQuiz?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
+        axios.get(`${BASE_API_URL}/quiz/getQuiz?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
             .then((res) => {
                 setTimeLeft(res.data[0].duration*60)
                 setQuestionType(res.data[0].type)

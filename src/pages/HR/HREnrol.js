@@ -8,6 +8,7 @@ import {
 import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
 import { useState } from "react"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HREnrol = () => {
     const [courses, setCourses] = useState([])
@@ -16,7 +17,7 @@ const HREnrol = () => {
     const { url } = useRouteMatch()
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/courses/courseName?keyword=${keyword}`)
+        axios.get(`${BASE_API_URL}/courses/courseName?keyword=${keyword}`)
             .then(res => {
                 setCourses(res.data)
             })

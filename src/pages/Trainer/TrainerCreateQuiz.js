@@ -9,6 +9,7 @@ import { useState } from 'react'
 import axios from "axios"
 import { useParams, useHistory } from 'react-router-dom'
 import styled from "styled-components";
+import { BASE_API_URL } from "../../utils/constants"
 
 const ButtonDiv = styled.div`
   font-size: 15px;
@@ -111,7 +112,7 @@ const TrainerCreateQuiz = () => {
                 option4 = options[3]
             }
 
-            axios.post("http://127.0.0.1:5000/quiz/createQuestion", {
+            axios.post(`${BASE_API_URL}/quiz/createQuestion`, {
                 "course_id": courseID,
                 "class_id": classID,
                 "chapter_id": chapterID,

@@ -5,6 +5,7 @@ import {
 
 import { Link, useRouteMatch } from 'react-router-dom'
 import axios from "axios"
+import { BASE_API_URL } from "../utils/constants"
 
 const ClassesContainer = (props) => {
     const { url } = useRouteMatch()
@@ -12,7 +13,7 @@ const ClassesContainer = (props) => {
     const filter = props.filter
     
     const publishClass = (courseID, classID) => {
-        axios.post("http://127.0.0.1:5000/classes/publishClass", {
+        axios.post(`${BASE_API_URL}/classes/publishClass`, {
             "courseID": courseID,
             "classID": classID
         })

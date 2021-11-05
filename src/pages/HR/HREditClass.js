@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom"
 import axios from "axios"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HREditClass = () => {
     const { courseID, classID } = useParams()
@@ -25,7 +26,7 @@ const HREditClass = () => {
 
     // Get course information from courseID passed in URL param
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/classes/class?courseID=${courseID}&classID=${classID}`)
+        axios.get(`${BASE_API_URL}/classes/class?courseID=${courseID}&classID=${classID}`)
             .then(res => {
                 const courseInfo = res.data[0]
                 setChosenTrainer(courseInfo.trainer_email)
@@ -40,7 +41,7 @@ const HREditClass = () => {
 
     // Get all qualified trainers to teach this course
     useEffect(()=> {
-        axios.post("http://127.0.0.1:5000/trainers/qualified", {
+        axios.post(`${BASE_API_URL}/trainers/qualified`, {
             "courseID": courseID
         })
             .then(res => {
@@ -51,7 +52,7 @@ const HREditClass = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post("http://127.0.0.1:5000/classes/editClass", {
+        axios.post(`${BASE_API_URL}/classes/editClass`, {
             "courseID": courseID,
             "classID": classID,
             "trainer": chosenTrainer,
@@ -61,7 +62,6 @@ const HREditClass = () => {
             "classStart": classStart,
             "classEnd": classEnd
         })
-            .then(console.log("sent to backend!"))
         alert("course edited successfully! redirecting back to previous page...")
         history.goBack()
     }
