@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom"
 import axios from "axios"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HRCreateCourse = () => {
     const { courseID } = useParams()
@@ -24,7 +25,7 @@ const HRCreateCourse = () => {
     const [trainers, setTrainers] = useState([])
 
     useEffect(()=> {
-        axios.post("http://127.0.0.1:5000/trainers/qualified", {
+        axios.post(`${BASE_API_URL}/trainers/qualified`, {
             "courseID": courseID
         })
             .then(res => {
@@ -36,7 +37,7 @@ const HRCreateCourse = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post("http://127.0.0.1:5000/classes/createClass", {
+        axios.post(`${BASE_API_URL}/classes/createClass`, {
             "courseID": courseID,
             "classID": classID,
             "size": size,

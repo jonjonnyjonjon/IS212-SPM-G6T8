@@ -10,6 +10,7 @@ import axios from "axios"
 import { useState } from "react"
 
 import ClassesContainer from "../../components/ClassesContainer"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HRCourses = () => {
     const { url } = useRouteMatch()
@@ -18,7 +19,7 @@ const HRCourses = () => {
     const [key, setKey] = useState("published")
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/classes/filter?courseID=${courseID}&filter=${key}`)
+        axios.get(`${BASE_API_URL}/classes/filter?courseID=${courseID}&filter=${key}`)
             .then(res => {
                 setClasses(res.data)
             })

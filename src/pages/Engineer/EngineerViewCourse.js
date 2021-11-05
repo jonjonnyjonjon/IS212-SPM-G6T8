@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom"
 import axios from "axios"
 import { Container, Badge, Button } from 'react-bootstrap'
+import { BASE_API_URL } from "../../utils/constants"
 
 const EngineerViewCourse = () => {
     const [courseID] = useState(useParams().courseID)
@@ -10,12 +11,12 @@ const EngineerViewCourse = () => {
     const [coursePrereq, getPrereq] = useState( [] )
 
     useEffect(()=> {
-        axios.get(`http://127.0.0.1:5000/courses/getClassInfo/?course_id=${courseID}&class_id=${classID}`, )
+        axios.get(`${BASE_API_URL}/courses/getClassInfo/?course_id=${courseID}&class_id=${classID}`, )
         .then(res => {
             getCourseInfo(res.data);
         }).catch(err => console.log(err))
 
-        axios.get(`http://127.0.0.1:5000/courses/getPrereq/?course_id=${courseID}`, )
+        axios.get(`${BASE_API_URL}/courses/getPrereq/?course_id=${courseID}`, )
         .then(res => {
             getPrereq( retrievePrereq(res.data) );           
         }).catch(err => console.log(err))
@@ -41,7 +42,7 @@ const EngineerViewCourse = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post("http://127.0.0.1:5000/enrolRequest/enrol", {
+        axios.post(`${BASE_API_URL}/enrolRequest/enrol`, {
             "engineerEmail": 'keithchiang@aio.com',
             "courseID": courseInfo.course_id,
             "classID": courseInfo.class_id

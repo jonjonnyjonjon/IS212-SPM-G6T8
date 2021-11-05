@@ -5,7 +5,7 @@ import {
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
-
+import { BASE_API_URL } from "../utils/constants"
 
 const EngineerGetMCQ = () => {
 
@@ -14,7 +14,7 @@ const EngineerGetMCQ = () => {
 	const [quiz, setQuiz] = useState([])
 
 	useEffect(() => {
-		axios.get(`http://127.0.0.1:5000/quiz/getMCQQuestions?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
+		axios.get(`${BASE_API_URL}/quiz/getMCQQuestions?course_id=${courseID}&class_id=${classID}&chapter_id=${chapterID}`)
 			.then((res) => {
 				setQuiz(res.data);
 			});

@@ -4,10 +4,11 @@ import {
     Tab,
  } from 'react-bootstrap'
 
- import { useEffect, useState } from "react"
- import BrowseClassesContainer from "../../components/BrowseClassesContainer"
- import axios from "axios"
- import styled from "styled-components";
+import { useEffect, useState } from "react"
+import axios from "axios"
+import styled from "styled-components";
+import BrowseClassesContainer from "../../components/BrowseClassesContainer"
+import { BASE_API_URL } from "../../utils/constants"
 
  const CourseTabs = styled(Tabs)`
      margin: 20px 50px;
@@ -23,33 +24,33 @@ function EngineerBrowseCourse() {
     const [key, setKey] = useState("eligible");
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/enrolRequest/getPendingRequest")
+        axios.get(`${BASE_API_URL}/enrolRequest/getPendingRequest`)
         .then(res => {
             getPendingEnrolment(res.data)
         })
 
-        axios.get("http://127.0.0.1:5000/courses/getEligibleWithPrereq")
+        axios.get(`${BASE_API_URL}/courses/getEligibleWithPrereq`)
             .then(res => {
                 getEligibleCoursesWithPrereq(res.data)
             })
 
-        axios.get("http://127.0.0.1:5000/courses/getEligibleNoPrereq")
+        axios.get(`${BASE_API_URL}/courses/getEligibleNoPrereq`)
             .then(res => {
                 getEligibleCoursesNoPrereq(res.data)
             })
 
-        axios.get("http://127.0.0.1:5000/courses/getIneligibleByPrereq")
+        axios.get(`${BASE_API_URL}/courses/getIneligibleByPrereq`)
         .then(res => {
             getIneligibleByPrereq( res.data )
         })
 
-        axios.get("http://127.0.0.1:5000/courses/getIneligibleByEnrolled")
+        axios.get(`${BASE_API_URL}/courses/getIneligibleByEnrolled`)
         .then(res => {
 
             getIneligibleByEnrolled( res.data )
         })
 
-        axios.get("http://127.0.0.1:5000/courses/getIneligibleByCompleted")
+        axios.get(`${BASE_API_URL}/courses/getIneligibleByCompleted`)
         .then(res => {
             getIneligibleByCompleted( res.data )
         })

@@ -7,6 +7,7 @@ import {
 import { useState } from 'react'
 import { useHistory } from "react-router-dom"
 import axios from "axios"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HRCreateCourse = () => {
     const [courseID, setCourseID] = useState("")
@@ -19,7 +20,7 @@ const HRCreateCourse = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post("http://127.0.0.1:5000/courses/createCourse", {
+        axios.post(`${BASE_API_URL}/courses/createCourse`, {
             "courseID": courseID,
             "courseName": courseName,
             "courseSummary": courseSummary,

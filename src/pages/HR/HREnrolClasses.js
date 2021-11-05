@@ -9,6 +9,7 @@ import {
 import { useParams } from 'react-router-dom'
 import axios from "axios"
 import { useState } from "react"
+import { BASE_API_URL } from "../../utils/constants"
 
 const HREnrolClasses = () => {
     const { courseID, courseName, hasPrereq } = useParams()
@@ -19,7 +20,7 @@ const HREnrolClasses = () => {
 
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/classes/courseID?courseID=${courseID}`)
+        axios.get(`${BASE_API_URL}/classes/courseID?courseID=${courseID}`)
             .then(res => {
                 setClasses(res.data)
                 setSelectedClass(res.data[0].class_id)
@@ -29,7 +30,7 @@ const HREnrolClasses = () => {
 
     // get eligible engineers when page loads
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/engineers/eligibleEngineers?courseID=${courseID}&hasPrereq=${hasPrereq}`)
+        axios.get(`${BASE_API_URL}/engineers/eligibleEngineers?courseID=${courseID}&hasPrereq=${hasPrereq}`)
             .then(res => {
                 setEligibleEngineers(res.data)
             })
@@ -49,7 +50,7 @@ const HREnrolClasses = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post("http://127.0.0.1:5000/enrolled", {
+        axios.post(`${BASE_API_URL}/enrolled`, {
             "courseID": courseID,
             "classID": selectedClass,
             "engineers": selectedEngineers

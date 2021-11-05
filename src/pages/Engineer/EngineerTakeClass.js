@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Col, Container, Form, Row, Button, Modal } from "react-bootstrap"
 import { useHistory, useParams, Link, useRouteMatch } from "react-router-dom"
 import { Stepper, Step, StepLabel } from "@mui/material"
-
+import { BASE_API_URL } from "../../utils/constants"
 import completionBadge from "../../img/completion-badge.png"
 
 const EngineerTakeClass = () => {
@@ -18,7 +18,7 @@ const EngineerTakeClass = () => {
 
     useEffect(() => {
         const query = `courseID=${courseID}&classID=${classID}`
-        axios.get(`http://127.0.0.1:5000/teachingMaterials/getChapters?${query}`)
+        axios.get(`${BASE_API_URL}/teachingMaterials/getChapters?${query}`)
             .then(res => {
                 setChapters(res.data)
             })

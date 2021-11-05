@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaUpload } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import TrainerModalForm from "../components/TrainerModalForm";
 import axios from 'axios';
+import TrainerModalForm from "../components/TrainerModalForm";
+import { BASE_API_URL } from "../utils/constants"
 
 const UploadIcon = styled(FaUpload)`
   color: white;
@@ -48,7 +49,7 @@ function TrainerChapter(props) {
   };
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/chapters/getChapterContent?course_id=${props.course_id}&class_id=${props.class_id}&chapter_id=${props.count}`)
+    axios.get(`${BASE_API_URL}/chapters/getChapterContent?course_id=${props.course_id}&class_id=${props.class_id}&chapter_id=${props.count}`)
         .then(res => {
           let content = res.data[0]['content']
           if (!!content) {
@@ -58,7 +59,7 @@ function TrainerChapter(props) {
 } , [props.course_id, props.class_id, props.count])
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/chapters/getQuizQuestions?course_id=${props.course_id}&class_id=${props.class_id}&chapter_id=${props.count}`)
+    axios.get(`${BASE_API_URL}/chapters/getQuizQuestions?course_id=${props.course_id}&class_id=${props.class_id}&chapter_id=${props.count}`)
         .then(res => {
           if (!!res.data.length) {
             setQuizUploaded(true)

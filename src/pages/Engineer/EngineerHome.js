@@ -5,6 +5,7 @@ import { Link, useRouteMatch } from "react-router-dom"
 import axios from "axios"
 import styled from "styled-components";
 import printerImg from "../../img/printer.png"
+import { BASE_API_URL } from "../../utils/constants"
 
 const CourseTabs = styled(Tabs)`
     margin: 20px 50px;
@@ -20,16 +21,16 @@ function EngineerHome() {
 
     // To change to retrieveOngoing once endpoint is completed
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/courses/getOngoing")
+        axios.get(`${BASE_API_URL}/courses/getOngoing`)
             .then(res => {
                 getOngoing(res.data)
             })
-        axios.get("http://127.0.0.1:5000/courses/getCompleted")
+        axios.get(`${BASE_API_URL}/courses/getCompleted`)
             .then(res => {
                 getCompleted(res.data)
             })
 
-        axios.get("http://127.0.0.1:5000/enrolRequest/getPendingRequest")
+        axios.get(`${BASE_API_URL}/enrolRequest/getPendingRequest`)
             .then(res => {
                 getPendingEnrolment(res.data)
             })
