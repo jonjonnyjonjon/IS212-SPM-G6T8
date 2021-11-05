@@ -4,7 +4,6 @@ const db = require("../db")
 
 // Post enrolment request by engineer 
 router.post("/enrol", (req, res) => {
-
 	let sql = `INSERT INTO enrol_request VALUES (
 		"${req.body.engineerEmail}",
 		"${req.body.courseID}",
@@ -47,5 +46,28 @@ router.get("/getPendingRequest", (req, res) => {
 		}
 	})
 })
+
+// Delete a specific self-enrolment request
+router.delete("/delPendingRequest", (req, res) => {
+	let sql = `
+	DELETE FROM enrol_request
+	WHERE course_id='${req.body.courseID}'
+	AND class_id='${req.body.classID}'
+	AND engineer_email='${req.body.engineerEmail}'
+    `
+
+	db.query(sql, (err) => {
+		if (err) {
+			res.status(500).send({
+				message: err.message || "An error has occurred."
+			})
+		} else {
+			res.status(200).send({
+				message: '1 record has been deleted.'
+			})		
+		}
+	})
+})
+
 
 module.exports = router

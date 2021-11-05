@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
   });
 });
 
-// post new chapter to db
+// Post new chapter to DB
 router.post("/addChapter", (req, res) => {
   let sql = `INSERT INTO teaching_materials VALUES ( \
 		"${req.body.courseID}", \
@@ -35,6 +35,29 @@ router.post("/addChapter", (req, res) => {
     } else {
       res.status(200).send({
         message: "1 record inserted to teaching_materials table",
+      });
+    }
+  });
+});
+
+// Delete chapter from DB (for testing purposes)
+router.post("/deleteChapter", (req, res) => {
+  let courseID = req.query.course_id;
+  let classID = req.query.class_id;
+  let chapterID = req.query.chapter_id;
+
+  let sql = `DELETE FROM teaching_materials WHERE 
+  course_id = '${courseID}' and class_id = '${classID}' and chapter_id = ${chapterID}`;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "An error has occured.",
+        sql: sql,
+      });
+    } else {
+      res.status(200).send({
+        message: "1 record deleted from teaching_materials table",
       });
     }
   });
@@ -59,7 +82,7 @@ router.get("/getAllChapters", (req, res) => {
   });
 });
 
-// Get all course materials by course ID and class ID
+// Update course materials given course ID and class ID
 router.post("/uploadContent", (req, res) => {
 
   let sql = `UPDATE teaching_materials
@@ -78,9 +101,6 @@ router.post("/uploadContent", (req, res) => {
     }
   });
 });
-
-module.exports = router;
-
 
 // Get content by course ID and class ID and chapter ID
 router.get("/getChapterContent", (req, res) => {
@@ -121,3 +141,5 @@ router.get("/getQuizQuestions", (req, res) => {
     }
   });
 });
+
+module.exports = router;

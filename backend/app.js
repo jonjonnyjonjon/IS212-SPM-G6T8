@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors')
 const app = express();
+const path = require('path')
+const PORT = process.env.PORT || 5000
 
 // Middlewares
 app.use(express.json())
@@ -27,6 +29,12 @@ app.use('/chapters', chaptersRoute)
 app.use('/quiz', quizRoute)
 app.use('/teachingMaterials', teachingMaterialsRoute)
 
-app.listen(5000, "127.0.0.1");
+// Routes for frontend (Heroku)
+app.use(express.static(path.join(__dirname, "..", "build")))
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, "..", 'build', 'index.html'));
+});
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 module.exports = app
