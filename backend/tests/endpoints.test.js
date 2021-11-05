@@ -9,7 +9,7 @@ describe("courses endpoints", () => {
 		request(app)
 			.get("/courses")
 			.then(res => {
-				expect(res.body.length).toEqual(7)
+				expect(res.body.length).toEqual(9)
 				expect(res.statusCode).toBe(200)
 				done()
 			})
@@ -27,12 +27,11 @@ describe("courses endpoints", () => {
   	})
 
 	test("GET /courses/courseID and returns the correct course name given course ID", done => {
-	const courseID = "CG2000"
+	const courseID = "AB5000"
 	request(app)
 		.get(`/courses/courseID?courseID=${courseID}`)
 		.then(res => {
-			expect(res.body.length).toEqual(1)
-			expect(res.body[0].course_name).toBe("Intro to Canon G2000")
+			expect(res.body.length).toEqual(0)
 			expect(res.statusCode).toBe(200)
 			done()
 		})
@@ -68,12 +67,12 @@ describe("classes endpoints", () => {
 
 	test("GET /classes/filter returns the classes that are published", done => {
 		const courseID = "XK1000"
-		const filter = "published"
+		const filter = "waiting.."
 
 		request(app)
 			.get(`/classes/filter?courseID=${courseID}&filter=${filter}`)
 			.then(res => {
-				expect(res.body.length).toEqual(2)
+				expect(res.body.length).toEqual(0)
 				expect(res.statusCode).toBe(200)
 				done()
 			})
@@ -188,9 +187,9 @@ describe("quiz endpoints", () => {
 	// Test – Creating a new MCQ question in a given chapter in a quiz
 	test("POST /quiz/createQuestion will add 1 new record to quiz_questions table", done => {
 		const question = {
-			course_id: "BG1000", 
-			class_id: "C7",
-			chapter_id: "1",
+			course_id: "CG2000", 
+			class_id: "C2",
+			chapter_id: 1,
 			question_id: "8",
 			question: "testing",
 			type: "ungraded",
@@ -214,14 +213,14 @@ describe("quiz endpoints", () => {
 
 	// Test – Checking that the MCQ question is in the question table
 	test("GET /quiz/getMCQQuestions returns the correct MCQ question given course & class & chapter", done => {
-		const courseID = "BG1000"
-		const classID = "C7"
-		const chapterID = "1"
+		const courseID = "CG2000"
+		const classID = "C2"
+		const chapterID = 1
 
 		const question = {
-			course_id: "BG1000", 
-			class_id: "C7",
-			chapter_id: "1",
+			course_id: "CG2000", 
+			class_id: "C2",
+			chapter_id: 1,
 			question_id: "8",
 			question: "testing",
 			option1: "test",
@@ -242,9 +241,9 @@ describe("quiz endpoints", () => {
 	// Test – Creating a new TF question in a given chapter in a quiz
 	test("POST /quiz/createQuestion will add 1 record inserted to quiz_questions table", done => {
 		const question = {
-			course_id: "BG1000", 
-			class_id: "C7",
-			chapter_id: "1",
+			course_id: "CG2000", 
+			class_id: "C2",
+			chapter_id: 1,
 			question_id: "5",
 			question: "Is it okay to shout at your customers?",
 			type: "ungraded",
@@ -268,14 +267,14 @@ describe("quiz endpoints", () => {
 
 	// Test – Checking that the TF question is in the question table
 	test("GET /quiz/getTFQuestions returns the correct TF question given course & class & chapter", done => {
-		const courseID = "BG1000"
-		const classID = "C7"
-		const chapterID = "1"
+		const courseID = "CG2000"
+		const classID = "C2"
+		const chapterID = 1
 
 		const question = {
-			course_id: "BG1000", 
-			class_id: "C7",
-			chapter_id: "1",
+			course_id: "CG2000", 
+			class_id: "C2",
+			chapter_id: 1,
 			question_id: "5",
 			question: "Is it okay to shout at your customers?",
 			option1: "True",
@@ -295,9 +294,9 @@ describe("quiz endpoints", () => {
 
 	// Test – Deleting that MCQ questions for a given chapter
 	test("POST /quiz/deleteQuestion will delete 1 record from quiz_questions table", done => {
-		const courseID = "BG1000"
-		const classID = "C7"
-		const chapterID = "1"
+		const courseID = "CG2000"
+		const classID = "C2"
+		const chapterID = 1
 		const questionID = "5"
 
 		request(app)
@@ -311,9 +310,9 @@ describe("quiz endpoints", () => {
 
 	// Test – Deleting that TF question for a given chapter
 	test("POST /quiz/deleteQuestion will delete 1 record from quiz_questions table", done => {
-		const courseID = "BG1000"
-		const classID = "C7"
-		const chapterID = "1"
+		const courseID = "CG2000"
+		const classID = "C2"
+		const chapterID = 1
 		const questionID = "8"
 
 		request(app)
@@ -328,9 +327,9 @@ describe("quiz endpoints", () => {
 	//Invalid Test - If the question is already in the database
 	test("POST /quiz/createQuestion will not add 1 new record to quiz_questions table", done => {
 		const question = {
-			course_id: "BG2000", 
-			class_id: "C3",
-			chapter_id: "1",
+			course_id: "BG1001", 
+			class_id: "C1",
+			chapter_id: 1,
 			question_id: "1",
 			question: "testing",
 			type: "ungraded",
@@ -354,5 +353,219 @@ describe("quiz endpoints", () => {
 })
 
 // =================================================================================================================================
-
 //  Testing Endpoints – Keith
+describe("Testing enrolRequest endpoints", () => {
+	describe("Checking that there is no prior enrolment requests", () => {
+		test("GET /enrolRequest/getPendingRequest SHOULD RETURN nothing", done => {
+			request(app)
+				.get('/enrolRequest/getPendingRequest')
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(0)
+					done()
+				})
+		})
+	})
+
+	describe("Adding 1 enrolment request", () => {
+		test("POST /enrolRequest/enrol SHOULD ADD 1 new record to enrol_request table", done => {
+			const enrol_request = {
+				engineerEmail: "keithchiang@aio.com", 
+				courseID: "CG3000",
+				classID: "C1"
+			}
+	
+			request(app)
+				.post('/enrolRequest/enrol')
+				.send(enrol_request)
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.message).toEqual(`${enrol_request.engineerEmail} enrolment into ${enrol_request.courseID} ${enrol_request.classID} has been added to enrol_request table.`)
+					done()
+				})
+		})
+	})
+	
+	describe("Checking that enrolment request has been added", () => {
+		test("GET /enrolRequest/getPendingRequest SHOULD RECEIVE the recently enrolled record from enrol_request table", done => {
+			const enrol_request = {
+				courseID: "CG3000",
+				classID: "C1"
+			}
+	
+			request(app)
+				.get('/enrolRequest/getPendingRequest')
+				.send(enrol_request)
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].course_id).toEqual("CG3000")
+					expect(res.body[0].class_id).toEqual("C1")
+					done()
+				})
+		})
+	})
+
+	describe("Removing enrolment request that has been added", () => {
+		test("DELETE /enrolRequest/delPendingRequest SHOULD DELETE the recently enrolled record from enrol_request table", done => {
+			const delete_enrol_request = {
+				engineerEmail: 'keithchiang@aio.com',
+				courseID: "CG3000",
+				classID: "C1"
+			}
+	
+			request(app)
+				.delete('/enrolRequest/delPendingRequest')
+				.send(delete_enrol_request)
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.message).toEqual('1 record has been deleted.')
+					done()
+				})
+		})
+	})
+
+	describe("Checking enrolment request has been deleted", () => {
+		test("GET /enrolRequest/getPendingRequest SHOULD RETURN nothing", done => {
+			request(app)
+				.get('/enrolRequest/getPendingRequest')
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(0)
+					done()
+				})
+		})
+	})
+})
+
+describe("Testing courses endpoints", () => {
+
+	describe("Checking retrieval of course pre-requisites", () => {
+		test("GET /courses/getPrereq SHOULD RETURN the correct pre-requisite", done => {
+			// When course ID = BG1001
+			request(app)
+				.get('/courses/getPrereq?course_id=BG1001')
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].prereq_course_id).toEqual('BG1000')
+					done()
+				})
+	
+			// When course ID = BG1002
+			request(app)
+				.get('/courses/getPrereq?course_id=BG1002')
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].prereq_course_id).toStrictEqual('BG1001')
+					done()
+				})
+			// When course ID = CG1001
+			request(app)
+				.get('/courses/getPrereq?course_id=CG1001')
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].prereq_course_id).toStrictEqual('CG1000')
+					done()
+				})
+			
+			// When course ID = CG1002
+			request(app)
+				.get('/courses/getPrereq?course_id=CG1002')
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].prereq_course_id).toStrictEqual('CG1001')
+					done()
+			})
+		})
+	})
+
+	describe("Checking retrieval of Eligible classes with prerequisite", () => {
+		test("GET /courses/getEligibleWithPrereq SHOULD RETURN 1 class", done => {
+			request(app)
+				.get("/courses/getEligibleWithPrereq")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					done()
+				})
+		})
+	})
+
+	describe("Checking retrieval of Eligible classes with no prerequisites", () => {
+		test("GET /courses/getEligibleNoPrereq SHOULD RETURN 3 classes", done => {
+			request(app)
+				.get("/courses/getEligibleNoPrereq")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(3)
+					done()
+				})
+		})
+	})
+
+	describe("Checking retrieval of Ineligible classes because did not meet pre-requisite", () => {
+		test("GET /courses/getIneligibleByPrereq SHOULD RETURN 1 classes", done => {
+			request(app)
+				.get("/courses/getIneligibleByPrereq")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].course_id).toStrictEqual("BG1002")
+					done()
+				})
+		})
+	})
+
+	describe("Checking retrieval of Ineligible classes because currently enrolled", () => {
+		test("GET /courses/getIneligibleByEnrolled SHOULD RETURN 1 class", done => {
+			request(app)
+				.get("/courses/getIneligibleByEnrolled")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(1)
+					expect(res.body[0].course_id).toStrictEqual("BG1001")
+					done()
+				})
+		})
+	})
+
+	describe("Checking retrieval of Ineligible classes because already completed", () => {
+		test("GET /courses/getIneligibleByCompleted SHOULD RETURN 3 classes", done => {
+			request(app)
+				.get("/courses/getIneligibleByCompleted")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(3)
+					done()
+				})
+		})
+	})
+
+	describe("Checking retrieval of COMPLETED classes", () => {
+		test("GET /courses/getCompleted SHOULD RETURN 2 classes", done => {
+			request(app)
+				.get("/courses/getCompleted")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(3)
+					done()
+				})
+		})
+	})
+
+	describe("Checking retrieval of ONGOING classes", () => {
+		test("GET /courses/getOngoing SHOULD RETURN 2 classes", done => {
+			request(app)
+				.get("/courses/getOngoing")
+				.then(res => {
+					expect(res.statusCode).toBe(200)
+					expect(res.body.length).toEqual(2)
+					done()
+				})
+		})
+	})
+})

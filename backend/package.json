@@ -1,16 +1,21 @@
 {
-  "name": "backend",
+  "name": "spmg6t8-projectbackend",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jest --forceExit",
-    "start": "nodemon app.js"
+    "test": "jest --forceExit --coverage --coverageDirectory=output/coverage/jest",
+		"start": "node app.js"
   },
+  "jest": {
+		"coverageReporters": [
+		  "text",
+		  "cobertura"
+		]
+	},
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "arkit": "^1.6.4",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

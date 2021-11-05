@@ -132,20 +132,20 @@ router.get("/getPrereq", (req, res) => {
 // Get completed courses + course details FOR engineer='keithchiang@aio.com'
 router.get("/getCompleted", (req, res) => {
 	let sql = `
-        SELECT
-            course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, t.email as trainer_email, class.size, class.class_start, class.class_end
-        FROM
-            courses course, classes class, completed_courses completed, trainers t
-        WHERE
-            course.course_id = class.course_id
-        AND
-            class.course_id = completed.course_id
-        AND
-            class.class_id = completed.class_id
-        AND
-            t.email = class.trainer_email
-        AND
-            completed.engineer_email = 'keithchiang@aio.com';
+	SELECT
+		course.course_id, course.course_name, course.course_summary, class.class_id, t.name as trainer_name, t.email as trainer_email, completed.completed_date
+	FROM
+		courses course, classes class, completed_courses completed, trainers t
+	WHERE
+		course.course_id = class.course_id
+	AND
+		class.course_id = completed.course_id
+	AND
+		class.class_id = completed.class_id
+	AND
+		t.email = class.trainer_email
+	AND
+		completed.engineer_email = 'keithchiang@aio.com';
     `
 	db.query(sql, (err, result) => {
 		if (err) {
@@ -172,7 +172,9 @@ router.get("/getOngoing", (req, res) => {
     AND
         t.email = class.trainer_email
     AND
-        class.course_id = enroll.course_id;
+        class.course_id = enroll.course_id
+	AND
+		enroll.engineer_email = 'keithchiang@aio.com';
     `
 
 	db.query(sql, (err, result) => {
