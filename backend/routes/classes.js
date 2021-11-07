@@ -118,22 +118,4 @@ router.post("/editClass", (req, res) => {
 	})
 })
 
-router.post("/updateEnrolled", (req, res) => {
-	let courseID = req.body.courseID
-	let classID = req.body.classID
-	let numEngineers = req.body.engineers.length
-
-	let sql = `UPDATE classes SET current_enrolled=current_enrolled+${numEngineers} WHERE course_id="${courseID}" AND class_id="${classID}";`
-
-	db.query(sql, (err, rows) => {
-		if (err) {
-			res.status(500).send({
-				message: err.message || "An error has occurred."
-			})
-		} else {
-			res.json(rows) 
-		}
-	})
-})
-
 module.exports = router
