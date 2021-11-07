@@ -22,7 +22,13 @@ const HREnrolClasses = () => {
     useEffect(() => {
         axios.get(`${BASE_API_URL}/classes/courseID?courseID=${courseID}`)
             .then(res => {
-                setClasses(res.data)
+                let filtered = []
+                for (let a_class of res.data) {
+                    if (a_class.current_enrolled < a_class.size) {
+                        filtered.push(a_class)
+                    }
+                }
+                setClasses(filtered)
                 setSelectedClass(res.data[0].class_id)
             })
     }, [courseID])
@@ -54,6 +60,11 @@ const HREnrolClasses = () => {
             "courseID": courseID,
             "classID": selectedClass,
             "engineers": selectedEngineers
+        })
+        axios.post(`${BASE_API_URL}/classes/updateEnrolled`, {
+            "courseID": courseID,
+            "classID": selectedClass,
+            "engineers": selectedEngineers
         }) 
         alert("enrolled engineers")
         window.location.reload()
@@ -66,8 +77,9 @@ const HREnrolClasses = () => {
 
                 <Form.Group className="mb-3">
                     <Form.Label>Choose a class:</Form.Label>
-                    <DropdownButton title={selectedClass}>                        
-                        {classes.map(a_class =>
+                    <DropdownButton title={selectedClass}>
+                        {classes.length === 0 ? null :                         
+                        classes.map(a_class =>
                             <Dropdown.Item 
                                 key={a_class.class_id}
                                 onClick={() => setSelectedClass(a_class.class_id)}
@@ -79,7 +91,8 @@ const HREnrolClasses = () => {
                 </Form.Group>
 
                 <div className="mt-3">
-                {eligibleEngineers.map(engineer => 
+                {eligibleEngineers.length === 0 ? null :
+                eligibleEngineers.map(engineer => 
                     <Form.Check 
                         type="checkbox"
                         key={engineer.email}
