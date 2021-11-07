@@ -10,7 +10,7 @@ const CardImg = styled(Card.Img)`
 
 const CourseCard = styled(Card)`
   width: 250px;
-  height: 450px;
+  height: 400px;
   margin: 30px 0px;
 `;
 
@@ -59,11 +59,6 @@ function TrainerCourseCard(props) {
         <ButtonDiv>
           <Link to={`${url}/${props.id}/${props.class}`}>
             <Btn>Manage</Btn>
-          </Link>
-        </ButtonDiv>
-        <ButtonDiv>
-          <Link to={`${url}/${props.id}/${props.class}/results`}>
-            <Btn>Quiz Results</Btn>
           </Link>
         </ButtonDiv>
       </Card.Body>
